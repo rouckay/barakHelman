@@ -1,0 +1,21 @@
+/* resources/css/custom-rtl.css */
+body {
+    direction: rtl;
+}
+
+.filament-main {
+    text-align: right;
+}
+
+/* Adjust sidebar styles for RTL */
+.filament-sidebar {
+    right: 0;
+    left: auto;
+}
+
+.filament-content {
+    margin-left: 0;
+    margin-right: 250px; /* Adjust according to sidebar width */
+}
+
+/* Add more RTL styles as needed */
