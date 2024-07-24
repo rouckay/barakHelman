@@ -25,26 +25,34 @@ class NumerahaResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('numero_number')
+                    ->label('د نمری نمبر')
                     ->required()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('save_number')
+                    ->label('د ثبت نمبر')
                     ->required()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('date')
+                    ->label('تاریخ')
                     ->required()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('tarifa_no')
+                    ->label('د تعرفی نمبر')
                     ->required()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('transfered_money_to_bank')
+                    ->label('بانک ته لیږل شوی پیسی')
                     ->required()
                     ->maxLength(191),
                 Forms\Components\FileUpload::make('Customer_image')
+                    ->label('د مشتری عکس')
                     ->image()
                     ->required(),
                 Forms\Components\FileUpload::make('documents')
+                    ->label('اسناد')
                     ->required(),
                 Forms\Components\Select::make('customer_id')
+                    ->label('مشتری')
                     ->relationship('customer', 'name')
                     ->required()
                     ->createOptionForm([

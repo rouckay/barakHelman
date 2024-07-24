@@ -25,25 +25,39 @@ class CustomersResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('نوم')
+                    ->extraAttributes(['class' => 'myx-right-align'])
                     ->required()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('father_name')
+                    ->label('د پلار نوم')
                     ->maxLength(191),
                 Forms\Components\TextInput::make('grand_father_name')
+                    ->label('د نیکه نوم')
                     ->maxLength(191),
                 Forms\Components\TextInput::make('province')
+                    ->label('ولایت')
                     ->maxLength(191),
                 Forms\Components\TextInput::make('village')
+                    ->label('کلی')
                     ->maxLength(191),
                 Forms\Components\TextInput::make('tazkira')
+                    ->label('تذکره نمبر')
                     ->maxLength(191),
                 Forms\Components\TextInput::make('mobile_number')
+                    ->label('تلفن نمبر')
                     ->maxLength(191),
                 Forms\Components\TextInput::make('parmanent_address')
+                    ->label('دایمی داوسیدو پته ')
+                    ->extraAttributes(['class' => 'myx-right-align'])
                     ->maxLength(191),
                 Forms\Components\TextInput::make('current_address')
+                    ->label('اوسنی داوسیدو پته ')
+                    ->extraAttributes(['class' => 'myx-right-align'])
                     ->maxLength(191),
                 Forms\Components\TextInput::make('job')
+                    ->label('وظیفه')
+                    ->extraAttributes(['class' => 'myx-right-align'])
                     ->maxLength(191),
             ]);
     }
