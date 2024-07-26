@@ -12,7 +12,12 @@ return new class extends Migration {
     {
         Schema::create('markets', function (Blueprint $table) {
             $table->id();
-
+            $table->string('name');
+            $table->string('description');
+            $table->string('lengthm_m2');
+            $table->string('nomerah_number');
+            $table->string('nomerah_owner');
+            $table->string('owner_phone_number');
             $table->timestamps();
         });
     }
