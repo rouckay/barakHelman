@@ -16,6 +16,7 @@ class numeraha extends Model
         'transfered_money_to_bank',
         'Customer_image',
         'documents',
+        'customer_id',
     ];
 
     public function customer()

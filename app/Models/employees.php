@@ -22,4 +22,5 @@ class employees extends Model
         'phone_number',
         'Address',
     ];
+
 }

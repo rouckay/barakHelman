@@ -98,7 +98,7 @@ class NumerahaResource extends Resource
                 Tables\Columns\ImageColumn::make('Customer_image'),
                 Tables\Columns\TextColumn::make('documents')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('customer_id')
+                Tables\Columns\TextColumn::make('customer.name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')

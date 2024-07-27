@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\customers;
+use App\Models\employees;
+use App\Models\numeraha;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,10 +17,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // customers::factory(100)->create();
+        // employees::factory(100)->create();
+        numeraha::factory(100)->create();
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
     }
 }
