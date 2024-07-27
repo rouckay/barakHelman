@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\customers;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,7 +20,7 @@ return new class extends Migration {
             $table->string('transfered_money_to_bank');
             $table->string('Customer_image');
             $table->string('documents');
-            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
+            $table->foreignIdFor(customers::class);
             $table->timestamps();
         });
     }
