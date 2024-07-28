@@ -47,13 +47,13 @@ class NumerahaResource extends Resource
                 Forms\Components\FileUpload::make('Customer_image')
                     ->label('د مشتری عکس')
                     ->image()
-                    ->required(),
+                    ->imageEditor(),
                 Forms\Components\FileUpload::make('documents')
-                    ->label('اسناد')
-                    ->required(),
+                    ->label('اسناد'),
                 Forms\Components\Select::make('customer_id')
                     ->label('مشتری')
                     ->relationship('customer', 'name')
+                    ->default(1)
                     ->required()
                     ->createOptionForm([
                         Forms\Components\TextInput::make('name')

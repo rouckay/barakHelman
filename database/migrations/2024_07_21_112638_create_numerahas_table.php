@@ -18,9 +18,9 @@ return new class extends Migration {
             $table->string('date');
             $table->string('tarifa_no');
             $table->string('transfered_money_to_bank');
-            $table->string('Customer_image');
-            $table->string('documents');
-            $table->foreignIdFor(customers::class);
+            $table->string('Customer_image')->nullable();
+            $table->string('documents')->nullable();
+            $table->foreignId('customer_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
