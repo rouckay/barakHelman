@@ -6,6 +6,8 @@ use App\Filament\Resources\CustomersResource\Pages;
 use App\Filament\Resources\CustomersResource\RelationManagers;
 use App\Models\Customers;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -24,41 +26,76 @@ class CustomersResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('نوم')
-                    ->extraAttributes(['class' => 'myx-right-align'])
-                    ->required()
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('father_name')
-                    ->label('د پلار نوم')
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('grand_father_name')
-                    ->label('د نیکه نوم')
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('province')
-                    ->label('ولایت')
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('village')
-                    ->label('کلی')
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('tazkira')
-                    ->label('تذکره نمبر')
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('mobile_number')
-                    ->label('تلفن نمبر')
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('parmanent_address')
-                    ->label('دایمی داوسیدو پته ')
-                    ->extraAttributes(['class' => 'myx-right-align'])
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('current_address')
-                    ->label('اوسنی داوسیدو پته ')
-                    ->extraAttributes(['class' => 'myx-right-align'])
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('job')
-                    ->label('وظیفه')
-                    ->extraAttributes(['class' => 'myx-right-align'])
-                    ->maxLength(191),
+                Card::make()->schema([
+                    Grid::make()->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label('نوم')
+                            ->required()
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('father_name')
+                            ->label('د پلار نوم')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('grand_father_name')
+                            ->label('د نیکه نوم')
+                            ->maxLength(191),
+                        Forms\Components\Select::make('province')
+                            ->label('ولایت')
+                            ->options([
+                                'Badakhshan' => 'Badakhshan',
+                                'Badghis' => 'Badghis',
+                                'Baghlan' => 'Baghlan',
+                                'Balkh' => 'Balkh',
+                                'Bamyan' => 'Bamyan',
+                                'Daykundi' => 'Daykundi',
+                                'Farah' => 'Farah',
+                                'Faryab' => 'Faryab',
+                                'Ghazni' => 'Ghazni',
+                                'Ghor' => 'Ghor',
+                                'Helmand' => 'Helmand',
+                                'Herat' => 'Herat',
+                                'Jowzjan' => 'Jowzjan',
+                                'Kabul' => 'Kabul',
+                                'Kandahar' => 'Kandahar',
+                                'Kapisa' => 'Kapisa',
+                                'Khost' => 'Khost',
+                                'Kunar' => 'Kunar',
+                                'Kunduz' => 'Kunduz',
+                                'Laghman' => 'Laghman',
+                                'Logar' => 'Logar',
+                                'Nangarhar' => 'Nangarhar',
+                                'Nimroz' => 'Nimroz',
+                                'Nuristan' => 'Nuristan',
+                                'Panjshir' => 'Panjshir',
+                                'Parwan' => 'Parwan',
+                                'Samangan' => 'Samangan',
+                                'Sar-e Pol' => 'Sar-e Pol',
+                                'Takhar' => 'Takhar',
+                                'Urozgan' => 'Urozgan',
+                                'Wardak' => 'Wardak',
+                                'Zabul' => 'Zabul'
+                            ]),
+                        Forms\Components\TextInput::make('village')
+                            ->label('کلی')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('tazkira')
+                            ->label('تذکره نمبر')
+                            ->maxLength(191),
+                    ])->columnSpan(6),
+                    Grid::make()->schema([
+                        Forms\Components\TextInput::make('mobile_number')
+                            ->label('تلفن نمبر')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('parmanent_address')
+                            ->label('دایمی داوسیدو پته ')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('current_address')
+                            ->label('اوسنی داوسیدو پته ')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('job')
+                            ->label('وظیفه')
+                            ->maxLength(191),
+                    ])->columnSpan(6)
+                ])->columns(12)
             ]);
     }
 
