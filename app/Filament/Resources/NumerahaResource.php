@@ -41,7 +41,7 @@ class NumerahaResource extends Resource
                     ]),
                     Grid::make()->schema([
                         Forms\Components\TextInput::make('date')
-                            ->label('تاریخ')
+                            ->label('نیټه')
                             ->required()
                             ->maxLength(191),
                         Forms\Components\TextInput::make('tarifa_no')
@@ -136,41 +136,52 @@ class NumerahaResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('numero_number')
                     ->sortable()
+                    ->label('د نمری نمبر')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('save_number')
                     ->sortable()
                     ->searchable()
+                    ->label('د ثبت نمبر')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('date')
                     ->sortable()
                     ->date()
+                    ->label('نیټه')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('tarifa_no')
                     ->toggleable(isToggledHiddenByDefault: true)
+                    ->label('د تعرفی نمبر')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('transfered_money_to_bank')
                     ->sortable()
+                    ->label('بانک ته لیږل شوی پیسی')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('Customer_image'),
+                Tables\Columns\ImageColumn::make('Customer_image')
+                    ->label('د مشتری عکس')
+                ,
                 Tables\Columns\TextColumn::make('documents')
                     ->toggleable(isToggledHiddenByDefault: true)
+                    ->label('اسناد')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('customer.name')
                     ->numeric()
                     ->sortable()
+                    ->label('مشتری')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
+                    ->label('د ثبت نیټه')
                     ->date()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->date()
+                    ->label('د بدلون نیټه')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([

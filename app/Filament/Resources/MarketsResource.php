@@ -7,6 +7,7 @@ use App\Filament\Resources\MarketsResource\RelationManagers;
 use App\Models\Markets;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -66,14 +67,26 @@ class MarketsResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable()
+                    ->label('نوم'),
                 Tables\Columns\TextColumn::make('description')
+                    ->sortable()
+                    ->label('تفصیل')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('lengthm_m2')
+                    ->sortable()
+                    ->label('مساحت (متر مربع)')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nomerah_number')
+                    ->sortable()
+                    ->label('د ځمکی نمبر')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nomerah_owner')
+                    ->sortable()
+                    ->label('د ځمکی مالک ')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('owner_phone_number')
                     ->searchable(),

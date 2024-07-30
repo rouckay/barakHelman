@@ -3,10 +3,10 @@
 // config for Afsakar/FilamentTranslateAction
 return [
 
-    'laravellocalization' => false,
+    'laravellocalization' => true,
 
     'locales' => [
-        'tr' => 'Türkçe',
+        'pa' => 'Pashto',
         'en' => 'English',
     ],
 

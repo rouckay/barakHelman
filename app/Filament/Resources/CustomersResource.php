@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CustomersResource\Pages;
-use App\Filament\Resources\CustomersResource\RelationManagers;
 use App\Models\Customers;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
@@ -11,6 +10,7 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -22,6 +22,8 @@ class CustomersResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
     protected static ?string $navigationLabel = 'مشتریان';
+
+    protected static ?string $recordTitleAttribute = 'name';
     public static function form(Form $form): Form
     {
         return $form
@@ -40,39 +42,34 @@ class CustomersResource extends Resource
                             ->maxLength(191),
                         Forms\Components\Select::make('province')
                             ->label('ولایت')
+                            ->placeholder('ولایت انتخاب کړی.')
                             ->options([
-                                'Badakhshan' => 'Badakhshan',
-                                'Badghis' => 'Badghis',
-                                'Baghlan' => 'Baghlan',
-                                'Balkh' => 'Balkh',
-                                'Bamyan' => 'Bamyan',
-                                'Daykundi' => 'Daykundi',
-                                'Farah' => 'Farah',
-                                'Faryab' => 'Faryab',
-                                'Ghazni' => 'Ghazni',
-                                'Ghor' => 'Ghor',
-                                'Helmand' => 'Helmand',
-                                'Herat' => 'Herat',
-                                'Jowzjan' => 'Jowzjan',
-                                'Kabul' => 'Kabul',
-                                'Kandahar' => 'Kandahar',
-                                'Kapisa' => 'Kapisa',
-                                'Khost' => 'Khost',
-                                'Kunar' => 'Kunar',
-                                'Kunduz' => 'Kunduz',
-                                'Laghman' => 'Laghman',
-                                'Logar' => 'Logar',
-                                'Nangarhar' => 'Nangarhar',
-                                'Nimroz' => 'Nimroz',
-                                'Nuristan' => 'Nuristan',
-                                'Panjshir' => 'Panjshir',
-                                'Parwan' => 'Parwan',
-                                'Samangan' => 'Samangan',
-                                'Sar-e Pol' => 'Sar-e Pol',
-                                'Takhar' => 'Takhar',
-                                'Urozgan' => 'Urozgan',
-                                'Wardak' => 'Wardak',
-                                'Zabul' => 'Zabul'
+                                'بلخ' => 'بلخ',
+                                'بامیان' => 'بامیان',
+                                'بادغیس' => 'بادغیس',
+                                'بدخشان' => 'بدخشان',
+                                'بغلان' => 'بغلان',
+                                'دایکندی' => 'دایکندی',
+                                'فراه' => 'فراه',
+                                'فاریاب' => 'فاریاب',
+                                'غزنی' => 'غزنی',
+                                'غور' => 'غور',
+                                'هلمند' => 'هلمند',
+                                'هرات' => 'هرات',
+                                'جوزجان' => 'جوزجان',
+                                'کابل' => 'کابل',
+                                'قندهار' => 'قندهار',
+                                'کاپیسا' => 'کاپیسا',
+                                'کندز' => 'کندز',
+                                'خوست' => 'خوست',
+                                'کنر' => 'کنر',
+                                'لغمان' => 'لغمان',
+                                'لوگر' => 'لوگر',
+                                'ننگرهار' => 'ننگرهار',
+                                'نیمروز' => 'نیمروز',
+                                'نورستان' => 'نورستان',
+                                'پنجشیر' => 'پنجشیر',
+                                'پروان' => 'پروان',
                             ]),
                         Forms\Components\TextInput::make('village')
                             ->label('کلی')
@@ -104,38 +101,76 @@ class CustomersResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->sortable()
+                    ->label('نوم')
+                    ->toggleable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('father_name')
+                    ->sortable()
+                    ->label('د پلار نوم')
+                    ->toggleable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('grand_father_name')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->label('د نیکه نوم')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('province')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->label('ولایت')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('village')
+                    ->sortable()
+                    ->toggleable()
+                    ->label('کلی')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('tazkira')
+                    ->sortable()
+                    ->toggleable()
+                    ->label('تذکره نمبر')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('mobile_number')
+                    ->sortable()
+                    ->toggleable()
+                    ->label('تلفن نمبر')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('parmanent_address')
+                    ->sortable()
+                    ->toggleable()
+                    ->label('دایمی داوسیدو پته ')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('current_address')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->label('اوسنی داوسیدو پته ')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('job')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false)
+                    ->label('وظیفه')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
+                    ->label('د ثبت نیټه ')
+                    ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
+                    ->date()
+                    ->label('د بدلون نیټه')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+
             ])
             ->actions([
+                \Filament\Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                ]),
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
