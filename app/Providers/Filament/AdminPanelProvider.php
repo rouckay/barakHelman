@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -17,14 +18,13 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Filament\Resources\NumerahaResource;
 
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            // ->plugin(\TomatoPHP\FilamentTranslations\FilamentTranslationsPlugin::make())
-            // ->plugin(\TomatoPHP\FilamentTranslations\FilamentTranslationsPlugin::make()->allowCreate())
             ->default()
             ->id('admin')
             ->path('admin')
@@ -34,6 +34,18 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            // ->sidebarFullyCollapsibleOnDesktop()
+            ->sidebarCollapsibleOnDesktop()
+            ->navigationItems([
+                // NavigationItem::make('Settings')
+                //     ->icon('heroicon-m-cog')
+                //     ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
+                //     ->url('/admin/settings'),
+                NavigationItem::make('د ځمکو مدیریت')
+                    ->icon('heroicon-m-cog')
+                    ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
+                    ->url('#'),
+            ])
             ->pages([
                 Pages\Dashboard::class,
             ])
@@ -54,8 +66,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->plugin(\TomatoPHP\FilamentTranslations\FilamentTranslationsSwitcherPlugin::make());
+            ]);
 
     }
 }
