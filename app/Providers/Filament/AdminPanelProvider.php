@@ -28,6 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->profile()
             ->login()
             ->colors([
                 'primary' => Color::Green,
@@ -41,10 +42,10 @@ class AdminPanelProvider extends PanelProvider
                 //     ->icon('heroicon-m-cog')
                 //     ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
                 //     ->url('/admin/settings'),
-                NavigationItem::make('د ځمکو مدیریت')
-                    ->icon('heroicon-m-cog')
-                    ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
-                    ->url('#'),
+                // NavigationItem::make('د ځمکو مدیریت')
+                //     ->icon('heroicon-m-cog')
+                //     ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
+                //     ->url('#'),
             ])
             ->pages([
                 Pages\Dashboard::class,

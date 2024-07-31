@@ -17,8 +17,10 @@ class TransactionsResource extends Resource
 {
     protected static ?string $model = Transactions::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-arrows-up-down';
+    protected static ?string $navigationLabel = 'د ځمکو پیرل او پلورل';
 
+    protected static ?string $navigationGroup = 'د ځمکو معاملی';
     public static function form(Form $form): Form
     {
         return $form
@@ -32,11 +34,14 @@ class TransactionsResource extends Resource
                 Forms\Components\TextInput::make('user_id')
                     ->required()
                     ->maxLength(191),
-                Forms\Components\TextInput::make('numeraha_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('numeraha_id')
+                    ->relationship('numeraha', 'numero_number')
+                    ->preload()
+                    ->required(),
                 Forms\Components\Select::make('customer_id')
                     ->relationship('customer', 'name')
+                    ->multiple()
+                    ->preload()
                     ->required(),
             ]);
     }
@@ -68,8 +73,20 @@ class TransactionsResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                \Filament\Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()
+                        ->label('کتل')
+                    ,
+                    Tables\Actions\EditAction::make()
+                        ->label('بدلون')
+                    ,
+                ]),
+                Tables\Actions\ViewAction::make()
+                    ->label('کتل')
+                ,
+                Tables\Actions\EditAction::make()
+                    ->label('بدلون')
+                ,
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

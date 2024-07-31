@@ -122,7 +122,7 @@ class CustomersResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('village')
                     ->sortable()
-                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->label('کلی')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('tazkira')
@@ -137,7 +137,7 @@ class CustomersResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('parmanent_address')
                     ->sortable()
-                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->label('دایمی داوسیدو پته ')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('current_address')
@@ -168,11 +168,19 @@ class CustomersResource extends Resource
             ])
             ->actions([
                 \Filament\Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make(),
-                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\ViewAction::make()
+                        ->label('کتل')
+                    ,
+                    Tables\Actions\EditAction::make()
+                        ->label('بدلون')
+                    ,
                 ]),
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('کتل')
+                ,
+                Tables\Actions\EditAction::make()
+                    ->label('بدلون')
+                ,
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -103,8 +103,20 @@ class FinanceResource extends Resource
                     ->relationship('user', 'name'),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                \Filament\Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()
+                        ->label('کتل')
+                    ,
+                    Tables\Actions\EditAction::make()
+                        ->label('بدلون')
+                    ,
+                ]),
+                Tables\Actions\ViewAction::make()
+                    ->label('کتل')
+                ,
+                Tables\Actions\EditAction::make()
+                    ->label('بدلون')
+                ,
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

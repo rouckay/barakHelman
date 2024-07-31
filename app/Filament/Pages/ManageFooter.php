@@ -11,7 +11,9 @@ use Filament\Pages\SettingsPage;
 
 class ManageFooter extends SettingsPage
 {
-    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+    protected static ?string $navigationIcon = 'heroicon-m-cog';
+    protected static ?string $navigationLabel = 'تظیمات';
+    protected static ?int $navigationSort = 5;
 
     protected static string $settings = FooterSettings::class;
 

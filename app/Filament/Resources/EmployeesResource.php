@@ -49,10 +49,12 @@ class EmployeesResource extends Resource
                     Grid::make(2)->schema([
                         Forms\Components\DatePicker::make('date_of_contract')
                             ->label('تاریخ قرارداد')
+                            ->default(now()->toDateString())
                             ->required()
                         ,
                         Forms\Components\DatePicker::make('end_date_of_contract')
                             ->label('تاریخ ختم قرارداد')
+                            ->default(now()->toDateString())
                             ->required()
                     ]),
                     Forms\Components\TextInput::make('phone_number')
@@ -162,8 +164,20 @@ class EmployeesResource extends Resource
 
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                \Filament\Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()
+                        ->label('کتل')
+                    ,
+                    Tables\Actions\EditAction::make()
+                        ->label('بدلون')
+                    ,
+                ]),
+                Tables\Actions\ViewAction::make()
+                    ->label('کتل')
+                ,
+                Tables\Actions\EditAction::make()
+                    ->label('بدلون')
+                ,
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

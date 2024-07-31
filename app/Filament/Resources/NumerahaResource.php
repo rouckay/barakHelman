@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\NumerahaResource\Pages;
 use App\Filament\Resources\NumerahaResource\RelationManagers;
+use App\Filament\Resources\NumerahaResource\RelationManagers\CustomersRelationManager;
 use App\Models\Numeraha;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
@@ -16,6 +17,7 @@ use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Enums\FiltersLayout;
 
 class NumerahaResource extends Resource
 {
@@ -24,6 +26,9 @@ class NumerahaResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-map';
 
     protected static ?string $navigationLabel = "مدیریت نمره ها";
+
+    protected static ?string $navigationGroup = 'د ځمکو معاملی';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -32,6 +37,8 @@ class NumerahaResource extends Resource
                     Grid::make()->schema([
                         Forms\Components\TextInput::make('numero_number')
                             ->label('د نمری نمبر')
+                            ->autofocus()
+                            ->placeholder('نمری نمبر')
                             ->required()
                             ->maxLength(191),
                         Forms\Components\TextInput::make('save_number')
@@ -69,8 +76,9 @@ class NumerahaResource extends Resource
                             ->label('اسناد'),
                         Forms\Components\Select::make('customer_id')
                             ->label('مشتری')
-                            ->relationship('customer', 'name')
-                            ->default(1)
+                            ->relationship('customers', 'name')
+                            ->multiple()
+                            ->preload()
                             ->required()
                             ->createOptionForm([
                                 Grid::make()->schema([
@@ -138,18 +146,18 @@ class NumerahaResource extends Resource
                     ->sortable()
                     ->label('د نمری نمبر')
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('save_number')
                     ->sortable()
                     ->searchable()
                     ->label('د ثبت نمبر')
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('date')
                     ->sortable()
                     ->date()
                     ->label('نیټه')
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('tarifa_no')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->label('د تعرفی نمبر')
@@ -157,9 +165,10 @@ class NumerahaResource extends Resource
                 Tables\Columns\TextColumn::make('transfered_money_to_bank')
                     ->sortable()
                     ->label('بانک ته لیږل شوی پیسی')
-                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->toggleable()
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('Customer_image')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->label('د مشتری عکس')
                 ,
                 Tables\Columns\TextColumn::make('documents')
@@ -170,7 +179,7 @@ class NumerahaResource extends Resource
                     ->numeric()
                     ->sortable()
                     ->label('مشتری')
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -184,13 +193,28 @@ class NumerahaResource extends Resource
                     ->label('د بدلون نیټه')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([
-                SelectFilter::make('customer')
-                    ->relationship('customer', 'name')
-            ])
+            ->filters(
+                [
+                    SelectFilter::make('customer')
+                        ->relationship('customers', 'name')
+                ],
+                //  layout: FiltersLayout::AboveContent
+            )
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('کتل')
+                ,
+                Tables\Actions\EditAction::make()
+                    ->label('بدلون')
+                ,
+                Tables\Actions\Action::make('تعرفه')
+                    ->icon('heroicon-o-arrow-down-tray')
+                ,
+
+
+
+
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -202,7 +226,7 @@ class NumerahaResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CustomersRelationManager::class
         ];
     }
 

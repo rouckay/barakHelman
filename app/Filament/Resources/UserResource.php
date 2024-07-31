@@ -18,7 +18,7 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-m-user';
-    protected static ?string $navigationGroup = 'User Management';
+    protected static ?string $navigationGroup = 'ډیټابیس مدیریان';
     protected static ?string $navigationLabel = 'کاربران';
 
     protected static ?int $navigationSort = 2;
@@ -75,8 +75,20 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                \Filament\Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()
+                        ->label('کتل')
+                    ,
+                    Tables\Actions\EditAction::make()
+                        ->label('بدلون')
+                    ,
+                ]),
+                Tables\Actions\ViewAction::make()
+                    ->label('کتل')
+                ,
+                Tables\Actions\EditAction::make()
+                    ->label('بدلون')
+                ,
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

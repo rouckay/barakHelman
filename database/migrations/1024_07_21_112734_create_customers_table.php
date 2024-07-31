@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->string('parmanent_address')->nullable();
             $table->string('current_address')->nullable();
             $table->string('job')->nullable();
+            // $table->foreignId('numeraha_id')->constrained('numerahas')->cascadeOnDelete();
             $table->timestamps();
         });
     }

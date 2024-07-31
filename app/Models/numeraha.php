@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class numeraha extends Model
 {
@@ -19,8 +20,8 @@ class numeraha extends Model
         'customer_id',
     ];
 
-    public function customer()
+    public function customers()
     {
-        return $this->belongsTo(customers::class);
+        return $this->hasMany(Customers::class); // Ensure proper class name casing
     }
 }

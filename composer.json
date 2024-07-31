@@ -12,6 +12,7 @@
         "filament/spatie-laravel-settings-plugin": "^3.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
+        "laraveldaily/laravel-invoices": "^4.0",
         "livewire/livewire": "^3.5",
         "mcamara/laravel-localization": "^2.0",
         "spatie/laravel-settings": "^3.3"
