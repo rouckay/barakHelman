@@ -74,65 +74,65 @@ class NumerahaResource extends Resource
                             ->preserveFilenames()
 
                             ->label('اسناد'),
-                        Forms\Components\Select::make('customer_id')
-                            ->label('مشتری')
-                            ->relationship('customers', 'name')
-                            ->multiple()
-                            ->preload()
-                            ->required()
-                            ->createOptionForm([
-                                Grid::make()->schema([
-                                    Forms\Components\TextInput::make('name')
-                                        ->required()
-                                        ->label('نوم')
+                        // Forms\Components\Select::make('customer_id')
+                        //     ->label('مشتری')
+                        //     ->relationship('Customers', 'name')
+                        //     ->preload()
+                        //     ->multiple()
+                        //     ->required()
+                        //     ->createOptionForm([
+                        //         Grid::make()->schema([
+                        //             Forms\Components\TextInput::make('name')
+                        //                 ->required()
+                        //                 ->label('نوم')
 
-                                        ->maxLength(191),
-                                    Forms\Components\TextInput::make('father_name')
-                                        ->maxLength(191)
-                                        ->label('د پلار نوم')
-                                    ,
-                                ]),
-                                Grid::make()->schema([
-                                    Forms\Components\TextInput::make('grand_father_name')
-                                        ->maxLength(191)
-                                        ->label('د نیکه نوم')
-                                    ,
-                                    Forms\Components\TextInput::make('province')
-                                        ->maxLength(191)
-                                        ->label('ولایت')
-                                    ,
-                                ]),
-                                Grid::make()->schema([
-                                    Forms\Components\TextInput::make('village')
-                                        ->maxLength(191)
-                                        ->label('کلی')
-                                    ,
-                                    Forms\Components\TextInput::make('tazkira')
-                                        ->maxLength(191)
-                                        ->label('تذکره نمبر')
-                                    ,
-                                ]),
-                                Grid::make()->schema([
-                                    Forms\Components\TextInput::make('mobile_number')
-                                        ->maxLength(191)
-                                        ->label('تلفن نمبر')
-                                    ,
-                                    Forms\Components\TextInput::make('parmanent_address')
-                                        ->maxLength(191)
-                                        ->label('دایمی داوسیدو پته ')
-                                    ,
-                                ]),
-                                Grid::make()->schema([
-                                    Forms\Components\TextInput::make('current_address')
-                                        ->maxLength(191)
-                                        ->label('اوسنی داوسیدو پته ')
-                                    ,
-                                    Forms\Components\TextInput::make('job')
-                                        ->maxLength(191)
-                                        ->label('وظیفه')
-                                    ,
-                                ]),
-                            ]),
+                        //                 ->maxLength(191),
+                        //             Forms\Components\TextInput::make('father_name')
+                        //                 ->maxLength(191)
+                        //                 ->label('د پلار نوم')
+                        //             ,
+                        //         ]),
+                        //         Grid::make()->schema([
+                        //             Forms\Components\TextInput::make('grand_father_name')
+                        //                 ->maxLength(191)
+                        //                 ->label('د نیکه نوم')
+                        //             ,
+                        //             Forms\Components\TextInput::make('province')
+                        //                 ->maxLength(191)
+                        //                 ->label('ولایت')
+                        //             ,
+                        //         ]),
+                        //         Grid::make()->schema([
+                        //             Forms\Components\TextInput::make('village')
+                        //                 ->maxLength(191)
+                        //                 ->label('کلی')
+                        //             ,
+                        //             Forms\Components\TextInput::make('tazkira')
+                        //                 ->maxLength(191)
+                        //                 ->label('تذکره نمبر')
+                        //             ,
+                        //         ]),
+                        //         Grid::make()->schema([
+                        //             Forms\Components\TextInput::make('mobile_number')
+                        //                 ->maxLength(191)
+                        //                 ->label('تلفن نمبر')
+                        //             ,
+                        //             Forms\Components\TextInput::make('parmanent_address')
+                        //                 ->maxLength(191)
+                        //                 ->label('دایمی داوسیدو پته ')
+                        //             ,
+                        //         ]),
+                        //         Grid::make()->schema([
+                        //             Forms\Components\TextInput::make('current_address')
+                        //                 ->maxLength(191)
+                        //                 ->label('اوسنی داوسیدو پته ')
+                        //             ,
+                        //             Forms\Components\TextInput::make('job')
+                        //                 ->maxLength(191)
+                        //                 ->label('وظیفه')
+                        //             ,
+                        //         ]),
+                        //     ]),
                     ])
                 ])->columnSpan(6)
             ])->columns(12);
@@ -175,7 +175,7 @@ class NumerahaResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->label('اسناد')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('customer.name')
+                Tables\Columns\TextColumn::make('customers.name')
                     ->numeric()
                     ->sortable()
                     ->label('مشتری')

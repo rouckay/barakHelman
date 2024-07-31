@@ -91,6 +91,10 @@ class CustomersResource extends Resource
                         Forms\Components\TextInput::make('job')
                             ->label('وظیفه')
                             ->maxLength(191),
+                        Forms\Components\Select::make('numeraha_id')
+                            ->label('نمره ځمکه')
+                            ->relationship('numerahas', 'numero_number')
+                        ,
                     ])->columnSpan(6)
                 ])->columns(12)
             ]);

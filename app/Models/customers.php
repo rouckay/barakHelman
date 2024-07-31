@@ -21,12 +21,13 @@ class customers extends Model
         'mobile_number',
         'parmanent_address',
         'current_address',
+        'numeraha_id',
         'job',
     ];
 
-    public function numeraha(): BelongsTo
+    public function numerahas(): BelongsTo
     {
-        return $this->belongsTo(numeraha::class);
+        return $this->BelongsTo(numeraha::class); // Customer has many Numerahas
     }
 
 }

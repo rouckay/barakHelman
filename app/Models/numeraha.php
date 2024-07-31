@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class numeraha extends Model
 {
+    // protected $primaryKey = 'numerahaID';
     use HasFactory;
     protected $fillable = [
         'numero_number',
@@ -17,11 +19,11 @@ class numeraha extends Model
         'transfered_money_to_bank',
         'Customer_image',
         'documents',
-        'customer_id',
+        // 'customers_id',
     ];
 
-    public function customers()
+    public function Customers(): HasMany
     {
-        return $this->hasMany(Customers::class); // Ensure proper class name casing
+        return $this->hasMany(customers::class); // Numeraha belongs to a Customer
     }
 }
