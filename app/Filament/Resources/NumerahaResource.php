@@ -210,11 +210,6 @@ class NumerahaResource extends Resource
                 Tables\Actions\Action::make('تعرفه')
                     ->icon('heroicon-o-arrow-down-tray')
                 ,
-
-
-
-
-
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
