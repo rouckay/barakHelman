@@ -14,14 +14,8 @@ body {
 }
 
 .filament-content {
-    margin-left: 0; /* Adjust according to sidebar width */
+    margin-left: 0;
+    margin-right: 250px; /* Adjust according to sidebar width */
 }
 
-.-translate-x-full {
-    --tw-translate-x: 0;
-}
-.fi-sidebar-nav {
-    right: 0;
-    left: auto;
-}
 /* Add more RTL styles as needed */

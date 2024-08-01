@@ -9,3 +9,4 @@ use App\Http\Controllers\tarifaController;
 // });
 Route::get('/', [employeesController::class, 'index']);
 Route::get('/tarifa', [tarifaController::class, 'index']);
+Route::get('/download-invoice/{id}', [TarifaController::class, 'downloadInvoice'])->name('download.invoice');

@@ -30,20 +30,24 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->label('نام')
                     ->required()
+                    ->placeholder('نام')
                     ->maxLength(191),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->label('ایمیل آدرس')
+                    ->placeholder('ایمیل آدرس')
                     ->required()
                     ->maxLength(191),
                 Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\TextInput::make('password')
                     ->password()
+                    ->placeholder('*********')
                     ->label('پټ نوم')
                     ->required()
                     ->maxLength(191),
                 Forms\Components\TextInput::make('lang')
                     ->required()
+                    ->placeholder('ژبه')
                     ->maxLength(191)
                     ->default('en'),
             ]);

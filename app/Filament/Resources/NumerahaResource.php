@@ -12,12 +12,14 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Enums\FiltersLayout;
+use App\Http\Controllers\tarifaController;
 
 class NumerahaResource extends Resource
 {
@@ -44,35 +46,44 @@ class NumerahaResource extends Resource
                         Forms\Components\TextInput::make('save_number')
                             ->label('د ثبت نمبر')
                             ->required()
+                            ->placeholder('د ثبت نمبر')
                             ->maxLength(191),
                     ]),
                     Grid::make()->schema([
                         Forms\Components\TextInput::make('date')
                             ->label('نیټه')
+                            ->default(now()->toDateString())
+                            ->placeholder('نیټه')
                             ->required()
                             ->maxLength(191),
                         Forms\Components\TextInput::make('tarifa_no')
                             ->label('د تعرفی نمبر')
                             ->required()
+                            ->placeholder('د تعرفی نمبر')
                             ->maxLength(191),
                     ]),
                     Forms\Components\TextInput::make('transfered_money_to_bank')
                         ->label('بانک ته لیږل شوی پیسی')
                         ->required()
+                        ->placeholder('د بانک ته لیږل شوی پیسی')
                         ->maxLength(191),
                 ])->columnSpan(6),
                 Card::make()->schema([
                     Forms\Components\FileUpload::make('Customer_image')
-                        ->label('د مشتری عکس')
+                        ->label('د مشتری انځور')
                         ->directory('Customer_images')
                         ->preserveFilenames()
+                        ->placeholder('د مشتری انځور')
                         ->image()
+                        ->required()
                         ->imageEditor(),
                     Grid::make()->schema([
                         Forms\Components\FileUpload::make('documents')
                             ->directory('Numeraha_documents')
                             ->preserveFilenames()
-
+                            ->downloadable()
+                            ->placeholder('اسناد')
+                            ->required()
                             ->label('اسناد'),
                         // Forms\Components\Select::make('customer_id')
                         //     ->label('مشتری')
@@ -175,7 +186,7 @@ class NumerahaResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->label('اسناد')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('customers.name')
+                Tables\Columns\TextColumn::make('Customers.name')
                     ->numeric()
                     ->sortable()
                     ->label('مشتری')
@@ -207,9 +218,15 @@ class NumerahaResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->label('بدلون')
                 ,
-                Tables\Actions\Action::make('تعرفه')
-                    ->icon('heroicon-o-arrow-down-tray')
-                ,
+                // Action::make('downloadInvoice')
+                //     ->label('Download Invoice')
+                //     ->url(fn(Numeraha $record) => route('download.invoice', $record->id)) // Use route to generate URL
+                //     ->icon('heroicon-o-download')
+                //     ->color('primary')
+                //     ->requiresConfirmation(),
+                // ,
+
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

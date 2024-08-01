@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class numeraha extends Model
+class Numeraha extends Model
 {
     // protected $primaryKey = 'numerahaID';
     use HasFactory;
@@ -24,6 +24,6 @@ class numeraha extends Model
 
     public function Customers(): HasMany
     {
-        return $this->hasMany(customers::class); // Numeraha belongs to a Customer
+        return $this->hasMany(Customers::class, 'numerahas_id'); // Numeraha belongs to a Customer
     }
 }

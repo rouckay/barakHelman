@@ -33,12 +33,15 @@ class CustomersResource extends Resource
                         Forms\Components\TextInput::make('name')
                             ->label('نوم')
                             ->required()
+                            ->placeholder('نام')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('father_name')
                             ->label('د پلار نوم')
+                            ->placeholder('د پلار نوم')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('grand_father_name')
                             ->label('د نیکه نوم')
+                            ->placeholder('د نیکه نوم')
                             ->maxLength(191),
                         Forms\Components\Select::make('province')
                             ->label('ولایت')
@@ -73,25 +76,32 @@ class CustomersResource extends Resource
                             ]),
                         Forms\Components\TextInput::make('village')
                             ->label('کلی')
+                            ->placeholder('کلی')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('tazkira')
                             ->label('تذکره نمبر')
+                            ->placeholder('تذکره نمبر')
                             ->maxLength(191),
                     ])->columnSpan(6),
                     Grid::make()->schema([
                         Forms\Components\TextInput::make('mobile_number')
                             ->label('تلفن نمبر')
+                            ->placeholder('تلفن نمبر')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('parmanent_address')
                             ->label('دایمی داوسیدو پته ')
+                            ->placeholder('دایمی داوسیدو پته')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('current_address')
-                            ->label('اوسنی داوسیدو پته ')
+                            ->label('اوسنی داوسیدو پته')
+                            ->placeholder('اوسنی داوسیدو پته')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('job')
                             ->label('وظیفه')
+                            ->placeholder('وظیفه')
                             ->maxLength(191),
                         Forms\Components\Select::make('numeraha_id')
+                            ->placeholder('نمره ځمکه')
                             ->label('نمره ځمکه')
                             ->relationship('numerahas', 'numero_number')
                         ,

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class customers extends Model
+class Customers extends Model
 {
     use HasFactory;
 
@@ -21,7 +21,7 @@ class customers extends Model
         'mobile_number',
         'parmanent_address',
         'current_address',
-        'numeraha_id',
+        'numerahas_id',
         'job',
     ];
 

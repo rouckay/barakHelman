@@ -89,6 +89,7 @@ class MarketsResource extends Resource
                     ->label('د ځمکی مالک ')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('owner_phone_number')
+
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
