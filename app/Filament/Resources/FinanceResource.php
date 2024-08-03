@@ -16,6 +16,12 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Repeater;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
+use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
+use Ysfkaya\FilamentPhoneInput\Infolists\PhoneEntry;
+use Ysfkaya\FilamentPhoneInput\PhoneInputNumberType;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
 
 class FinanceResource extends Resource
 {
@@ -24,6 +30,15 @@ class FinanceResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
     protected static ?string $navigationLabel = 'مالی مدیریت';
 
+    public static function infolists(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->columns([
+                Infolists\Components\TextEntry::make('name'),
+                Tables\Columns\TextColumn::make('email'),
+                PhoneEntry::make('phone')->displayFormat(PhoneInputNumberType::NATIONAL),
+            ]);
+    }
     public static function form(Form $form): Form
     {
         return $form
@@ -70,11 +85,7 @@ class FinanceResource extends Resource
                             ->content(function ($get) {
                                 return $get('dollor') * $get('dollor_unit');
                             }),
-                        Forms\Components\TextInput::make('phone_number')
-                            ->tel()
-                            ->label('شماره تلفن')
-                            ->required()
-                            ->numeric(),
+                        PhoneInput::make('phone_number'),
                         Forms\Components\Select::make('user_id')
                             ->relationship('user', 'name')
                             ->label('مصرف کننده')
@@ -107,7 +118,7 @@ class FinanceResource extends Resource
                     ->searchable()
                     ->label('دالر')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('phone_number')
+                PhoneColumn::make('phone_number')->displayFormat(PhoneInputNumberType::NATIONAL)
                     ->numeric()
                     ->searchable()
                     ->label('شماره تلفن')

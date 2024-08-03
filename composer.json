@@ -16,7 +16,8 @@
         "livewire/livewire": "^3.5",
         "mcamara/laravel-localization": "^2.0",
         "spatie/laravel-settings": "^3.3",
-        "tomatophp/filament-pwa": "^1.0"
+        "tomatophp/filament-pwa": "^1.0",
+        "ysfkaya/filament-phone-input": "^2.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
