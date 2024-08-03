@@ -21,14 +21,14 @@ class Customers extends Model
         'mobile_number',
         'parmanent_address',
         'current_address',
-        'numerahas_id',
+        'numeraha_id',
         'payed_price',
-        'due_price',
+        // 'due_price',
         'total_price',
         'job',
     ];
 
-    public function numerahas(): BelongsTo
+    public function numeraha(): BelongsTo
     {
         return $this->BelongsTo(numeraha::class); // Customer has many Numerahas
     }

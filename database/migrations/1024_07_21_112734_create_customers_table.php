@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('job')->nullable();
             $table->foreignIdFor(Numeraha::class)->nullable();
             $table->string('payed_price');
-            $table->string('due_price');
+            // $table->string('due_price');
             $table->string('total_price');
             $table->timestamps();
         });

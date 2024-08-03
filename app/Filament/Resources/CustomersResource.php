@@ -15,6 +15,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Filters\Filter;
 
 class CustomersResource extends Resource
 {
@@ -104,7 +105,7 @@ class CustomersResource extends Resource
                         Forms\Components\Select::make('numeraha_id')
                             ->placeholder('نمره ځمکه')
                             ->label('نمره ځمکه')
-                            ->relationship('numerahas', 'numero_number')
+                            ->relationship('numeraha', 'numero_number')
                         ,
                         TextInput::make('payed_price')
                             ->label('رسید پیسی')
@@ -118,7 +119,7 @@ class CustomersResource extends Resource
                             ->label('باقی پیسی')
                             ->disabled()
                             ->content(function ($get) {
-                                return $get('total_price') - $get('payed_price');
+                                return $get('payed_price') - $get('total_price');
                             }),
                     ])->columnSpan(6)
                 ])->columns(12)
@@ -191,8 +192,53 @@ class CustomersResource extends Resource
                     ->label('د بدلون نیټه')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('payed_price')
+                    ->label('رسید پیسی')
+                ,
+                Tables\Columns\TextColumn::make('total_price')
+                    ->label('محمعه پیسی'),
+
+                Tables\Columns\TextColumn::make('total_price')
+                    ->label('محمعه پیسی')
+
             ])
             ->filters([
+                Filter::make('due_price_range')
+                    ->label('قرزداران')
+                    ->form([
+                        Forms\Components\TextInput::make('min_due_price')
+                            ->label('کمترین قرز')
+                            ->numeric(),
+
+                        Forms\Components\TextInput::make('max_due_price')
+                            ->label('جګ ترین قرز')
+                            ->numeric(),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        // Ensure min and max values are set
+                        $min = $data['min_due_price'] ?? null;
+                        $max = $data['max_due_price'] ?? null;
+
+                        // Filter logic
+                        return $query->when($min !== null, fn($query) => $query->whereRaw('total_price - payed_price >= ?', [$min]))
+                            ->when($max !== null, fn($query) => $query->whereRaw('total_price - payed_price <= ?', [$max]));
+                    })
+                    ->indicateUsing(function (array $data): array {
+                        // Display current filter range
+                        $indicators = [];
+
+                        if ($data['min_due_price'] ?? null) {
+                            $indicators['min_due_price'] = 'Min Due Price: $' . $data['min_due_price'];
+                        }
+
+                        if ($data['max_due_price'] ?? null) {
+                            $indicators['max_due_price'] = 'Max Due Price: $' . $data['max_due_price'];
+                        }
+
+                        return $indicators;
+                    }),
+                Filter::make('ټول قرزداران')
+                    ->query(fn(Builder $query) => $query->whereColumn('total_price', '>', 'payed_price')),
 
             ])
             ->actions([
