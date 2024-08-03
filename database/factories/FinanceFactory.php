@@ -21,7 +21,10 @@ class FinanceFactory extends Factory
             'quantity' => fake()->numberBetween(1, 4000),
             'unit' => fake()->numberBetween(1, 100),
             'dollor' => fake()->numberBetween(1, 1000),
-            'phone_number' => fake()->numberBetween(9, 10),
+            'total_price' => fake()->numberBetween(40010, 2000000),
+            'dollor_unit' => fake()->numberBetween(72, 80),
+            'dollor_total' => fake()->numberBetween(41, 2000),
+            'phone_number' => fake()->numberBetween(74333333, 79333333),
             'user_id' => 1,
         ];
     }

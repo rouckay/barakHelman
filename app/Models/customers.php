@@ -22,6 +22,9 @@ class Customers extends Model
         'parmanent_address',
         'current_address',
         'numerahas_id',
+        'payed_price',
+        'due_price',
+        'total_price',
         'job',
     ];
 

@@ -26,6 +26,10 @@ class CustomersFactory extends Factory
             'mobile_number' => fake()->phoneNumber(),
             'parmanent_address' => fake()->address(),
             'current_address' => fake()->address(),
+            'numeraha_id' => 1,
+            'payed_price' => fake()->numberBetween(2000, 50000),
+            'due_price' => fake()->numberBetween(4000, 30000),
+            'total_price' => fake()->numberBetween(2000, 50000),
             'job' => fake()->jobTitle(),
         ];
     }

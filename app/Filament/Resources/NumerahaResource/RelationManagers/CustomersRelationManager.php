@@ -5,6 +5,7 @@ namespace App\Filament\Resources\NumerahaResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -87,12 +88,28 @@ class CustomersRelationManager extends RelationManager
                         Forms\Components\Select::make('numeraha_id')
                             ->label('نمره ځمکه')
                             ->relationship('numerahas', 'numero_number')
+
+                        ,
+                        Forms\Components\TextInput::make('payed_price')
+                            ->label('رسید پیسی')
+                            ->live()
+                            ->dehydrated()
+                        ,
+                        Forms\Components\TextInput::make('total_price')
+                            ->live()
+                            ->label('محمعه پیسی')
+                        ,
+                        Forms\Components\Placeholder::make('due_price')
+                            ->label('باقی پیسی')
+                            ->content(function ($get) {
+                                $duePrice = $get('payed_price') - $get('total_price');
+                                return $duePrice;
+                            })
                         ,
                     ])->columnSpan(6)
                 ])->columns(12)
             ]);
     }
-
     public function table(Table $table): Table
     {
         return $table

@@ -38,34 +38,38 @@ class NumerahaResource extends Resource
                 Card::make()->schema([
                     Grid::make()->schema([
                         Forms\Components\TextInput::make('numero_number')
-                            ->label('د نمری نمبر')
+                            ->label('د نمری (ځمکی) ای ډی')
                             ->autofocus()
-                            ->placeholder('نمری نمبر')
+                            ->placeholder('د نمری (ځمکی) ای ډی')
+                            // ->unique()
                             ->required()
                             ->maxLength(191),
                         Forms\Components\TextInput::make('save_number')
                             ->label('د ثبت نمبر')
                             ->required()
+                            // ->disabled()
+
+                            ->prefix('er-')
                             ->placeholder('د ثبت نمبر')
                             ->maxLength(191),
-                    ]),
-                    Grid::make()->schema([
                         Forms\Components\TextInput::make('date')
                             ->label('نیټه')
                             ->default(now()->toDateString())
                             ->placeholder('نیټه')
                             ->required()
                             ->maxLength(191),
-                        Forms\Components\TextInput::make('tarifa_no')
-                            ->label('د تعرفی نمبر')
-                            ->required()
-                            ->placeholder('د تعرفی نمبر')
-                            ->maxLength(191),
+                    ])->columns(3),
+                    Grid::make()->schema([
                     ]),
-                    Forms\Components\TextInput::make('transfered_money_to_bank')
-                        ->label('بانک ته لیږل شوی پیسی')
+                    Forms\Components\TextInput::make('numera_price')
+                        ->label('د نمری (ځمکی) قیمت')
                         ->required()
-                        ->placeholder('د بانک ته لیږل شوی پیسی')
+                        ->placeholder('د نمری (ځمکی) قیمت')
+                        ->maxLength(191),
+                    Forms\Components\TextInput::make('sharwali_tarifa_price')
+                        ->label('د ښاروالی د تعرفی پیسی')
+                        ->required()
+                        ->placeholder('د ښاروالی د تعرفی پیسی')
                         ->maxLength(191),
                 ])->columnSpan(6),
                 Card::make()->schema([
@@ -75,7 +79,7 @@ class NumerahaResource extends Resource
                         ->preserveFilenames()
                         ->placeholder('د مشتری انځور')
                         ->image()
-                        ->required()
+                        // ->required()
                         ->imageEditor(),
                     Grid::make()->schema([
                         Forms\Components\FileUpload::make('documents')
@@ -83,7 +87,7 @@ class NumerahaResource extends Resource
                             ->preserveFilenames()
                             ->downloadable()
                             ->placeholder('اسناد')
-                            ->required()
+                            // ->required()
                             ->label('اسناد'),
                         // Forms\Components\Select::make('customer_id')
                         //     ->label('مشتری')
@@ -173,9 +177,14 @@ class NumerahaResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->label('د تعرفی نمبر')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('transfered_money_to_bank')
+                Tables\Columns\TextColumn::make('numera_price')
                     ->sortable()
-                    ->label('بانک ته لیږل شوی پیسی')
+                    ->label('د نمری (ځمکی) قیمت')
+                    ->toggleable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('sharwali_tarifa_price')
+                    ->sortable()
+                    ->label('د ښاروالی د تعرفی پیسی')
                     ->toggleable()
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('Customer_image')
@@ -207,7 +216,11 @@ class NumerahaResource extends Resource
             ->filters(
                 [
                     SelectFilter::make('customer')
-                        ->relationship('customers', 'name')
+                        ->relationship('customers', 'name'),
+                    // SelectFilter::make('Nullcustomer')
+                    //     ->content(function () {
+
+                    //     })
                 ],
                 //  layout: FiltersLayout::AboveContent
             )

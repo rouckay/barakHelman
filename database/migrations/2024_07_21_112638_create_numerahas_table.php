@@ -16,8 +16,9 @@ return new class extends Migration {
             $table->string('numero_number');
             $table->string('save_number');
             $table->string('date');
-            $table->string('tarifa_no');
-            $table->string('transfered_money_to_bank');
+            // $table->string('tarifa_no');
+            $table->string('numera_price');
+            $table->string('sharwali_tarifa_price');
             $table->string('Customer_image')->nullable();
             $table->string('documents')->nullable();
             $table->timestamps();

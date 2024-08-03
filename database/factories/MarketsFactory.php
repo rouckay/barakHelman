@@ -20,7 +20,7 @@ class MarketsFactory extends Factory
             'name' => fake()->name(),
             'description' => fake()->realText(100),
             'lengthm_m2' => fake()->numberBetween(1233, 3211),
-            'nomerah_number' => fake()->numberBetween(3221, 3422),
+            'nomerah_number' => fake()->numberBetween(1, 100),
             'nomerah_owner' => fake()->numberBetween(1, 100),
             'owner_phone_number' => fake()->phoneNumber(),
         ];

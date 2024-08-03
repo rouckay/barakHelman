@@ -35,62 +35,73 @@ class EmployeesResource extends Resource
             ->schema([
                 Card::make()->schema([
                     Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label('نوم')
+                            ->placeholder('نوم')
+                            ->required()
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('lastName')
+                            ->label('تخلص')
+                            ->placeholder('تخلص')
+                            ->required()
+                            ->maxLength(191),
+                    ]),
+                    Forms\Components\TextInput::make('FatherName')
+                        ->label('د پلار نوم')
+                        ->placeholder('د پلار نوم')
+                        ->required()
+                        ->maxLength(191),
+                    Forms\Components\TextInput::make('Position')
+                        ->label('بست')
+                        ->placeholder('بست')
+                        ->required()
+                        ->maxLength(191),
+                    Forms\Components\TextInput::make('Education')
+                        ->label('زده کړې')
+                        ->placeholder('زده کړې')
+                        ->required()
+                        ->maxLength(191),
+                ])->columnSpan(4),
+                Card::make()->schema([
+                    Grid::make(2)->schema([
                         Forms\Components\TextInput::make('salary')
                             ->label('معاش ')
                             ->required()
+                            ->placeholder('معاش')
                             ->numeric()
                             ->maxLength(191),
                         Forms\Components\TextInput::make('tazkira')
                             ->label('تذکره')
                             ->required()
+                            ->placeholder('تذکره')
                             ->numeric()
                             ->maxLength(191),
                     ]),
                     Grid::make(2)->schema([
                         Forms\Components\DatePicker::make('date_of_contract')
                             ->label('تاریخ قرارداد')
+                            ->placeholder('تاریخ قرارداد')
                             ->default(now()->toDateString())
                             ->required()
                         ,
                         Forms\Components\DatePicker::make('end_date_of_contract')
                             ->label('تاریخ ختم قرارداد')
+                            ->placeholder('تاریخ ختم قرارداد')
                             ->default(now()->toDateString())
                             ->required()
                     ]),
                     Forms\Components\TextInput::make('phone_number')
                         ->label('شماره تلفن')
+                        ->placeholder('شماره تلفن')
                         ->tel()
                         ->required()
                         ->maxLength(191),
                     Forms\Components\Textarea::make('Address')
                         ->label('پته / آدرس')
+                        ->placeholder('پته / آدرس')
                         ->required()
                         ->maxLength(191),
                 ])->columnSpan(8),
-                Card::make()->schema([
-                    Grid::make(2)->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->label('نوم')
-                            ->required()
-                            ->maxLength(191),
-                        Forms\Components\TextInput::make('lastName')
-                            ->label('تخلص')
-                            ->required()
-                            ->maxLength(191),
-                    ]),
-                    Forms\Components\TextInput::make('FatherName')
-                        ->label('د پلار نوم')
-                        ->required()
-                        ->maxLength(191),
-                    Forms\Components\TextInput::make('Position')
-                        ->label('بست')
-                        ->required()
-                        ->maxLength(191),
-                    Forms\Components\TextInput::make('Education')
-                        ->label('زده کړې')
-                        ->required()
-                        ->maxLength(191),
-                ])->columnSpan(4),
             ])->columns(12);
     }
 

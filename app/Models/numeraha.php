@@ -15,8 +15,9 @@ class Numeraha extends Model
         'numero_number',
         'save_number',
         'date',
-        'tarifa_no',
-        'transfered_money_to_bank',
+        // 'tarifa_no',
+        'numera_price',
+        'sharwali_tarifa_price',
         'Customer_image',
         'documents',
         // 'customers_id',
@@ -24,6 +25,6 @@ class Numeraha extends Model
 
     public function Customers(): HasMany
     {
-        return $this->hasMany(Customers::class, 'numerahas_id'); // Numeraha belongs to a Customer
+        return $this->hasMany(Customers::class, 'numeraha_id'); // Numeraha belongs to a Customer
     }
 }

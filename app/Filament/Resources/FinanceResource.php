@@ -6,6 +6,8 @@ use App\Filament\Resources\FinanceResource\Pages;
 use App\Filament\Resources\FinanceResource\RelationManagers;
 use App\Models\Finance;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -13,6 +15,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Repeater;
 
 class FinanceResource extends Resource
 {
@@ -25,36 +28,63 @@ class FinanceResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\RichEditor::make('description')
-                    ->label('توضیحات')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('quantity')
-                    ->required()
-                    ->label('مقدار')
-                    ->default(1)
-                    ->numeric(),
-                Forms\Components\TextInput::make('unit')
-                    ->required()
-                    ->label('فی واحد')
-                    ->dehydrated()
-                    ->numeric(),
-                Forms\Components\TextInput::make('dollor')
-                    ->required()
-                    ->label('دالر')
-                    ->numeric(),
+                Repeater::make('Finance')->schema([
+                    Forms\Components\RichEditor::make('description')
+                        ->label('توضیحات')
+                        ->required()
+                        ->columnSpanFull(),
+                    Grid::make()->schema([
+                        Forms\Components\TextInput::make('quantity')
+                            ->required()
+                            ->label('مقدار')
+                            ->live()
+                            ->dehydrated()
+                            ->default(1)
+                            ->numeric(),
+                        Forms\Components\TextInput::make('unit')
+                            ->required()
+                            ->label('فی واحد')
+                            ->dehydrated()
+                            ->default(1)
+                            ->live()
+                            ->numeric(),
+                        Forms\Components\Placeholder::make('total_price')
+                            ->label('مجمعه قیمت')
+                            ->content(function ($get) {
+                                return $get('quantity') * $get('unit');
+                            }),
+                        Forms\Components\TextInput::make('dollor')
+                            ->required()
+                            ->label('دالر')
+                            ->live()
+                            ->dehydrated()
+                            ->numeric(),
+                        Forms\Components\TextInput::make('dollor_unit')
+                            ->required()
+                            ->label('دالر قیمت')
+                            ->live()
+                            ->default(1)
+                            ->numeric(),
+                        Forms\Components\Placeholder::make('dollor_total')
+                            ->label('مجمعه دالر')
+                            ->content(function ($get) {
+                                return $get('dollor') * $get('dollor_unit');
+                            }),
+                        Forms\Components\TextInput::make('phone_number')
+                            ->tel()
+                            ->label('شماره تلفن')
+                            ->required()
+                            ->numeric(),
+                        Forms\Components\Select::make('user_id')
+                            ->relationship('user', 'name')
+                            ->label('مصرف کننده')
+                            ->default(auth()->user()->id)
+                            ->required(),
+                    ])->columns(6),
+                ])->columnSpanFull(),
                 // Forms\Components\ViewField::make('total_dollors')
                 //     ->label(' دالر مجمعه')
                 //     ->view('2'),
-                Forms\Components\TextInput::make('phone_number')
-                    ->tel()
-                    ->label('شماره تلفن')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->label('مصرف کننده')
-                    ->required(),
             ]);
     }
 

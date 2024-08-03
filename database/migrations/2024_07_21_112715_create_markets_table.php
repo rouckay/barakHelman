@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('description');
             $table->string('lengthm_m2');
-            $table->string('nomerah_number');
+            $table->foreignId('nomerah_number')->constrained('numerahas')->cascadeOnDelete();
             $table->string('nomerah_owner');
             $table->string('owner_phone_number');
             $table->timestamps();

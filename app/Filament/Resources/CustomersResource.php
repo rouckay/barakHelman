@@ -7,6 +7,7 @@ use App\Models\Customers;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -105,6 +106,20 @@ class CustomersResource extends Resource
                             ->label('نمره ځمکه')
                             ->relationship('numerahas', 'numero_number')
                         ,
+                        TextInput::make('payed_price')
+                            ->label('رسید پیسی')
+                            ->live()
+                            ->dehydrated()
+                        ,
+                        TextInput::make('total_price')
+                            ->live()
+                            ->label('محمعه پیسی'),
+                        Forms\Components\Placeholder::make('due_price')
+                            ->label('باقی پیسی')
+                            ->disabled()
+                            ->content(function ($get) {
+                                return $get('total_price') - $get('payed_price');
+                            }),
                     ])->columnSpan(6)
                 ])->columns(12)
             ]);
@@ -141,7 +156,7 @@ class CustomersResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('tazkira')
                     ->sortable()
-                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->label('تذکره نمبر')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('mobile_number')

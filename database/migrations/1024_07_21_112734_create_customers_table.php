@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\numeraha;
+use App\Models\Numeraha;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,8 +23,10 @@ return new class extends Migration {
             $table->string('parmanent_address')->nullable();
             $table->string('current_address')->nullable();
             $table->string('job')->nullable();
-            // $table->foreignId('numeraha_id')->constrained('numerahas')->cascadeOnDelete();
-            $table->foreignIdFor(numeraha::class)->nullable();
+            $table->foreignIdFor(Numeraha::class)->nullable();
+            $table->string('payed_price');
+            $table->string('due_price');
+            $table->string('total_price');
             $table->timestamps();
         });
     }

@@ -42,17 +42,20 @@ class MarketsResource extends Resource
                         ->maxLength(191),
                 ])->columnSpan(8),
                 Card::make()->schema([
-                    Forms\Components\TextInput::make('nomerah_number')
+                    Forms\Components\Select::make('nomerah_number')
                         ->label('د ځمکی نمبر')
-                        ->numeric()
-                        ->required()
-                        ->maxLength(191),
-                    // below the owner should be saved in customer list or not ? 
+                        ->relationship('numerNumer', 'numero_number')
+                        ->searchable()
+                        ->selectablePlaceholder()
+                        ->required(),
+                    // below the owner should be saved in customer list or not ?
                     // to make relatoinship with customer table
-                    Forms\Components\TextInput::make('nomerah_owner')
+                    Forms\Components\Select::make('nomerah_owner')
                         ->label('د ځمکی مالک ')
                         ->required()
-                        ->maxLength(191),
+                        ->relationship('nomerah_owner', 'name')
+                        ->searchable()
+                    ,
                     Forms\Components\TextInput::make('owner_phone_number')
                         ->label('د ځمکی د مالک د تلفن شمیره')
                         ->tel()

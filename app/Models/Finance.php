@@ -14,7 +14,10 @@ class Finance extends Model
         'description',
         'quantity',
         'unit',
+        'total_price',
         'dollor',
+        'dollor_unit',
+        'dollor_total',
         'phone_number',
         'user_id',
     ];
