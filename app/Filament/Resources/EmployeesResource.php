@@ -38,27 +38,32 @@ class EmployeesResource extends Resource
                         Forms\Components\TextInput::make('name')
                             ->label('نوم')
                             ->placeholder('نوم')
+                            ->prefixIcon('heroicon-o-user')
                             ->required()
                             ->maxLength(191),
                         Forms\Components\TextInput::make('lastName')
                             ->label('تخلص')
+                            ->prefixIcon('heroicon-o-user')
                             ->placeholder('تخلص')
                             ->required()
                             ->maxLength(191),
                     ]),
                     Forms\Components\TextInput::make('FatherName')
                         ->label('د پلار نوم')
+                        ->prefixIcon('heroicon-o-user')
                         ->placeholder('د پلار نوم')
                         ->required()
                         ->maxLength(191),
                     Forms\Components\TextInput::make('Position')
                         ->label('بست')
                         ->placeholder('بست')
+                        ->prefixIcon('heroicon-o-briefcase')
                         ->required()
                         ->maxLength(191),
                     Forms\Components\TextInput::make('Education')
                         ->label('زده کړې')
                         ->placeholder('زده کړې')
+                        ->prefixIcon('heroicon-o-briefcase')
                         ->required()
                         ->maxLength(191),
                 ])->columnSpan(4),
@@ -67,12 +72,14 @@ class EmployeesResource extends Resource
                         Forms\Components\TextInput::make('salary')
                             ->label('معاش ')
                             ->required()
+                            ->prefixIcon('heroicon-o-banknotes')
                             ->placeholder('معاش')
                             ->numeric()
                             ->maxLength(191),
                         Forms\Components\TextInput::make('tazkira')
                             ->label('تذکره')
                             ->required()
+                            ->prefixIcon('heroicon-o-identification')
                             ->placeholder('تذکره')
                             ->numeric()
                             ->maxLength(191),
@@ -90,17 +97,20 @@ class EmployeesResource extends Resource
                             ->default(now()->toDateString())
                             ->required()
                     ]),
-                    Forms\Components\TextInput::make('phone_number')
-                        ->label('شماره تلفن')
-                        ->placeholder('شماره تلفن')
-                        ->tel()
-                        ->required()
-                        ->maxLength(191),
-                    Forms\Components\Textarea::make('Address')
-                        ->label('پته / آدرس')
-                        ->placeholder('پته / آدرس')
-                        ->required()
-                        ->maxLength(191),
+                    Grid::make()->schema([
+                        Forms\Components\TextInput::make('phone_number')
+                            ->label('شماره تلفن')
+                            ->placeholder('شماره تلفن')
+                            ->tel()
+                            ->prefixIcon('heroicon-o-phone')
+                            ->required()
+                            ->maxLength(191),
+                        Forms\Components\Textarea::make('Address')
+                            ->label('پته / آدرس')
+                            ->placeholder('پته / آدرس')
+                            ->required()
+                            ->maxLength(191),
+                    ])
                 ])->columnSpan(8),
             ])->columns(12);
     }

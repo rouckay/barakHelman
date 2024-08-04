@@ -5,6 +5,7 @@ namespace App\Filament\Resources\NumerahaResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -12,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Filters\Filter;
 
 class CustomersRelationManager extends RelationManager
 {
@@ -22,92 +24,119 @@ class CustomersRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Card::make()->schema([
-                    Grid::make()->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->label('نوم')
-                            ->required()
-                            ->maxLength(191),
-                        Forms\Components\TextInput::make('father_name')
-                            ->label('د پلار نوم')
-                            ->maxLength(191),
-                        Forms\Components\TextInput::make('grand_father_name')
-                            ->label('د نیکه نوم')
-                            ->maxLength(191),
-                        Forms\Components\Select::make('province')
-                            ->label('ولایت')
-                            ->placeholder('ولایت انتخاب کړی.')
-                            ->options([
-                                'بلخ' => 'بلخ',
-                                'بامیان' => 'بامیان',
-                                'بادغیس' => 'بادغیس',
-                                'بدخشان' => 'بدخشان',
-                                'بغلان' => 'بغلان',
-                                'دایکندی' => 'دایکندی',
-                                'فراه' => 'فراه',
-                                'فاریاب' => 'فاریاب',
-                                'غزنی' => 'غزنی',
-                                'غور' => 'غور',
-                                'هلمند' => 'هلمند',
-                                'هرات' => 'هرات',
-                                'جوزجان' => 'جوزجان',
-                                'کابل' => 'کابل',
-                                'قندهار' => 'قندهار',
-                                'کاپیسا' => 'کاپیسا',
-                                'کندز' => 'کندز',
-                                'خوست' => 'خوست',
-                                'کنر' => 'کنر',
-                                'لغمان' => 'لغمان',
-                                'لوگر' => 'لوگر',
-                                'ننگرهار' => 'ننگرهار',
-                                'نیمروز' => 'نیمروز',
-                                'نورستان' => 'نورستان',
-                                'پنجشیر' => 'پنجشیر',
-                                'پروان' => 'پروان',
-                            ]),
-                        Forms\Components\TextInput::make('village')
-                            ->label('کلی')
-                            ->maxLength(191),
-                        Forms\Components\TextInput::make('tazkira')
-                            ->label('تذکره نمبر')
-                            ->maxLength(191),
-                    ])->columnSpan(6),
-                    Grid::make()->schema([
-                        Forms\Components\TextInput::make('mobile_number')
-                            ->label('تلفن نمبر')
-                            ->maxLength(191),
-                        Forms\Components\TextInput::make('parmanent_address')
-                            ->label('دایمی داوسیدو پته ')
-                            ->maxLength(191),
-                        Forms\Components\TextInput::make('current_address')
-                            ->label('اوسنی داوسیدو پته ')
-                            ->maxLength(191),
-                        Forms\Components\TextInput::make('job')
-                            ->label('وظیفه')
-                            ->maxLength(191),
-                        Forms\Components\Select::make('numeraha_id')
-                            ->label('نمره ځمکه')
-                            ->relationship('numerahas', 'numero_number')
+                Forms\Components\Tabs::make('New_customer')->
+                    tabs([
+                        Tab::make('مشتری جدید')->schema([
+                            Card::make()->schema([
+                                Grid::make()->schema([
+                                    Forms\Components\TextInput::make('name')
+                                        ->label('نوم')
+                                        ->prefixIcon('heroicon-o-user')
+                                        ->required()
+                                        ->maxLength(191),
+                                    Forms\Components\TextInput::make('father_name')
+                                        ->label('د پلار نوم')
+                                        ->prefixIcon('heroicon-o-user')
+                                        ->maxLength(191),
+                                    Forms\Components\TextInput::make('grand_father_name')
+                                        ->label('د نیکه نوم')
+                                        ->prefixIcon('heroicon-o-user')
+                                        ->maxLength(191),
+                                    Forms\Components\Select::make('province')
+                                        ->label('ولایت')
+                                        ->prefixIcon('heroicon-m-globe-alt')
+                                        ->placeholder('ولایت انتخاب کړی.')
+                                        ->options([
+                                            'بلخ' => 'بلخ',
+                                            'بامیان' => 'بامیان',
+                                            'بادغیس' => 'بادغیس',
+                                            'بدخشان' => 'بدخشان',
+                                            'بغلان' => 'بغلان',
+                                            'دایکندی' => 'دایکندی',
+                                            'فراه' => 'فراه',
+                                            'فاریاب' => 'فاریاب',
+                                            'غزنی' => 'غزنی',
+                                            'غور' => 'غور',
+                                            'هلمند' => 'هلمند',
+                                            'هرات' => 'هرات',
+                                            'جوزجان' => 'جوزجان',
+                                            'کابل' => 'کابل',
+                                            'قندهار' => 'قندهار',
+                                            'کاپیسا' => 'کاپیسا',
+                                            'کندز' => 'کندز',
+                                            'خوست' => 'خوست',
+                                            'کنر' => 'کنر',
+                                            'لغمان' => 'لغمان',
+                                            'لوگر' => 'لوگر',
+                                            'ننگرهار' => 'ننگرهار',
+                                            'نیمروز' => 'نیمروز',
+                                            'نورستان' => 'نورستان',
+                                            'پنجشیر' => 'پنجشیر',
+                                            'پروان' => 'پروان',
+                                        ]),
+                                    Forms\Components\TextInput::make('village')
+                                        ->label('کلی')
+                                        ->prefixIcon('heroicon-m-map-pin')
+                                        ->maxLength(191),
+                                    Forms\Components\TextInput::make('tazkira')
+                                        ->label('تذکره نمبر')
+                                        ->prefixIcon('heroicon-o-identification')
+                                        ->maxLength(191),
+                                    Forms\Components\TextInput::make('parmanent_address')
+                                        ->label('دایمی داوسیدو پته ')
+                                        ->prefixIcon('heroicon-o-map-pin')
+                                        ->maxLength(191),
+                                ])->columnSpan(6),
+                                Grid::make()->schema([
+                                    Forms\Components\TextInput::make('current_address')
+                                        ->label('اوسنی داوسیدو پته ')
+                                        ->prefixIcon('heroicon-o-map-pin')
+                                        ->maxLength(191),
+                                    Forms\Components\TextInput::make('total_price')
+                                        ->live()
+                                        ->prefixIcon('heroicon-o-banknotes')
+                                        ->label('محمعه پیسی')
+                                        ->dehydrated()
+                                        ->numeric()
+                                    ,
+                                    Forms\Components\TextInput::make('payed_price')
+                                        ->label('رسید پیسی')
+                                        ->live()
+                                        ->dehydrated()
+                                        ->numeric()
+                                        ->prefixIcon('heroicon-o-banknotes')
+                                    ,
+                                    Forms\Components\Placeholder::make('due_price')
+                                        ->label('باقی پیسی')
+                                        ->content(function ($get) {
+                                            $duePrice = $get('payed_price') - $get('total_price');
+                                            return $duePrice;
+                                        })
+                                    ,
+                                    Forms\Components\TextInput::make('mobile_number')
+                                        ->label('تلفن نمبر')
+                                        ->prefixIcon('heroicon-o-phone')
+                                        ->maxLength(191),
 
-                        ,
-                        Forms\Components\TextInput::make('payed_price')
-                            ->label('رسید پیسی')
-                            ->live()
-                            ->dehydrated()
-                        ,
-                        Forms\Components\TextInput::make('total_price')
-                            ->live()
-                            ->label('محمعه پیسی')
-                        ,
-                        Forms\Components\Placeholder::make('due_price')
-                            ->label('باقی پیسی')
-                            ->content(function ($get) {
-                                $duePrice = $get('payed_price') - $get('total_price');
-                                return $duePrice;
-                            })
-                        ,
-                    ])->columnSpan(6)
-                ])->columns(12)
+                                    Forms\Components\TextInput::make('job')
+                                        ->label('وظیفه')
+                                        ->prefixIcon('heroicon-o-briefcase')
+                                        ->maxLength(191),
+                                    Forms\Components\Select::make('numeraha_id')
+                                        ->label('نمره ځمکه')
+                                        ->relationship('numeraha', 'numero_number')
+                                        ->prefixIcon('heroicon-o-map')
+                                    ,
+                                ])->columnSpan(6)
+                            ])->columns(12)
+                        ]),
+                        Tab::make('موجوده مشتری')->schema([
+                            Forms\Components\Select::make('numeraha_id')
+                                ->label('نمره ځمکه')
+                                ->relationship('numeraha', 'numero_number')
+                                ->prefixIcon('heroicon-o-map'),
+                        ])
+                    ])->columnSpanFull()
             ]);
     }
     public function table(Table $table): Table
@@ -180,7 +209,42 @@ class CustomersRelationManager extends RelationManager
 
             ])
             ->filters([
-                //
+                Filter::make('due_price_range')
+                    ->label('قرزداران')
+                    ->form([
+                        Forms\Components\TextInput::make('min_due_price')
+                            ->label('کمترین قرز')
+                            ->numeric(),
+
+                        Forms\Components\TextInput::make('max_due_price')
+                            ->label('جګ ترین قرز')
+                            ->numeric(),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        // Ensure min and max values are set
+                        $min = $data['min_due_price'] ?? null;
+                        $max = $data['max_due_price'] ?? null;
+
+                        // Filter logic
+                        return $query->when($min !== null, fn($query) => $query->whereRaw('total_price - payed_price >= ?', [$min]))
+                            ->when($max !== null, fn($query) => $query->whereRaw('total_price - payed_price <= ?', [$max]));
+                    })
+                    ->indicateUsing(function (array $data): array {
+                        // Display current filter range
+                        $indicators = [];
+
+                        if ($data['min_due_price'] ?? null) {
+                            $indicators['min_due_price'] = 'Min Due Price: $' . $data['min_due_price'];
+                        }
+
+                        if ($data['max_due_price'] ?? null) {
+                            $indicators['max_due_price'] = 'Max Due Price: $' . $data['max_due_price'];
+                        }
+
+                        return $indicators;
+                    }),
+                Filter::make('ټول قرزداران')
+                    ->query(fn(Builder $query) => $query->whereColumn('total_price', '>', 'payed_price')),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),

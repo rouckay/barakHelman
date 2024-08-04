@@ -20,7 +20,7 @@ class Numeraha extends Model
         'sharwali_tarifa_price',
         'Customer_image',
         'documents',
-        // 'customers_id',
+        'customer_id',
     ];
 
     public function Customers(): HasMany

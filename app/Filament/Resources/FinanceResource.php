@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FinanceResource\Pages;
@@ -30,15 +29,13 @@ class FinanceResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
     protected static ?string $navigationLabel = 'مالی مدیریت';
 
-    public static function infolists(Infolist $infolist): Infolist
-    {
-        return $infolist
-            ->columns([
-                Infolists\Components\TextEntry::make('name'),
-                Tables\Columns\TextColumn::make('email'),
-                PhoneEntry::make('phone')->displayFormat(PhoneInputNumberType::NATIONAL),
-            ]);
-    }
+    // public static function infolists(Infolist $infolist): Infolist
+    // {
+    //     return $infolist
+    //         ->columns([
+    //             PhoneEntry::make('phone')->displayFormat(PhoneInputNumberType::NATIONAL),
+    //         ]);
+    // }
     public static function form(Form $form): Form
     {
         return $form
@@ -54,12 +51,14 @@ class FinanceResource extends Resource
                             ->label('مقدار')
                             ->live()
                             ->dehydrated()
+                            ->prefixIcon('heroicon-o-banknotes')
                             ->default(1)
                             ->numeric(),
                         Forms\Components\TextInput::make('unit')
                             ->required()
                             ->label('فی واحد')
                             ->dehydrated()
+                            ->prefixIcon('heroicon-o-banknotes')
                             ->default(1)
                             ->live()
                             ->numeric(),
@@ -72,13 +71,16 @@ class FinanceResource extends Resource
                             ->required()
                             ->label('دالر')
                             ->live()
+                            ->default(1)
+                            ->prefixIcon('heroicon-o-banknotes')
                             ->dehydrated()
                             ->numeric(),
                         Forms\Components\TextInput::make('dollor_unit')
                             ->required()
                             ->label('دالر قیمت')
+                            ->prefixIcon('heroicon-o-banknotes')
                             ->live()
-                            ->default(1)
+                            ->default(72)
                             ->numeric(),
                         Forms\Components\Placeholder::make('dollor_total')
                             ->label('مجمعه دالر')
@@ -89,13 +91,11 @@ class FinanceResource extends Resource
                         Forms\Components\Select::make('user_id')
                             ->relationship('user', 'name')
                             ->label('مصرف کننده')
+                            ->prefixIcon('heroicon-o-user')
                             ->default(auth()->user()->id)
                             ->required(),
                     ])->columns(6),
                 ])->columnSpanFull(),
-                // Forms\Components\ViewField::make('total_dollors')
-                //     ->label(' دالر مجمعه')
-                //     ->view('2'),
             ]);
     }
 

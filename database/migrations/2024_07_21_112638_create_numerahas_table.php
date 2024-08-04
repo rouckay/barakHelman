@@ -4,6 +4,7 @@ use App\Models\customers;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 return new class extends Migration {
     /**
@@ -14,7 +15,7 @@ return new class extends Migration {
         Schema::create('numerahas', function (Blueprint $table) {
             $table->id();
             $table->string('numero_number');
-            $table->string('save_number');
+            $table->string('save_number')->default('SAVE-' . Str::uuid())->change(); // Use UUID as default
             $table->string('date');
             // $table->string('tarifa_no');
             $table->string('numera_price');
@@ -31,5 +32,8 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::dropIfExists('numerahas');
+        Schema::table('numerahas', function (Blueprint $table) {
+            $table->string('save_number')->nullable()->change(); // Revert if needed
+        });
     }
 };

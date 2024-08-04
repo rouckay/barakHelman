@@ -16,6 +16,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\Filter;
+use App\Filament\Resources\CustomerResource\RelationManagers\NumerahaRelationManager;
 
 class CustomersResource extends Resource
 {
@@ -35,19 +36,23 @@ class CustomersResource extends Resource
                         Forms\Components\TextInput::make('name')
                             ->label('نوم')
                             ->required()
+                            ->prefixIcon('heroicon-o-user')
                             ->placeholder('نام')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('father_name')
                             ->label('د پلار نوم')
                             ->placeholder('د پلار نوم')
+                            ->prefixIcon('heroicon-o-user')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('grand_father_name')
                             ->label('د نیکه نوم')
                             ->placeholder('د نیکه نوم')
+                            ->prefixIcon('heroicon-o-user')
                             ->maxLength(191),
                         Forms\Components\Select::make('province')
                             ->label('ولایت')
                             ->placeholder('ولایت انتخاب کړی.')
+                            ->prefixIcon('heroicon-m-globe-alt')
                             ->options([
                                 'بلخ' => 'بلخ',
                                 'بامیان' => 'بامیان',
@@ -79,41 +84,16 @@ class CustomersResource extends Resource
                         Forms\Components\TextInput::make('village')
                             ->label('کلی')
                             ->placeholder('کلی')
+                            ->prefixIcon('heroicon-m-map-pin')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('tazkira')
                             ->label('تذکره نمبر')
                             ->placeholder('تذکره نمبر')
+                            ->prefixIcon('heroicon-o-identification')
                             ->maxLength(191),
-                    ])->columnSpan(6),
-                    Grid::make()->schema([
-                        Forms\Components\TextInput::make('mobile_number')
-                            ->label('تلفن نمبر')
-                            ->placeholder('تلفن نمبر')
-                            ->maxLength(191),
-                        Forms\Components\TextInput::make('parmanent_address')
-                            ->label('دایمی داوسیدو پته ')
-                            ->placeholder('دایمی داوسیدو پته')
-                            ->maxLength(191),
-                        Forms\Components\TextInput::make('current_address')
-                            ->label('اوسنی داوسیدو پته')
-                            ->placeholder('اوسنی داوسیدو پته')
-                            ->maxLength(191),
-                        Forms\Components\TextInput::make('job')
-                            ->label('وظیفه')
-                            ->placeholder('وظیفه')
-                            ->maxLength(191),
-                        Forms\Components\Select::make('numeraha_id')
-                            ->placeholder('نمره ځمکه')
-                            ->label('نمره ځمکه')
-                            ->relationship('numeraha', 'numero_number')
-                        ,
-                        TextInput::make('payed_price')
-                            ->label('رسید پیسی')
-                            ->live()
-                            ->dehydrated()
-                        ,
                         TextInput::make('total_price')
                             ->live()
+                            ->prefixIcon('heroicon-o-banknotes')
                             ->label('محمعه پیسی'),
                         Forms\Components\Placeholder::make('due_price')
                             ->label('باقی پیسی')
@@ -121,6 +101,40 @@ class CustomersResource extends Resource
                             ->content(function ($get) {
                                 return $get('payed_price') - $get('total_price');
                             }),
+                    ])->columnSpan(6),
+                    Grid::make()->schema([
+                        Forms\Components\TextInput::make('mobile_number')
+                            ->label('تلفن نمبر')
+                            ->placeholder('تلفن نمبر')
+                            ->prefixIcon('heroicon-o-phone')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('parmanent_address')
+                            ->label('دایمی داوسیدو پته ')
+                            ->placeholder('دایمی داوسیدو پته')
+                            ->prefixIcon('heroicon-o-map-pin')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('current_address')
+                            ->label('اوسنی داوسیدو پته')
+                            ->prefixIcon('heroicon-o-map-pin')
+                            ->placeholder('اوسنی داوسیدو پته')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('job')
+                            ->label('وظیفه')
+                            ->prefixIcon('heroicon-o-briefcase')
+                            ->placeholder('وظیفه')
+                            ->maxLength(191),
+                        Forms\Components\Select::make('numeraha_id')
+                            ->placeholder('نمره ځمکه')
+                            ->label('نمره ځمکه')
+                            ->prefixIcon('heroicon-m-map-pin')
+                            ->relationship('numeraha', 'numero_number')
+                        ,
+                        TextInput::make('payed_price')
+                            ->label('رسید پیسی')
+                            ->live()
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->dehydrated()
+                        ,
                     ])->columnSpan(6)
                 ])->columns(12)
             ]);
@@ -239,7 +253,6 @@ class CustomersResource extends Resource
                     }),
                 Filter::make('ټول قرزداران')
                     ->query(fn(Builder $query) => $query->whereColumn('total_price', '>', 'payed_price')),
-
             ])
             ->actions([
                 \Filament\Tables\Actions\ActionGroup::make([
@@ -267,7 +280,7 @@ class CustomersResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            NumerahaRelationManager::class
         ];
     }
 

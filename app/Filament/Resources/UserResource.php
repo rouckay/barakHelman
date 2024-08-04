@@ -6,6 +6,8 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -27,29 +29,38 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('نام')
-                    ->required()
-                    ->placeholder('نام')
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->label('ایمیل آدرس')
-                    ->placeholder('ایمیل آدرس')
-                    ->required()
-                    ->maxLength(191),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->placeholder('*********')
-                    ->label('پټ نوم')
-                    ->required()
-                    ->maxLength(191),
-                Forms\Components\TextInput::make('lang')
-                    ->required()
-                    ->placeholder('ژبه')
-                    ->maxLength(191)
-                    ->default('en'),
+                Card::make()->schema([
+                    Grid::make()->schema([
+
+                        Forms\Components\TextInput::make('name')
+                            ->label('نام')
+                            ->required()
+                            ->placeholder('نام')
+                            ->prefixIcon('heroicon-o-user')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('email')
+                            ->email()
+                            ->prefixIcon('')
+                            ->label('ایمیل آدرس')
+                            ->placeholder('ایمیل آدرس')
+                            ->required()
+                            ->maxLength(191),
+                        Forms\Components\DateTimePicker::make('email_verified_at'),
+                        Forms\Components\TextInput::make('password')
+                            ->password()
+                            ->placeholder('*********')
+                            ->prefixIcon('')
+                            ->label('پټ نوم')
+                            ->required()
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('lang')
+                            ->required()
+                            ->prefixIcon('heroicon-m-globe-alt')
+                            ->placeholder('ژبه')
+                            ->maxLength(191)
+                            ->default('en'),
+                    ])->columns(5)
+                ]),
             ]);
     }
 

@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Enums\FiltersLayout;
 use App\Http\Controllers\tarifaController;
+use Filament\Tables\Filters\Filter;
+use Filament\Forms\Components\TextInput;
 
 class NumerahaResource extends Resource
 {
@@ -41,113 +43,54 @@ class NumerahaResource extends Resource
                             ->label('د نمری (ځمکی) ای ډی')
                             ->autofocus()
                             ->placeholder('د نمری (ځمکی) ای ډی')
-                            // ->unique()
+                            ->numeric()
                             ->required()
                             ->maxLength(191),
                         Forms\Components\TextInput::make('save_number')
                             ->label('د ثبت نمبر')
-                            ->required()
-                            // ->disabled()
-
-                            ->prefix('er-')
-                            ->placeholder('د ثبت نمبر')
-                            ->maxLength(191),
+                            ->default('******') // Auto-generate a unique save number
+                            ->disabled()
+                            ->required(),
+                    ])->columns(2),
+                    Grid::make()->schema([
                         Forms\Components\TextInput::make('date')
                             ->label('نیټه')
                             ->default(now()->toDateString())
                             ->placeholder('نیټه')
                             ->required()
                             ->maxLength(191),
+                        Forms\Components\TextInput::make('numera_price')
+                            ->label('د نمری (ځمکی) قیمت')
+                            ->required()
+                            ->numeric()
+                            ->placeholder('د نمری (ځمکی) قیمت')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('sharwali_tarifa_price')
+                            ->label('د ښاروالی د تعرفی پیسی')
+                            ->required()
+                            ->numeric()
+                            ->placeholder('د ښاروالی د تعرفی پیسی')
+                            ->maxLength(191),
                     ])->columns(3),
-                    Grid::make()->schema([
-                    ]),
-                    Forms\Components\TextInput::make('numera_price')
-                        ->label('د نمری (ځمکی) قیمت')
-                        ->required()
-                        ->placeholder('د نمری (ځمکی) قیمت')
-                        ->maxLength(191),
-                    Forms\Components\TextInput::make('sharwali_tarifa_price')
-                        ->label('د ښاروالی د تعرفی پیسی')
-                        ->required()
-                        ->placeholder('د ښاروالی د تعرفی پیسی')
-                        ->maxLength(191),
+
                 ])->columnSpan(6),
                 Card::make()->schema([
-                    Forms\Components\FileUpload::make('Customer_image')
-                        ->label('د مشتری انځور')
-                        ->directory('Customer_images')
-                        ->preserveFilenames()
-                        ->placeholder('د مشتری انځور')
-                        ->image()
-                        // ->required()
-                        ->imageEditor(),
                     Grid::make()->schema([
                         Forms\Components\FileUpload::make('documents')
                             ->directory('Numeraha_documents')
                             ->preserveFilenames()
                             ->downloadable()
                             ->placeholder('اسناد')
+                            // ->multiple()
+                            ->openable()
+                            ->uploadingMessage('فایل شما در حال اپلود به دیتابیس هست...')
+                            ->previewable()
+                            // ->minFiles(1)
+                            // ->maxFiles(5)
                             // ->required()
-                            ->label('اسناد'),
-                        // Forms\Components\Select::make('customer_id')
-                        //     ->label('مشتری')
-                        //     ->relationship('Customers', 'name')
-                        //     ->preload()
-                        //     ->multiple()
-                        //     ->required()
-                        //     ->createOptionForm([
-                        //         Grid::make()->schema([
-                        //             Forms\Components\TextInput::make('name')
-                        //                 ->required()
-                        //                 ->label('نوم')
-
-                        //                 ->maxLength(191),
-                        //             Forms\Components\TextInput::make('father_name')
-                        //                 ->maxLength(191)
-                        //                 ->label('د پلار نوم')
-                        //             ,
-                        //         ]),
-                        //         Grid::make()->schema([
-                        //             Forms\Components\TextInput::make('grand_father_name')
-                        //                 ->maxLength(191)
-                        //                 ->label('د نیکه نوم')
-                        //             ,
-                        //             Forms\Components\TextInput::make('province')
-                        //                 ->maxLength(191)
-                        //                 ->label('ولایت')
-                        //             ,
-                        //         ]),
-                        //         Grid::make()->schema([
-                        //             Forms\Components\TextInput::make('village')
-                        //                 ->maxLength(191)
-                        //                 ->label('کلی')
-                        //             ,
-                        //             Forms\Components\TextInput::make('tazkira')
-                        //                 ->maxLength(191)
-                        //                 ->label('تذکره نمبر')
-                        //             ,
-                        //         ]),
-                        //         Grid::make()->schema([
-                        //             Forms\Components\TextInput::make('mobile_number')
-                        //                 ->maxLength(191)
-                        //                 ->label('تلفن نمبر')
-                        //             ,
-                        //             Forms\Components\TextInput::make('parmanent_address')
-                        //                 ->maxLength(191)
-                        //                 ->label('دایمی داوسیدو پته ')
-                        //             ,
-                        //         ]),
-                        //         Grid::make()->schema([
-                        //             Forms\Components\TextInput::make('current_address')
-                        //                 ->maxLength(191)
-                        //                 ->label('اوسنی داوسیدو پته ')
-                        //             ,
-                        //             Forms\Components\TextInput::make('job')
-                        //                 ->maxLength(191)
-                        //                 ->label('وظیفه')
-                        //             ,
-                        //         ]),
-                        //     ]),
+                            ->label('د ځمکی اسناد'),
+                        Forms\Components\Select::make('customer_id')
+                            ->relationship('Customers', 'name')
                     ])
                 ])->columnSpan(6)
             ])->columns(12);
@@ -173,10 +116,6 @@ class NumerahaResource extends Resource
                     ->label('نیټه')
                     ->searchable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('tarifa_no')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->label('د تعرفی نمبر')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('numera_price')
                     ->sortable()
                     ->label('د نمری (ځمکی) قیمت')
@@ -199,7 +138,7 @@ class NumerahaResource extends Resource
                     ->numeric()
                     ->sortable()
                     ->label('مشتری')
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -216,13 +155,10 @@ class NumerahaResource extends Resource
             ->filters(
                 [
                     SelectFilter::make('customer')
+                        ->label('به اساس مشتری')
                         ->relationship('customers', 'name'),
-                    // SelectFilter::make('Nullcustomer')
-                    //     ->content(function () {
-
-                    //     })
-                ],
-                //  layout: FiltersLayout::AboveContent
+                    //  layout: FiltersLayout::AboveContent
+                ]
             )
             ->actions([
                 Tables\Actions\ViewAction::make()
