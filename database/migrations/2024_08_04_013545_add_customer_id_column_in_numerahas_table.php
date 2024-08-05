@@ -10,9 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('numerahas', function (Blueprint $table) {
-            $table->integer('customer_id');
-        });
+        // Check if the column does not exist before adding it
+        if (!Schema::hasColumn('numerahas', 'customer_id')) {
+            Schema::table('numerahas', function (Blueprint $table) {
+                $table->integer('customer_id')->unsigned()->after('id'); // Add after 'id' for better table organization
+            });
+        }
     }
 
     /**
@@ -20,8 +23,11 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('numerahas', function (Blueprint $table) {
-            //
-        });
+        // Drop the column only if it exists
+        if (Schema::hasColumn('numerahas', 'customer_id')) {
+            Schema::table('numerahas', function (Blueprint $table) {
+                $table->dropColumn('customer_id');
+            });
+        }
     }
 };

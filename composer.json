@@ -8,6 +8,7 @@
         "php": "^8.2",
         "afsakar/filament-translate-action": "^1.1",
         "aymanalhattami/filament-page-with-sidebar": "^2.5",
+        "eightynine/filament-reports": "*",
         "filament/filament": "^3.2",
         "filament/spatie-laravel-settings-plugin": "^3.2",
         "laravel/framework": "^11.9",

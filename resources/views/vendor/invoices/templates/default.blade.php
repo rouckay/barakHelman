@@ -158,12 +158,12 @@
     <table class="table mt-5">
         <tbody>
             <tr>
-                <td class="border-0 pl-0" width="70%">
+                <td class="pl-0 border-0" width="70%">
                     <h4 class="text-uppercase">
                         <strong>{{ $invoice->name }}</strong>
                     </h4>
                 </td>
-                <td class="border-0 pl-0">
+                <td class="pl-0 border-0">
                     @if($invoice->status)
                         <h4 class="text-uppercase cool-gray">
                             <strong>{{ $invoice->status }}</strong>
@@ -180,11 +180,11 @@
     <table class="table">
         <thead>
             <tr>
-                <th class="border-0 pl-0 party-header" width="48.5%">
+                <th class="pl-0 border-0 party-header" width="48.5%">
                     {{ __('invoices::invoice.seller') }}
                 </th>
                 <th class="border-0" width="3%"></th>
-                <th class="border-0 pl-0 party-header">
+                <th class="pl-0 border-0 party-header">
                     {{ __('invoices::invoice.buyer') }}
                 </th>
             </tr>
@@ -262,7 +262,7 @@
     <table class="table table-items">
         <thead>
             <tr>
-                <th scope="col" class="border-0 pl-0">{{ __('invoices::invoice.description') }}</th>
+                <th scope="col" class="pl-0 border-0">{{ __('invoices::invoice.description') }}</th>
                 @if($invoice->hasItemUnits)
                     <th scope="col" class="text-center border-0">{{ __('invoices::invoice.units') }}</th>
                 @endif
@@ -274,7 +274,7 @@
                 @if($invoice->hasItemTax)
                     <th scope="col" class="text-right border-0">{{ __('invoices::invoice.tax') }}</th>
                 @endif
-                <th scope="col" class="text-right border-0 pr-0">{{ __('invoices::invoice.sub_total') }}</th>
+                <th scope="col" class="pr-0 text-right border-0">{{ __('invoices::invoice.sub_total') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -306,7 +306,7 @@
                         </td>
                     @endif
 
-                    <td class="text-right pr-0">
+                    <td class="pr-0 text-right">
                         {{ $invoice->formatCurrency($item->sub_total_price) }}
                     </td>
                 </tr>
@@ -315,8 +315,8 @@
             @if($invoice->hasItemOrInvoiceDiscount())
                 <tr>
                     <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                    <td class="text-right pl-0">{{ __('invoices::invoice.total_discount') }}</td>
-                    <td class="text-right pr-0">
+                    <td class="pl-0 text-right">{{ __('invoices::invoice.total_discount') }}</td>
+                    <td class="pr-0 text-right">
                         {{ $invoice->formatCurrency($invoice->total_discount) }}
                     </td>
                 </tr>
@@ -324,8 +324,8 @@
             @if($invoice->taxable_amount)
                 <tr>
                     <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                    <td class="text-right pl-0">{{ __('invoices::invoice.taxable_amount') }}</td>
-                    <td class="text-right pr-0">
+                    <td class="pl-0 text-right">{{ __('invoices::invoice.taxable_amount') }}</td>
+                    <td class="pr-0 text-right">
                         {{ $invoice->formatCurrency($invoice->taxable_amount) }}
                     </td>
                 </tr>
@@ -333,8 +333,8 @@
             @if($invoice->tax_rate)
                 <tr>
                     <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                    <td class="text-right pl-0">{{ __('invoices::invoice.tax_rate') }}</td>
-                    <td class="text-right pr-0">
+                    <td class="pl-0 text-right">{{ __('invoices::invoice.tax_rate') }}</td>
+                    <td class="pr-0 text-right">
                         {{ $invoice->tax_rate }}%
                     </td>
                 </tr>
@@ -342,8 +342,8 @@
             @if($invoice->hasItemOrInvoiceTax())
                 <tr>
                     <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                    <td class="text-right pl-0">{{ __('invoices::invoice.total_taxes') }}</td>
-                    <td class="text-right pr-0">
+                    <td class="pl-0 text-right">{{ __('invoices::invoice.total_taxes') }}</td>
+                    <td class="pr-0 text-right">
                         {{ $invoice->formatCurrency($invoice->total_taxes) }}
                     </td>
                 </tr>
@@ -351,16 +351,16 @@
             @if($invoice->shipping_amount)
                 <tr>
                     <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                    <td class="text-right pl-0">{{ __('invoices::invoice.shipping') }}</td>
-                    <td class="text-right pr-0">
+                    <td class="pl-0 text-right">{{ __('invoices::invoice.shipping') }}</td>
+                    <td class="pr-0 text-right">
                         {{ $invoice->formatCurrency($invoice->shipping_amount) }}
                     </td>
                 </tr>
             @endif
             <tr>
                 <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                <td class="text-right pl-0">{{ __('invoices::invoice.total_amount') }}</td>
-                <td class="text-right pr-0 total-amount">
+                <td class="pl-0 text-right">{{ __('invoices::invoice.total_amount') }}</td>
+                <td class="pr-0 text-right total-amount">
                     {{ $invoice->formatCurrency($invoice->total_amount) }}
                 </td>
             </tr>

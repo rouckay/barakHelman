@@ -21,21 +21,21 @@ class TarifaController extends Controller
 
         // Create a Buyer instance with customer data
         $customer = new Buyer([
-            'name' => $filament->customer_name ?? 'Unknown', // Fallback to 'Unknown'
+            'name' => $filament->numera_number ?? 'Unknown', // Fallback to 'Unknown'
             'custom_fields' => [
-                'email' => $filament->customer_email ?? 'no-email@example.com', // Fallback email
+                'email' => $filament->save_number ?? 'no-email@example.com', // Fallback email
             ],
         ]);
 
         // Handle potential null values in the item details
-        $itemName = $filament->item_name ?? 'Unnamed Item';
-        $itemPrice = $filament->price ?? 0; // Fallback price
-        $itemQuantity = $filament->quantity ?? 1; // Default quantity to 1
+        $numera_number = $filament->numera_number ?? 'Unnamed Item';
+        $save_number = $filament->save_number ?? 0; // Fallback price
+        $numera_price = $filament->numera_price ?? 1; // Default quantity to 1
 
         // Create InvoiceItem instances for each row data
-        $item = InvoiceItem::make($itemName)
-            ->pricePerUnit($itemPrice)
-            ->quantity($itemQuantity);
+        $item = InvoiceItem::make($numera_number)
+            ->pricePerUnit($save_number)
+            ->quantity($numera_price);
 
         // Create the invoice
         $invoice = Invoice::make()

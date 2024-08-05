@@ -22,6 +22,9 @@ use Filament\Tables\Enums\FiltersLayout;
 use App\Http\Controllers\tarifaController;
 use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Actions\Button;
+use App\Filament\Exports\ProductExporter;
+use Filament\Actions\Exports\Enums\ExportFormat;
 
 class NumerahaResource extends Resource
 {
@@ -167,15 +170,12 @@ class NumerahaResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->label('بدلون')
                 ,
-                // Action::make('downloadInvoice')
-                //     ->label('Download Invoice')
-                //     ->url(fn(Numeraha $record) => route('download.invoice', $record->id)) // Use route to generate URL
-                //     ->icon('heroicon-o-download')
-                //     ->color('primary')
-                //     ->requiresConfirmation(),
-                // ,
-
-
+                Tables\Actions\ButtonAction::make('downloadInvoice')
+                    ->label('Download Invoice')
+                    ->url(fn(Numeraha $record) => route('download.invoice', $record)) // Use route to generate URL
+                    ->icon('heroicon-o-printer')
+                    ->color('primary')
+                    ->requiresConfirmation(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
