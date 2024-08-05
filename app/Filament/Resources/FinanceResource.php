@@ -40,6 +40,21 @@ class FinanceResource extends Resource
     {
         return $form
             ->schema([
+                Grid::make()->schema([
+                    Forms\Components\RichEditor::make('description')
+                        ->label('توضیحات')
+                        ->required()
+                        ->columnSpanFull(),
+                    Forms\Components\TextInput::make('phone_number')
+                        ->numeric()
+                    ,
+                    Forms\Components\Select::make('user_id')
+                        ->relationship('user', 'name')
+                        ->label('مصرف کوونکی')
+                        ->prefixIcon('heroicon-o-user')
+                        ->default(auth()->user()->id)
+                        ->required(),
+                ])->columns(4),
                 // Repeater::make('Finance')->schema([
                 Grid::make()->schema([
                     Forms\Components\TextInput::make('quantity')
@@ -52,14 +67,14 @@ class FinanceResource extends Resource
                         ->numeric(),
                     Forms\Components\TextInput::make('unit')
                         ->required()
-                        ->label('فی واحد')
+                        ->label('قیمت فی واحد (افغانی) ')
                         ->dehydrated()
                         ->prefixIcon('heroicon-o-banknotes')
                         ->default(1)
                         ->live()
                         ->numeric(),
                     Forms\Components\Placeholder::make('total_price')
-                        ->label('مجمعه قیمت')
+                        ->label('ټولټال لګښت')
                         ->content(function ($get) {
                             return $get('quantity') * $get('unit');
                         }),
@@ -88,21 +103,6 @@ class FinanceResource extends Resource
                     // ->color('red')
                     ,
                 ])->columns(3),
-                Grid::make()->schema([
-                    Forms\Components\TextInput::make('phone_number')
-                        ->numeric()
-                    ,
-                    Forms\Components\Select::make('user_id')
-                        ->relationship('user', 'name')
-                        ->label('مصرف کننده')
-                        ->prefixIcon('heroicon-o-user')
-                        ->default(auth()->user()->id)
-                        ->required(),
-                    Forms\Components\RichEditor::make('description')
-                        ->label('توضیحات')
-                        ->required()
-                        ->columnSpanFull(),
-                ])->columns(4),
                 // ])->columnSpanFull(),
             ]);
     }

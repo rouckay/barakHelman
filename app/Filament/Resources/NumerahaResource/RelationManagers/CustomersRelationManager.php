@@ -95,12 +95,12 @@ class CustomersRelationManager extends RelationManager
                                     Forms\Components\TextInput::make('total_price')
                                         ->live()
                                         ->prefixIcon('heroicon-o-banknotes')
-                                        ->label('محمعه پیسی')
+                                        ->label('د نمری (ځمکی) قیمت')
                                         ->dehydrated()
                                         ->numeric()
                                     ,
                                     Forms\Components\TextInput::make('payed_price')
-                                        ->label('رسید پیسی')
+                                        ->label('تحویل شوی پیسی')
                                         ->live()
                                         ->dehydrated()
                                         ->numeric()
@@ -123,7 +123,7 @@ class CustomersRelationManager extends RelationManager
                                         ->prefixIcon('heroicon-o-briefcase')
                                         ->maxLength(191),
                                     Forms\Components\Select::make('numeraha_id')
-                                        ->label('نمره ځمکه')
+                                        ->label('د نمری (ځمکی) آی ډی')
                                         ->relationship('numeraha', 'numero_number')
                                         ->prefixIcon('heroicon-o-map')
                                     ,

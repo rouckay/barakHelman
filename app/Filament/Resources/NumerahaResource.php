@@ -171,7 +171,7 @@ class NumerahaResource extends Resource
                     ->label('بدلون')
                 ,
                 Tables\Actions\ButtonAction::make('downloadInvoice')
-                    ->label('Download Invoice')
+                    ->label('Download Tarifa')
                     ->url(fn(Numeraha $record) => route('download.invoice', $record)) // Use route to generate URL
                     ->icon('heroicon-o-printer')
                     ->color('primary')

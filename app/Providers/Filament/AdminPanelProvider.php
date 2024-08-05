@@ -19,6 +19,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Resources\NumerahaResource;
+use EightyNine\Reports\ReportsPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -68,7 +69,10 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make())
+            ->plugins([
+                \TomatoPHP\FilamentPWA\FilamentPWAPlugin::make(),
+                ReportsPlugin::make()
+            ])
         ;
 
     }
