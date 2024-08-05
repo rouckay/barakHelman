@@ -29,73 +29,81 @@ class FinanceResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
     protected static ?string $navigationLabel = 'مالی مدیریت';
 
-    // public static function infolists(Infolist $infolist): Infolist
-    // {
-    //     return $infolist
-    //         ->columns([
-    //             PhoneEntry::make('phone')->displayFormat(PhoneInputNumberType::NATIONAL),
-    //         ]);
-    // }
+    public static function infolists(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->columns([
+                PhoneEntry::make('phone')->displayFormat(PhoneInputNumberType::NATIONAL),
+            ]);
+    }
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Repeater::make('Finance')->schema([
+                // Repeater::make('Finance')->schema([
+                Grid::make()->schema([
+                    Forms\Components\TextInput::make('quantity')
+                        ->required()
+                        ->label('مقدار')
+                        ->live()
+                        ->dehydrated()
+                        ->prefixIcon('heroicon-o-banknotes')
+                        ->default(1)
+                        ->numeric(),
+                    Forms\Components\TextInput::make('unit')
+                        ->required()
+                        ->label('فی واحد')
+                        ->dehydrated()
+                        ->prefixIcon('heroicon-o-banknotes')
+                        ->default(1)
+                        ->live()
+                        ->numeric(),
+                    Forms\Components\Placeholder::make('total_price')
+                        ->label('مجمعه قیمت')
+                        ->content(function ($get) {
+                            return $get('quantity') * $get('unit');
+                        }),
+                ])->columns(3),
+                Grid::make()->schema([
+                    Forms\Components\TextInput::make('dollor')
+                        ->required()
+                        ->label('دالر')
+                        ->live()
+                        ->default(1)
+                        ->prefixIcon('heroicon-o-banknotes')
+                        ->dehydrated()
+                        ->numeric(),
+                    Forms\Components\TextInput::make('dollor_unit')
+                        ->required()
+                        ->label('دالر قیمت')
+                        ->prefixIcon('heroicon-o-banknotes')
+                        ->live()
+                        ->default(72)
+                        ->numeric(),
+                    Forms\Components\Placeholder::make('dollor_total')
+                        ->label('مجمعه دالر')
+                        ->content(function ($get) {
+                            return $get('dollor') * $get('dollor_unit');
+                        })
+                    // ->color('red')
+                    ,
+                ])->columns(3),
+                Grid::make()->schema([
+                    Forms\Components\TextInput::make('phone_number')
+                        ->numeric()
+                    ,
+                    Forms\Components\Select::make('user_id')
+                        ->relationship('user', 'name')
+                        ->label('مصرف کننده')
+                        ->prefixIcon('heroicon-o-user')
+                        ->default(auth()->user()->id)
+                        ->required(),
                     Forms\Components\RichEditor::make('description')
                         ->label('توضیحات')
                         ->required()
                         ->columnSpanFull(),
-                    Grid::make()->schema([
-                        Forms\Components\TextInput::make('quantity')
-                            ->required()
-                            ->label('مقدار')
-                            ->live()
-                            ->dehydrated()
-                            ->prefixIcon('heroicon-o-banknotes')
-                            ->default(1)
-                            ->numeric(),
-                        Forms\Components\TextInput::make('unit')
-                            ->required()
-                            ->label('فی واحد')
-                            ->dehydrated()
-                            ->prefixIcon('heroicon-o-banknotes')
-                            ->default(1)
-                            ->live()
-                            ->numeric(),
-                        Forms\Components\Placeholder::make('total_price')
-                            ->label('مجمعه قیمت')
-                            ->content(function ($get) {
-                                return $get('quantity') * $get('unit');
-                            }),
-                        Forms\Components\TextInput::make('dollor')
-                            ->required()
-                            ->label('دالر')
-                            ->live()
-                            ->default(1)
-                            ->prefixIcon('heroicon-o-banknotes')
-                            ->dehydrated()
-                            ->numeric(),
-                        Forms\Components\TextInput::make('dollor_unit')
-                            ->required()
-                            ->label('دالر قیمت')
-                            ->prefixIcon('heroicon-o-banknotes')
-                            ->live()
-                            ->default(72)
-                            ->numeric(),
-                        Forms\Components\Placeholder::make('dollor_total')
-                            ->label('مجمعه دالر')
-                            ->content(function ($get) {
-                                return $get('dollor') * $get('dollor_unit');
-                            }),
-                        PhoneInput::make('phone_number'),
-                        Forms\Components\Select::make('user_id')
-                            ->relationship('user', 'name')
-                            ->label('مصرف کننده')
-                            ->prefixIcon('heroicon-o-user')
-                            ->default(auth()->user()->id)
-                            ->required(),
-                    ])->columns(6),
-                ])->columnSpanFull(),
+                ])->columns(4),
+                // ])->columnSpanFull(),
             ]);
     }
 
