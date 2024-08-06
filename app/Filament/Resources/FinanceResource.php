@@ -69,7 +69,7 @@ class FinanceResource extends Resource
                             ->helperText('په کومه نیټه مو مصرف کړی.')
                             ->label('د پیرودلو نیټه')
                             ->prefixIcon('heroicon-o-calendar-days')
-                            ->default(auth()->user()->id)
+                            ->default(now()->toDateString())
                             ->required(),
                     ])->columns(3),
                     Forms\Components\RichEditor::make('description')

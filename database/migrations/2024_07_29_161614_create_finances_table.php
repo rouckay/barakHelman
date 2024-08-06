@@ -16,12 +16,12 @@ return new class extends Migration {
             $table->longText('description');
             $table->integer('quantity');
             $table->integer('unit');
-            $table->integer('total_price');
             $table->integer('dollor');
             $table->integer('dollor_unit');
-            $table->integer('dollor_total');
+            $table->integer('dollor_price');
             $table->integer('phone_number');
             $table->foreignId('user_id')->Constraint('users');
+            $table->date('date_purchase');
             $table->timestamps();
         });
     }
