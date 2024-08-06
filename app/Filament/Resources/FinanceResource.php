@@ -21,6 +21,8 @@ use Ysfkaya\FilamentPhoneInput\Infolists\PhoneEntry;
 use Ysfkaya\FilamentPhoneInput\PhoneInputNumberType;
 use Filament\Infolists;
 use Filament\Infolists\Infolist;
+use Filament\Support\RawJs;
+use Illuminate\Support\HtmlString;
 
 class FinanceResource extends Resource
 {
@@ -28,6 +30,7 @@ class FinanceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
     protected static ?string $navigationLabel = 'مالی مدیریت';
+    protected static ?int $navigationSort = 4;
 
     public static function infolists(Infolist $infolist): Infolist
     {
@@ -40,70 +43,144 @@ class FinanceResource extends Resource
     {
         return $form
             ->schema([
-                Grid::make()->schema([
+                // Repeater::make('Finance Expeses')->schema([
+                Card::make([
+                    Grid::make()->schema([
+                        Forms\Components\TextInput::make('phone_number')
+                            ->numeric()
+                            ->placeholder(' 234 5678 071')
+                            ->extraAttributes([
+                                'oninput' => 'this.value = this.value.replace(/[٠-٩]/g, function(d) { return d.charCodeAt(0) - 1632; });'
+                            ])
+                            ->helperText('07 په اتومات ډول خپله سیستم لیکی تاسی خپل باقی نمبر ټایپ کړی')
+                            //     ->mask(RawJs::make(<<<'JS'
+                            //         $input.startsWith('07') ? '079-999-9999' : '079-999-9999'? :''
+                            // JS))
+                            ->prefixIcon('heroicon-o-phone')
+                            ->label('د پلورونکی تلفن نمبر'),
+                        Forms\Components\Select::make('user_id')
+                            ->relationship('user', 'name')
+                            ->label('مصرف کوونکی')
+                            ->helperText('چاچی مصرف کړی د هغی کس نوم دلته ذکر کیږی.')
+                            ->prefixIcon('heroicon-o-user')
+                            ->default(auth()->user()->id)
+                            ->required(),
+                        Forms\Components\DateTimePicker::make('date_purchase')
+                            ->helperText('په کومه نیټه مو مصرف کړی.')
+                            ->label('د پیرودلو نیټه')
+                            ->prefixIcon('heroicon-o-calendar-days')
+                            ->default(auth()->user()->id)
+                            ->required(),
+                    ])->columns(3),
                     Forms\Components\RichEditor::make('description')
                         ->label('توضیحات')
+                        ->placeholder('دلته خپل ټول توضیحات ولیکی د مصرف په اړه')
                         ->required()
                         ->columnSpanFull(),
-                    Forms\Components\TextInput::make('phone_number')
-                        ->numeric()
-                    ,
-                    Forms\Components\Select::make('user_id')
-                        ->relationship('user', 'name')
-                        ->label('مصرف کوونکی')
-                        ->prefixIcon('heroicon-o-user')
-                        ->default(auth()->user()->id)
-                        ->required(),
-                ])->columns(4),
+                ]),
                 // Repeater::make('Finance')->schema([
-                Grid::make()->schema([
-                    Forms\Components\TextInput::make('quantity')
-                        ->required()
-                        ->label('مقدار')
-                        ->live()
-                        ->dehydrated()
-                        ->prefixIcon('heroicon-o-banknotes')
-                        ->default(1)
-                        ->numeric(),
-                    Forms\Components\TextInput::make('unit')
-                        ->required()
-                        ->label('قیمت فی واحد (افغانی) ')
-                        ->dehydrated()
-                        ->prefixIcon('heroicon-o-banknotes')
-                        ->default(1)
-                        ->live()
-                        ->numeric(),
-                    Forms\Components\Placeholder::make('total_price')
-                        ->label('ټولټال لګښت')
-                        ->content(function ($get) {
-                            return $get('quantity') * $get('unit');
-                        }),
-                ])->columns(3),
-                Grid::make()->schema([
-                    Forms\Components\TextInput::make('dollor')
-                        ->required()
-                        ->label('دالر')
-                        ->live()
-                        ->default(1)
-                        ->prefixIcon('heroicon-o-banknotes')
-                        ->dehydrated()
-                        ->numeric(),
-                    Forms\Components\TextInput::make('dollor_unit')
-                        ->required()
-                        ->label('دالر قیمت')
-                        ->prefixIcon('heroicon-o-banknotes')
-                        ->live()
-                        ->default(72)
-                        ->numeric(),
-                    Forms\Components\Placeholder::make('dollor_total')
-                        ->label('مجمعه دالر')
-                        ->content(function ($get) {
-                            return $get('dollor') * $get('dollor_unit');
-                        })
-                    // ->color('red')
-                    ,
-                ])->columns(3),
-                // ])->columnSpanFull(),
+                Card::make()->schema([
+                    Grid::make()->schema([
+                        Forms\Components\TextInput::make('quantity')
+                            ->required()
+                            ->label('مقدار')
+                            ->live()
+                            ->dehydrated()
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->default(1)
+                            ->numeric(),
+                        Forms\Components\TextInput::make('unit')
+                            ->required()
+                            ->label('قیمت فی واحد (افغانی) ')
+                            ->dehydrated()
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->default(1)
+                            ->live()
+                            ->numeric(),
+                        Forms\Components\Placeholder::make('total_price')
+                            ->label('ټولټال لګښت (افغانی)')
+                            ->content(function ($get) {
+                                $quantity = $get('quantity');
+                                $unit = $get('unit');
+                                if (!is_numeric($quantity) || !is_numeric($unit)) {
+                                    return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی یوازې عددي ارزښتونه اضافه کړی!</strong></p>');
+
+                                } else if ($quantity == 0 || $unit == 0) {
+                                    return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی د 1 څخه جګ عدد انتخاب کړی!</strong></p>');
+                                }
+                                return $quantity * $unit;
+                            }),
+                    ])->columns(3),
+                    Grid::make()->schema([
+                        Forms\Components\TextInput::make('dollor')
+                            ->required()
+                            ->label('مقدار')
+                            ->live()
+                            ->default(1)
+                            // ->afterStateUpdated(function (string $state, $operation, callable $get, callable $set) {
+                            //     if ($operation !== 'create') {
+                            //         return;
+                            //     }
+
+                            //     $dollor = $get('dollor'); // Use $get to retrieve the value of 'dollor_unit'
+                            //     $dollor_price = $get('dollor_price');
+                            //     $dollor_unit = $get('dollor_unit');
+                            //     $set('dollor_to_afghani', $dollor * $dollor_price * $dollor_unit);
+                            // })
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('dollor_unit')
+                            ->required()
+                            ->label('قیمت فی واحد (ډالر) ')
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->live()
+                            ->dehydrated()
+                            ->default(1)
+                            ->numeric(),
+                        Forms\Components\TextInput::make('dollor_price')
+                            ->required()
+                            ->label('قیمت (ډالر) ')
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->live()
+                            ->default(71)
+                            ->extraInputAttributes(['color' => 'red'])
+                            ->numeric(),
+                        Forms\Components\Placeholder::make('dollor_to_afghani')
+                            ->label('تبادله په افغانی')
+                            ->content(function ($get) {
+                                $dollor = $get('dollor');
+                                $dollorPrice = $get('dollor_price');
+                                $dollorUnit = $get('dollor_unit');
+
+                                if (!is_numeric($dollor) || !is_numeric($dollorPrice) || !is_numeric($dollorUnit)) {
+                                    return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی یوازې عددي ارزښتونه اضافه کړی!</strong></p>');
+
+                                } else if ($dollor == 0 || $dollorPrice == 0 || $dollorUnit == 0) {
+                                    return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی د 1 څخه جګ عدد انتخاب کړی!</strong></p>');
+                                }
+
+                                return $dollor * $dollorPrice * $dollorUnit;
+                            })
+                            ->default(71),
+
+                        Forms\Components\Placeholder::make('dollor_total')
+                            ->label('ټولټال لګښت (ډالر)')
+                            ->content(function ($get) {
+                                $dollor = $get('dollor');
+                                $dollorUnit = $get('dollor_unit');
+
+                                if (!is_numeric($dollor) || !is_numeric($dollorUnit)) {
+                                    return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی یوازې عددي ارزښتونه اضافه کړی!</strong></p>');
+                                } else if ($dollor == 0 || $dollorUnit == 0) {
+                                    return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی د 1 څخه جګ عدد انتخاب کړی!</strong></p>');
+                                }
+
+                                return $dollor * $dollorUnit;
+                            }),
+                        // ])->columnSpanFull(),
+                    ])->columns(5),
+                ])
+                // ])->columnSpanFull()
             ]);
     }
 

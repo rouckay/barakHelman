@@ -23,6 +23,7 @@ class EmployeesResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';
 
     protected static ?string $recordTitleAttribute = 'name';
+    protected static ?int $navigationSort = 3;
 
     public static function getNavigationBadge(): ?string
     {

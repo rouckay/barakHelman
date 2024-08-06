@@ -21,6 +21,7 @@ class MarketsResource extends Resource
     protected static ?string $navigationLabel = 'مارکیټونو مدیریت';
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {

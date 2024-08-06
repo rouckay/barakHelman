@@ -32,9 +32,11 @@ class NumerahaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-map';
 
-    protected static ?string $navigationLabel = "مدیریت نمره ها";
+    protected static ?string $navigationLabel = "د نمرو (ځمکو) مدیریت";
 
-    protected static ?string $navigationGroup = 'د ځمکو معاملی';
+    protected static ?int $navigationSort = 1;
+
+    // protected static ?string $navigationGroup = 'د ځمکو معاملی';
 
     public static function form(Form $form): Form
     {
@@ -47,6 +49,7 @@ class NumerahaResource extends Resource
                             ->autofocus()
                             ->placeholder('د نمری (ځمکی) ای ډی')
                             ->numeric()
+                            ->unique()
                             ->required()
                             ->maxLength(191),
                         Forms\Components\TextInput::make('save_number')
@@ -75,7 +78,6 @@ class NumerahaResource extends Resource
                             ->placeholder('د ښاروالی د تعرفی پیسی')
                             ->maxLength(191),
                     ])->columns(3),
-
                 ])->columnSpan(6),
                 Card::make()->schema([
                     Grid::make()->schema([
@@ -105,7 +107,7 @@ class NumerahaResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('numero_number')
                     ->sortable()
-                    ->label('د نمری نمبر')
+                    ->label('د نمری (ځمکی) ای ډی')
                     ->searchable()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('save_number')

@@ -8,6 +8,7 @@ use EightyNine\Reports\Components\Footer;
 use EightyNine\Reports\Components\Header;
 use EightyNine\Reports\Components\Text;
 use EightyNine\Reports\Components\Image;
+use EightyNine\Reports\Components\Input;
 use Filament\Forms\Form;
 
 class NumerahaReport extends Report
@@ -62,7 +63,16 @@ class NumerahaReport extends Report
     {
         return $form
             ->schema([
-                // ...
+                // Input::make('search')
+                //     ->placeholder('Search')
+                //     ->autofocus()
+                //     ->iconLeft('heroicon-o-search'),
+                // Select::make('status')
+                //     ->placeholder('Status')
+                //     ->options([
+                //         'active' => 'Active',
+                //         'inactive' => 'Inactive',
+                //     ]),
             ]);
     }
 }

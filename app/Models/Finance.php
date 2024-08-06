@@ -17,9 +17,10 @@ class Finance extends Model
         // 'total_price',
         'dollor',
         'dollor_unit',
-        // 'dollor_total',
+        'dollor_price',
         'phone_number',
         'user_id',
+        'date_purchase',
     ];
 
     public function user(): BelongsTo
