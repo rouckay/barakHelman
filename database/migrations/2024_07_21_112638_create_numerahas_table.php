@@ -17,11 +17,11 @@ return new class extends Migration {
             $table->string('numero_number');
             $table->string('save_number')->default('SAVE-' . Str::uuid())->change(); // Use UUID as default
             $table->string('date');
-            // $table->string('tarifa_no');
             $table->string('numera_price');
             $table->string('sharwali_tarifa_price');
             $table->string('Customer_image')->nullable();
             $table->string('documents')->nullable();
+            $table->string('description');
             $table->timestamps();
         });
     }

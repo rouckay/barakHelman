@@ -14,14 +14,26 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\Filter;
+use Illuminate\Support\HtmlString;
+use App\Models\Customers;
 
 class CustomersRelationManager extends RelationManager
 {
     protected static string $relationship = 'Customers';
     protected static ?string $navigationLabel = 'ددی ځمکی مشتریان';
+    protected function getParentNumerahaData(): array
+    {
+        $numeraha = $this->ownerRecord; // Access the parent Numeraha model
 
+        return [
+            'numera_price' => $numeraha->numera_price,
+            'numero_number' => $numeraha->numero_number,
+            // Add other fields as needed
+        ];
+    }
     public function form(Form $form): Form
     {
+        $numerahaData = $this->getParentNumerahaData();
         return $form
             ->schema([
                 Forms\Components\Tabs::make('New_customer')->
@@ -95,6 +107,8 @@ class CustomersRelationManager extends RelationManager
                                     Forms\Components\TextInput::make('total_price')
                                         ->live()
                                         ->prefixIcon('heroicon-o-banknotes')
+                                        ->default($numerahaData['numera_price'])
+                                        ->disabled()
                                         ->label('د نمری (ځمکی) قیمت')
                                         ->dehydrated()
                                         ->numeric()
@@ -109,7 +123,12 @@ class CustomersRelationManager extends RelationManager
                                     Forms\Components\Placeholder::make('due_price')
                                         ->label('باقی پیسی')
                                         ->content(function ($get) {
-                                            $duePrice = $get('payed_price') - $get('total_price');
+                                            $total_price = $get('total_price');
+                                            $payed_price = $get('payed_price');
+                                            if ($payed_price <= 0) {
+                                                return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>تحویل شوی پیسی اندازه غلطه ده!</strong></p>');
+                                            }
+                                            $duePrice = $total_price - $payed_price;
                                             return $duePrice;
                                         })
                                     ,
@@ -131,6 +150,10 @@ class CustomersRelationManager extends RelationManager
                             ])->columns(12)
                         ]),
                         Tab::make('موجوده مشتری')->schema([
+                            // Forms\Components\Select::make('customer')
+                            //     ->query(function () {
+                            //         Customers::query()->get();
+                            //     }),
                             Forms\Components\Select::make('numeraha_id')
                                 ->label('نمره ځمکه')
                                 ->relationship('numeraha', 'numero_number')

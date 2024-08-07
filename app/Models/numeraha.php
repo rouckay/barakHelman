@@ -21,6 +21,7 @@ class Numeraha extends Model
         'Customer_image',
         'documents',
         'customer_id',
+        'numera_type'
     ];
 
     public function Customers(): HasMany
