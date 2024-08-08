@@ -139,14 +139,14 @@ class FinanceResource extends Resource
                             ->numeric(),
                         Forms\Components\TextInput::make('dollor_price')
                             ->required()
-                            ->label('قیمت (ډالر) ')
+                            ->label('تبادله (ډالر /افغانی) ')
                             ->prefixIcon('heroicon-o-banknotes')
                             ->live()
                             ->default(71)
                             ->extraInputAttributes(['color' => 'red'])
                             ->numeric(),
                         Forms\Components\Placeholder::make('dollor_to_afghani')
-                            ->label('تبادله په افغانی')
+                            ->label('ټولټال افغانی')
                             ->content(function ($get) {
                                 $dollor = $get('dollor');
                                 $dollorPrice = $get('dollor_price');
@@ -168,7 +168,6 @@ class FinanceResource extends Resource
                             ->content(function ($get) {
                                 $dollor = $get('dollor');
                                 $dollorUnit = $get('dollor_unit');
-
                                 if (!is_numeric($dollor) || !is_numeric($dollorUnit)) {
                                     return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی یوازې عددي ارزښتونه اضافه کړی!</strong></p>');
                                 } else if ($dollor == 0 || $dollorUnit == 0) {
