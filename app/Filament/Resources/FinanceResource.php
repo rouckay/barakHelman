@@ -187,6 +187,9 @@ class FinanceResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('row_number')
+                    ->label('نمبر')
+                    ->rowIndex(),
                 Tables\Columns\TextColumn::make('quantity')
                     ->numeric()
                     ->searchable()

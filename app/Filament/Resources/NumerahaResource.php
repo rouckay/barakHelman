@@ -38,6 +38,7 @@ class NumerahaResource extends Resource
 
     // protected static ?string $navigationGroup = 'د ځمکو معاملی';
 
+    // Add this method in the appropriate place (e.g., Filament Resource or Table class)
     public static function form(Form $form): Form
     {
         return $form
@@ -121,6 +122,9 @@ class NumerahaResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('row_number')
+                    ->label('نمبر')
+                    ->rowIndex(),
                 Tables\Columns\TextColumn::make('numero_number')
                     ->sortable()
                     ->label('د نمری (ځمکی) ای ډی')
@@ -179,6 +183,14 @@ class NumerahaResource extends Resource
                         ->label('به اساس مشتری')
                         ->relationship('customers', 'name'),
                     //  layout: FiltersLayout::AboveContent
+                    Filter::make('پلورل شوی نمری (ځمکی)')
+                        ->query(fn(Builder $query) => $query->where('customer_id', '>=', 1))
+                    ,
+                    // Filter::make('هغه نمری (ځمکی) چی نه دی پلورل شوی.')
+                    //     ->query(fn(Builder $query) => $query->where(function ($query) {
+                    //         $query->where('customer_id', '=', 0)
+                    //             ->orWhereNull('customer_id');
+                    //     })),
                 ]
             )
             ->actions([

@@ -165,8 +165,12 @@ class CustomersRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('name')
+            ->recordTitleAttribute('مشتریان')
+            // ->label('')
             ->columns([
+                Tables\Columns\TextColumn::make('row_number')
+                    ->label('نمبر')
+                    ->rowIndex(),
                 Tables\Columns\TextColumn::make('name')
                     ->sortable()
                     ->label('نوم')
