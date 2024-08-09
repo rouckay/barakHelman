@@ -18,6 +18,8 @@
         "livewire/livewire": "^3.5",
         "maatwebsite/excel": "^3.1",
         "mcamara/laravel-localization": "^2.0",
+        "psr/simple-cache": "^2.0",
+        "pxlrbt/filament-excel": "*",
         "spatie/laravel-settings": "^3.3",
         "tomatophp/filament-pwa": "^1.0",
         "ysfkaya/filament-phone-input": "^2.3"

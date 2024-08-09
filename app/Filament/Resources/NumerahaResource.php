@@ -41,17 +41,6 @@ class NumerahaResource extends Resource
     // protected static ?string $navigationGroup = 'د ځمکو معاملی';
 
     // Add this method in the appropriate place (e.g., Filament Resource or Table class)
-    protected function getHeaderActions(): array
-    {
-        return [
-            ExcelImportAction::make()
-                ->color("primary")
-                ->label('Import Excel')
-                ->icon('heroicon-o-upload')
-                ->action(fn($records) => $this->handleExcelImport($records)), // Handling the import
-            Actions\CreateAction::make(),
-        ];
-    }
 
     protected function handleExcelImport($records)
     {
