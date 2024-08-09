@@ -25,6 +25,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Tables\Actions\Button;
 use App\Filament\Exports\ProductExporter;
 use Filament\Actions\Exports\Enums\ExportFormat;
+use Filament\Actions;
+use EightyNine\ExcelImport\ExcelImportAction;
 
 class NumerahaResource extends Resource
 {
@@ -39,6 +41,25 @@ class NumerahaResource extends Resource
     // protected static ?string $navigationGroup = 'د ځمکو معاملی';
 
     // Add this method in the appropriate place (e.g., Filament Resource or Table class)
+    protected function getHeaderActions(): array
+    {
+        return [
+            ExcelImportAction::make()
+                ->color("primary")
+                ->label('Import Excel')
+                ->icon('heroicon-o-upload')
+                ->action(fn($records) => $this->handleExcelImport($records)), // Handling the import
+            Actions\CreateAction::make(),
+        ];
+    }
+
+    protected function handleExcelImport($records)
+    {
+        // Define your import logic here
+        foreach ($records as $record) {
+            // Process each record, e.g., save to the database
+        }
+    }
     public static function form(Form $form): Form
     {
         return $form
@@ -183,9 +204,15 @@ class NumerahaResource extends Resource
                         ->label('به اساس مشتری')
                         ->relationship('customers', 'name'),
                     //  layout: FiltersLayout::AboveContent
-                    Filter::make('پلورل شوی نمری (ځمکی)')
-                        ->query(fn(Builder $query) => $query->where('customer_id', '>=', 1))
-                    ,
+                    TernaryFilter::make('پلورل شوی نمری (ځمکی)')
+                        ->label('د نمرو (ځمکو) فلتر')
+                        ->placeholder('د فلتر انتخاب')
+                        ->trueLabel('پلورل شوی نمری (ځمکی)')
+                        ->falseLabel(' هغه نمری (ځمکی) جی ندی پلورل شوی.')
+                        ->queries(
+                            true: fn(Builder $query) => $query->where('customer_id', '>=', 1),
+                            false: fn(Builder $query) => $query->where('customer_id', '=', 0) // No condition applied when false
+                        ),
                     // Filter::make('هغه نمری (ځمکی) چی نه دی پلورل شوی.')
                     //     ->query(fn(Builder $query) => $query->where(function ($query) {
                     //         $query->where('customer_id', '=', 0)
