@@ -27,6 +27,10 @@ use App\Filament\Exports\ProductExporter;
 use Filament\Actions\Exports\Enums\ExportFormat;
 use Filament\Actions;
 use EightyNine\ExcelImport\ExcelImportAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use pxlrbt\FilamentExcel\Columns\Column;
 
 class NumerahaResource extends Resource
 {
@@ -222,11 +226,28 @@ class NumerahaResource extends Resource
                     ->icon('heroicon-o-printer')
                     ->color('primary')
                     ->requiresConfirmation(),
+                ExportAction::make()->exports([
+                    ExcelExport::make()->withColumns([
+                        Column::make('numero_number'),
+                        Column::make('save_number'),
+                        Column::make('date'),
+                        Column::make('numera_price'),
+                        Column::make('sharwali_tarifa_price'),
+                        Column::make('Customer_image'),
+                        Column::make('documents'),
+                        Column::make('created_at'),
+                        Column::make('updated_at'),
+                        Column::make('updated_at'),
+                        Column::make('customer_id'),
+                        Column::make('numera_type'),
+                    ]),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+
             ]);
     }
 
