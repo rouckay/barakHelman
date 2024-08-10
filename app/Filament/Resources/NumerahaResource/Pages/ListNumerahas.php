@@ -13,7 +13,11 @@ class ListNumerahas extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-
+            \EightyNine\ExcelImport\ExcelImportAction::make()
+                ->color("primary")
+                ->label('اپلوډ کړی'),
+            Actions\CreateAction::make()
+                ->label('نوی نمره ثبت کړی'), // Custom label for the "Add" button
         ];
     }
 }

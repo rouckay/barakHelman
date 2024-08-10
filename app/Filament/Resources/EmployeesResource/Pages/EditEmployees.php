@@ -13,8 +13,10 @@ class EditEmployees extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make(),
-            Actions\DeleteAction::make(),
+            Actions\ViewAction::make()
+                ->label('کتل'),
+            Actions\DeleteAction::make()
+                ->label('حذف کول'),
         ];
     }
 }
