@@ -34,6 +34,15 @@ class CustomersRelationManager extends RelationManager
     public function form(Form $form): Form
     {
         $numerahaData = $this->getParentNumerahaData();
+        // return $form
+        //     ->schema([
+        //         Forms\Components\Select::make('customer_id')
+        //             ->label('Customer')
+        //             ->relationship('Customers', 'name') // Use 'numeraha' if 'numeraha' is the correct relationship name
+        //             ->searchable()
+        //             ->required(),
+        //         // Other fields...
+        //     ]);
         return $form
             ->schema([
                 Forms\Components\Tabs::make('New_customer')->

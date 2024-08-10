@@ -30,7 +30,7 @@ class Customers extends Model
 
     public function numeraha(): BelongsTo
     {
-        return $this->BelongsTo(numeraha::class); // Customer has many Numerahas
+        return $this->BelongsTo(numeraha::class, 'numeraha_id'); // Customer has many Numerahas
     }
 
 }

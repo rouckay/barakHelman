@@ -221,27 +221,31 @@ class NumerahaResource extends Resource
                     ->label('بدلون')
                 ,
                 Tables\Actions\ButtonAction::make('downloadInvoice')
-                    ->label('Download Tarifa')
+                    ->label('تعرفه ترلاسه کړی')
                     ->url(fn(Numeraha $record) => route('download.invoice', $record)) // Use route to generate URL
                     ->icon('heroicon-o-printer')
                     ->color('primary')
                     ->requiresConfirmation(),
-                ExportAction::make()->exports([
-                    ExcelExport::make()->withColumns([
-                        Column::make('numero_number'),
-                        Column::make('save_number'),
-                        Column::make('date'),
-                        Column::make('numera_price'),
-                        Column::make('sharwali_tarifa_price'),
-                        Column::make('Customer_image'),
-                        Column::make('documents'),
-                        Column::make('created_at'),
-                        Column::make('updated_at'),
-                        Column::make('updated_at'),
-                        Column::make('customer_id'),
-                        Column::make('numera_type'),
-                    ]),
-                ])
+                ExportAction::make()
+                    ->label('ډنلوډ کول')
+                    ->color('success')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->exports([
+                        ExcelExport::make()->withColumns([
+                            Column::make('numero_number'),
+                            Column::make('save_number'),
+                            Column::make('date'),
+                            Column::make('numera_price'),
+                            Column::make('sharwali_tarifa_price'),
+                            Column::make('Customer_image'),
+                            Column::make('documents'),
+                            Column::make('created_at'),
+                            Column::make('updated_at'),
+                            Column::make('updated_at'),
+                            Column::make('customer_id'),
+                            Column::make('numera_type'),
+                        ]),
+                    ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
