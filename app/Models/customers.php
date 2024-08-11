@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Customers extends Model
 {
@@ -21,16 +21,16 @@ class Customers extends Model
         'mobile_number',
         'parmanent_address',
         'current_address',
-        'numeraha_id',
+        // 'numeraha_id',
         'payed_price',
         // 'due_price',
         'total_price',
         'job',
     ];
 
-    public function numeraha(): BelongsTo
+    public function numerahas(): BelongsToMany
     {
-        return $this->BelongsTo(numeraha::class, 'numeraha_id'); // Customer has many Numerahas
+        return $this->belongsToMany(Numeraha::class, 'customer_numeraha');
     }
 
 }
