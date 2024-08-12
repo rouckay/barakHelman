@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.2",
         "afsakar/filament-translate-action": "^1.1",
+        "awcodes/overlook": "^2.2",
         "aymanalhattami/filament-page-with-sidebar": "^2.5",
         "eightynine/filament-excel-import": "^3.1",
         "eightynine/filament-reports": "^3.0",

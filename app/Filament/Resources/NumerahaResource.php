@@ -30,6 +30,7 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use pxlrbt\FilamentExcel\Columns\Column;
+use Illuminate\Support\Str;
 
 class NumerahaResource extends Resource
 {
@@ -68,8 +69,8 @@ class NumerahaResource extends Resource
                             ->maxLength(191),
                         Forms\Components\TextInput::make('save_number')
                             ->label('د ثبت نمبر')
-                            ->default('***********') // Auto-generate a unique save number
-                            ->disabled()
+                            ->default('Save-' . Str::uuid()->toString()) // Auto-generate a unique save number
+                            // ->disabled()
                             ->required(),
                     ])->columns(2),
                     Grid::make()->schema([
@@ -94,18 +95,18 @@ class NumerahaResource extends Resource
                     ])->columns(3),
                 ])->columnSpan(6),
                 Card::make()->schema([
-                    Grid::make()->schema([
-                        Forms\Components\Select::make('numera_type')
-                            ->label('د نمری (ځمکی) تفصیل')
-                            ->placeholder('د نمری (ځمکی) تفصیل')
-                            ->options([
-                                '3 بسوه ای' => '3 بسوه ای',
-                                '2 بسوه ای' => '2 بسوه ای',
-                                '1 بسوه ای' => '1 بسوه ای',
-                            ])
-                            ->required()
-                            ->searchable()
-                    ]),
+                    // Grid::make()->schema([
+                    // ]),
+                    Forms\Components\Select::make('numera_type')
+                        ->label('د نمری (ځمکی) تفصیل')
+                        ->placeholder('د نمری (ځمکی) تفصیل')
+                        ->options([
+                            '3 بسوه ای' => '3 بسوه ای',
+                            '2 بسوه ای' => '2 بسوه ای',
+                            '1 بسوه ای' => '1 بسوه ای',
+                        ])
+                        ->required()
+                        ->searchable(),
                     Forms\Components\FileUpload::make('documents')
                         ->directory('Numeraha_documents')
                         ->preserveFilenames()

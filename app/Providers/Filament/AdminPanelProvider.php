@@ -18,8 +18,9 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Filament\Resources\NumerahaResource;
 use EightyNine\Reports\ReportsPlugin;
+use Awcodes\Overlook\OverlookPlugin;
+use Awcodes\Overlook\Widgets\OverlookWidget;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -53,7 +54,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
+                // Widgets\AccountWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -71,8 +72,29 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 \TomatoPHP\FilamentPWA\FilamentPWAPlugin::make(),
-                ReportsPlugin::make()
+                ReportsPlugin::make(),
+                OverlookPlugin::make()
+                    ->sort(2)
+                    ->columns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'md' => 3,
+                        'lg' => 4,
+                        'xl' => 5,
+                        '2xl' => null,
+                    ])
+                    ->includes([
+                        \App\Filament\Resources\CustomerNumerahaResource::class,
+                        \App\Filament\Resources\CustomersResource::class,
+                        \App\Filament\Resources\EmployeesResource::class,
+                        \App\Filament\Resources\FinanceResource::class,
+                    ])
+                ,
             ])
+            ->databaseNotifications()
+            ->widgets([
+                OverlookWidget::class,
+            ]);
         ;
 
     }
