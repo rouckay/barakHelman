@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\Filter;
 use App\Filament\Resources\CustomerResource\RelationManagers\NumerahaRelationManager;
+use Illuminate\Support\HtmlString;
 
 class CustomersResource extends Resource
 {
@@ -100,7 +101,15 @@ class CustomersResource extends Resource
                             ->label('باقی پیسی')
                             ->disabled()
                             ->content(function ($get) {
-                                return $get('payed_price') - $get('total_price');
+                                $payed_price = $get('payed_price');
+                                $total_price = $get('total_price');
+                                if (!is_numeric($payed_price) || !is_numeric($total_price)) {
+                                    return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی یوازې عددي ارزښتونه اضافه کړی!</strong></p>');
+
+                                } else if ($payed_price <= 0 || $total_price <= 0) {
+                                    return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی د 1 څخه جګ عدد انتخاب کړی!</strong></p>');
+                                }
+                                return $total_price - $payed_price;
                             }),
                     ])->columnSpan(6),
                     Grid::make()->schema([
@@ -124,18 +133,7 @@ class CustomersResource extends Resource
                             ->prefixIcon('heroicon-o-briefcase')
                             ->placeholder('وظیفه')
                             ->maxLength(191),
-                        Forms\Components\Select::make('numeraha_id')
-                            ->placeholder('نمره ځمکه')
-                            ->label('نمره ځمکه')
-                            ->prefixIcon('heroicon-m-map-pin')
-                            ->relationship('numeraha', 'numero_number')
-                        ,
-                        TextInput::make('payed_price')
-                            ->label('رسید پیسی')
-                            ->live()
-                            ->prefixIcon('heroicon-o-banknotes')
-                            ->dehydrated()
-                        ,
+                        TextInput::make('payed_price')->label('رسید پیسی')->live()->prefixIcon('heroicon-o-banknotes')->dehydrated(),
                     ])->columnSpan(6)
                 ])->columns(12)
             ]);
@@ -281,12 +279,12 @@ class CustomersResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            NumerahaRelationManager::class
-        ];
-    }
+    // public static function getRelations(): array
+    // {
+    //     return [
+    //         NumerahaRelationManager::class
+    //     ];
+    // }
 
     public static function getPages(): array
     {

@@ -72,7 +72,6 @@ class NumerahaResource extends Resource
                             ->default('******') // Auto-generate a unique save number
                             ->disabled()
                             ->required(),
-
                     ])->columns(2),
                     Grid::make()->schema([
                         Forms\Components\TextInput::make('date')
@@ -107,13 +106,6 @@ class NumerahaResource extends Resource
                             ])
                             ->required()
                             ->searchable()
-                        ,
-                        Forms\Components\Select::make('customer_id')
-                            ->label('د ځمکی مالک')
-                            ->searchable()
-                            ->preload()
-                            ->placeholder('د ځمکی مالک انتخاب کړی')
-                            ->relationship('Customers', 'name'),
                     ]),
                     Forms\Components\FileUpload::make('documents')
                         ->directory('Numeraha_documents')
@@ -173,11 +165,11 @@ class NumerahaResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->label('اسناد')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('Customers.name')
-                    ->numeric()
-                    ->sortable()
-                    ->label('مشتری')
-                    ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('Customers')
+                //     ->numeric()
+                //     ->sortable()
+                //     ->label('مشتری')
+                //     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -193,9 +185,9 @@ class NumerahaResource extends Resource
             ])
             ->filters(
                 [
-                    SelectFilter::make('customer')
-                        ->label('به اساس مشتری')
-                        ->relationship('customers', 'name'),
+                    // SelectFilter::make('customer')
+                    //     ->label('به اساس مشتری')
+                    //     ->relationship('customers', 'name'),
                     //  layout: FiltersLayout::AboveContent
                     TernaryFilter::make('پلورل شوی نمری (ځمکی)')
                         ->label('د نمرو (ځمکو) فلتر')
@@ -255,12 +247,12 @@ class NumerahaResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            CustomersRelationManager::class
-        ];
-    }
+    // public static function getRelations(): array
+    // {
+    //     return [
+    //         CustomersRelationManager::class
+    //     ];
+    // }
 
     public static function getPages(): array
     {

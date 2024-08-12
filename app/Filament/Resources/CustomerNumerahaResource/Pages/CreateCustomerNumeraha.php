@@ -9,4 +9,10 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateCustomerNumeraha extends CreateRecord
 {
     protected static string $resource = CustomerNumerahaResource::class;
+    protected function getFooterActions(): array
+    {
+        return [
+            Actions\EditAction::make(),
+        ];
+    }
 }

@@ -16,8 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class CustomerNumerahaResource extends Resource
 {
     protected static ?string $model = CustomerNumeraha::class;
+    protected static ?string $navigationIcon = 'heroicon-o-home';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'د نمرو معاملی';
 
     public static function form(Form $form): Form
     {
@@ -49,9 +50,10 @@ class CustomerNumerahaResource extends Resource
                     // ->minFiles(1)
                     // ->maxFiles(5)
                     // ->required()
-                    ->label('د ځمکی اسناد'),
-                Forms\Components\TextInput::make('remarks')
+                    ->label('د ځمکی اسناد')
                     ->required()
+                ,
+                Forms\Components\TextInput::make('remarks')
                     ->maxLength(191),
             ]);
     }
@@ -60,7 +62,7 @@ class CustomerNumerahaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('customer_id')
+                Tables\Columns\TextColumn::make('customer.name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('numeraha_id')
