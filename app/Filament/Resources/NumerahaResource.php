@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\NumerahaResource\Pages;
-use App\Filament\Resources\NumerahaResource\RelationManagers;
 use App\Filament\Resources\NumerahaResource\RelationManagers\CustomersRelationManager;
 use App\Models\Numeraha;
 use Filament\Forms;
@@ -69,7 +68,7 @@ class NumerahaResource extends Resource
                             ->maxLength(191),
                         Forms\Components\TextInput::make('save_number')
                             ->label('د ثبت نمبر')
-                            ->default('******') // Auto-generate a unique save number
+                            ->default('***********') // Auto-generate a unique save number
                             ->disabled()
                             ->required(),
                     ])->columns(2),
@@ -247,12 +246,12 @@ class NumerahaResource extends Resource
             ]);
     }
 
-    // public static function getRelations(): array
-    // {
-    //     return [
-    //         CustomersRelationManager::class
-    //     ];
-    // }
+    public static function getRelations(): array
+    {
+        return [
+            CustomersRelationManager::class
+        ];
+    }
 
     public static function getPages(): array
     {

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CustomerNumerahaResource\Pages;
 use App\Filament\Resources\CustomerNumerahaResource\RelationManagers;
+use App\Filament\Resources\CustomerNumerahaResource\RelationManagers\CustomersRelationManager;
 use App\Models\CustomerNumeraha;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -98,7 +99,6 @@ class CustomerNumerahaResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 

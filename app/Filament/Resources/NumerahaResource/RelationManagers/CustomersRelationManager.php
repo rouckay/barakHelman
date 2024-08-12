@@ -6,7 +6,6 @@ use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Tabs\Tab;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -150,11 +149,11 @@ class CustomersRelationManager extends RelationManager
                                         ->label('وظیفه')
                                         ->prefixIcon('heroicon-o-briefcase')
                                         ->maxLength(191),
-                                    Forms\Components\Select::make('numeraha_id')
-                                        ->label('د نمری (ځمکی) آی ډی')
-                                        ->relationship('numeraha', 'numero_number')
-                                        ->prefixIcon('heroicon-o-map')
-                                    ,
+                                    // Forms\Components\Select::make('numeraha_id')
+                                    //     ->label('د نمری (ځمکی) آی ډی')
+                                    //     ->relationship('numeraha', 'numero_number')
+                                    //     ->prefixIcon('heroicon-o-map')
+                                    // ,
                                 ])->columnSpan(6)
                             ])->columns(12)
                         ]),
@@ -163,10 +162,10 @@ class CustomersRelationManager extends RelationManager
                             //     ->query(function () {
                             //         Customers::query()->get();
                             //     }),
-                            Forms\Components\Select::make('numeraha_id')
-                                ->label('نمره ځمکه')
-                                ->relationship('numeraha', 'numero_number')
-                                ->prefixIcon('heroicon-o-map'),
+                            // Forms\Components\Select::make('numeraha_id')
+                            //     ->label('نمره ځمکه')
+                            //     ->relationship('numeraha', 'numero_number')
+                            //     ->prefixIcon('heroicon-o-map'),
                         ])
                     ])->columnSpanFull()
             ]);

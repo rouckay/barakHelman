@@ -15,13 +15,12 @@ return new class extends Migration {
         Schema::create('numerahas', function (Blueprint $table) {
             $table->id();
             $table->string('numero_number');
-            $table->string('save_number')->default('SAVE-' . Str::uuid())->change(); // Use UUID as default
             $table->string('date');
             $table->string('numera_price');
             $table->string('sharwali_tarifa_price');
             $table->string('Customer_image')->nullable();
             $table->string('documents')->nullable();
-            $table->string('description');
+            $table->string('numeraha_type');
             $table->timestamps();
         });
     }
@@ -32,8 +31,5 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::dropIfExists('numerahas');
-        Schema::table('numerahas', function (Blueprint $table) {
-            $table->string('save_number')->nullable()->change(); // Revert if needed
-        });
     }
 };

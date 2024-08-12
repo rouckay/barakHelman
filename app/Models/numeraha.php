@@ -27,6 +27,6 @@ class Numeraha extends Model
 
     public function Customers(): BelongsToMany
     {
-        return $this->belongsToMany(Customers::class, 'customer_numeraha'); // Numeraha belongs to a Customer
+        return $this->belongsToMany(Customers::class, 'customer_numerahas', 'numeraha_id', 'customer_id'); // Numeraha belongs to a Customer
     }
 }

@@ -16,7 +16,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\Filter;
-use App\Filament\Resources\CustomerResource\RelationManagers\NumerahaRelationManager;
+use App\filament\Resources\CustomersResource\RelationManagers\NumerahasRelationManager;
 use Illuminate\Support\HtmlString;
 
 class CustomersResource extends Resource
@@ -279,12 +279,12 @@ class CustomersResource extends Resource
             ]);
     }
 
-    // public static function getRelations(): array
-    // {
-    //     return [
-    //         NumerahaRelationManager::class
-    //     ];
-    // }
+    public static function getRelations(): array
+    {
+        return [
+            NumerahasRelationManager::class
+        ];
+    }
 
     public static function getPages(): array
     {
