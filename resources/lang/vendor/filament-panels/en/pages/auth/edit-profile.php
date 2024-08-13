@@ -2,30 +2,30 @@
 
 return [
 
-    'label' => 'Profile',
+    'label' => 'پروفایل',
 
     'form' => [
 
         'email' => [
-            'label' => 'Email address',
+            'label' => 'ایمیل آدرس',
         ],
 
         'name' => [
-            'label' => 'Name',
+            'label' => 'نوم',
         ],
 
         'password' => [
-            'label' => 'New password',
+            'label' => 'نوی پټ نوم',
         ],
 
         'password_confirmation' => [
-            'label' => 'Confirm new password',
+            'label' => 'پټ نوم تایید',
         ],
 
         'actions' => [
 
             'save' => [
-                'label' => 'Save changes',
+                'label' => 'تغیرات مو ثبت کړی',
             ],
 
         ],
@@ -35,7 +35,7 @@ return [
     'notifications' => [
 
         'saved' => [
-            'title' => 'Saved',
+            'title' => 'ثبت شول',
         ],
 
     ],
@@ -43,7 +43,7 @@ return [
     'actions' => [
 
         'cancel' => [
-            'label' => 'Cancel',
+            'label' => 'لغو کړی',
         ],
 
     ],

@@ -2,29 +2,29 @@
 
 return [
 
-    'title' => 'Reset your password',
+    'title' => 'خپل پټ نوم ریسټ کړی',
 
-    'heading' => 'Reset your password',
+    'heading' => 'خپل پټ نوم ریسټ کړی',
 
     'form' => [
 
         'email' => [
-            'label' => 'Email address',
+            'label' => 'ایمیل آدرس',
         ],
 
         'password' => [
-            'label' => 'Password',
-            'validation_attribute' => 'password',
+            'label' => 'پټ نوم',
+            'validation_attribute' => 'یو ځل بیا پټ نوم ولیکی',
         ],
 
         'password_confirmation' => [
-            'label' => 'Confirm password',
+            'label' => 'پټ نوم مو تایید کړی',
         ],
 
         'actions' => [
 
             'reset' => [
-                'label' => 'Reset password',
+                'label' => 'پټ نوم ریسټ کړی',
             ],
 
         ],
@@ -34,8 +34,8 @@ return [
     'notifications' => [
 
         'throttled' => [
-            'title' => 'Too many reset attempts',
-            'body' => 'Please try again in :seconds seconds.',
+            'title' => 'ډیر زیات کوښښ مو وکړ',
+            'body' => 'مهربانی وکړی :seconds ثانیی صبر وکړی.',
         ],
 
     ],

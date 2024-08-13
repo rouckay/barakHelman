@@ -2,14 +2,14 @@
 
 return [
 
-    'title' => 'Reset your password',
+    'title' => 'خپل پټ نوم ریسټ کړی',
 
-    'heading' => 'Forgot password?',
+    'heading' => 'خپل پټ نوم مو هیر کړی دی؟ ',
 
     'actions' => [
 
         'login' => [
-            'label' => 'back to login',
+            'label' => 'بیرته د ننوتلو صفحه ته لاړ شی.',
         ],
 
     ],
@@ -17,13 +17,13 @@ return [
     'form' => [
 
         'email' => [
-            'label' => 'Email address',
+            'label' => 'ایمیل آدرس',
         ],
 
         'actions' => [
 
             'request' => [
-                'label' => 'Send email',
+                'label' => 'ایمیل ولیږی.',
             ],
 
         ],
@@ -33,8 +33,8 @@ return [
     'notifications' => [
 
         'throttled' => [
-            'title' => 'Too many requests',
-            'body' => 'Please try again in :seconds seconds.',
+            'title' => 'ډیر زیات کوښښ مو وکړ',
+            'body' => 'مهربانی وکړی :seconds ثانیی صبر وکړی.',
         ],
 
     ],

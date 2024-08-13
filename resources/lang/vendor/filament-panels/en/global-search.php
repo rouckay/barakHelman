@@ -3,10 +3,10 @@
 return [
 
     'field' => [
-        'label' => 'Global search',
-        'placeholder' => 'Search',
+        'label' => 'عمومی لټون',
+        'placeholder' => 'لټون',
     ],
 
-    'no_results_message' => 'No search results found.',
+    'no_results_message' => 'هیڅ پیدا نشول',
 
 ];

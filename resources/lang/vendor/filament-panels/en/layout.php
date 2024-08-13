@@ -7,11 +7,11 @@ return [
     'actions' => [
 
         'billing' => [
-            'label' => 'Manage subscription',
+            'label' => 'د ګډون کوونکو اداره کول',
         ],
 
         'logout' => [
-            'label' => 'Sign out',
+            'label' => 'سیستم نه وتل',
         ],
 
         'open_database_notifications' => [
@@ -19,7 +19,7 @@ return [
         ],
 
         'open_user_menu' => [
-            'label' => 'User menu',
+            'label' => 'کاربرانو منیو',
         ],
 
         'sidebar' => [
@@ -37,15 +37,15 @@ return [
         'theme_switcher' => [
 
             'dark' => [
-                'label' => 'Enable dark theme',
+                'label' => 'د شپی حالت',
             ],
 
             'light' => [
-                'label' => 'Enable light theme',
+                'label' => 'د ورځی حالت',
             ],
 
             'system' => [
-                'label' => 'Enable system theme',
+                'label' => 'سیستم مربوط حالت',
             ],
 
         ],

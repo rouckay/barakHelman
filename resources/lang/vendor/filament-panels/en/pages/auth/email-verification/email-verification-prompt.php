@@ -2,32 +2,32 @@
 
 return [
 
-    'title' => 'Verify your email address',
+    'title' => 'د ایمیل هویت مو ثبت کړی',
 
-    'heading' => 'Verify your email address',
+    'heading' => 'د ایمیل هویت مو ثبت کړی',
 
     'actions' => [
 
         'resend_notification' => [
-            'label' => 'Resend it',
+            'label' => 'بیا ایمیل ولیږی',
         ],
 
     ],
 
     'messages' => [
-        'notification_not_received' => 'Not received the email we sent?',
-        'notification_sent' => 'We\'ve sent an email to :email containing instructions on how to verify your email address.',
+        'notification_not_received' => 'ایمیل مو تر لاسه نه کړ؟?',
+        'notification_sent' => 'موږ تاسی ته ایمیل ولیږو چی څه ایمل هویت ثبت کړی او باقی مرحلی څنګه مخته یوسی.',
     ],
 
     'notifications' => [
 
         'notification_resent' => [
-            'title' => 'We\'ve resent the email.',
+            'title' => 'موږ تاسی ته بیا ایمیل ولیږو.',
         ],
 
         'notification_resend_throttled' => [
-            'title' => 'Too many resend attempts',
-            'body' => 'Please try again in :seconds seconds.',
+            'title' => 'ډیر کوښښ مو وکړ.',
+            'body' => 'مهربانی وکړی  :seconds ثانیی صبر وکړی.',
         ],
 
     ],

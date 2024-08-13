@@ -8,17 +8,17 @@ return [
 
         'filter' => [
 
-            'label' => 'Filter',
+            'label' => 'فلټر',
 
             'modal' => [
 
-                'heading' => 'Filter',
+                'heading' => 'فلټر',
 
                 'actions' => [
 
                     'apply' => [
 
-                        'label' => 'Apply',
+                        'label' => 'درخواست وکړئ',
 
                     ],
 
