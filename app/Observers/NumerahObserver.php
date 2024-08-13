@@ -14,7 +14,7 @@ class NumerahObserver
     {
         Notification::make()
             ->title('نمره(ځمکه) اضافه شوه')
-            ->sendToDatabase($numeraha)
+            ->sendToDatabase($numeraha->numero_number)
         ;
     }
 

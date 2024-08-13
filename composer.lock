@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc5ad4206e422fc006d51be7ebdcf5b3",
+    "content-hash": "a7d74a34079e3c6c3983063abb01a01e",
     "packages": [
         {
             "name": "afsakar/filament-translate-action",
