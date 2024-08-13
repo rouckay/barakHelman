@@ -13,6 +13,7 @@ class StatsOverview extends BaseWidget
 {
     protected static ?string $pollingInterval = '15s';
     protected static bool $isLazy = true;
+    protected static ?int $sort = 1;
     protected function getStats(): array
     {
         return [

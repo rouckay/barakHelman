@@ -8,7 +8,8 @@ use Filament\Widgets\ChartWidget;
 
 class NumeraChart extends ChartWidget
 {
-    protected static ?string $heading = 'Chart';
+    protected static ?string $heading = 'د نمرو (ځمکو) ثبت ';
+    protected static ?int $sort = 2;
 
     protected function getData(): array
     {
@@ -17,11 +18,11 @@ class NumeraChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'lable' => '',
-                    'data' => $data['NumerahaPerMonth']
-                ]
+                    'label' => 'Numerahas Per Month',
+                    'data' => $data['NumerahasPerMonth'],
+                ],
             ],
-            'labels' => $data['months']
+            'labels' => $data['months'],
         ];
     }
 
@@ -34,13 +35,14 @@ class NumeraChart extends ChartWidget
         $now = Carbon::now();
 
         $NumerahasPerMonth = [];
-        $months = collect(range(1, 12))->map(function ($month) use ($now, $NumerahasPerMonth) {
-            $count = Numeraha::whereMonth('created_at', Carbon::parse($now->month($month)->format('Y-m')))->count();
+        $months = collect(range(1, 12))->map(function ($month) use ($now, &$NumerahasPerMonth) {
+            $count = Numeraha::whereMonth('created_at', $month)->count();
             $NumerahasPerMonth[] = $count;
             return $now->month($month)->format('M');
         })->toArray();
+
         return [
-            'NumerahaPerMonth' => $NumerahasPerMonth,
+            'NumerahasPerMonth' => $NumerahasPerMonth,
             'months' => $months
         ];
     }
