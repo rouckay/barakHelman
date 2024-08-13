@@ -2,19 +2,19 @@
 
 return [
 
-    'title' => 'Login',
+    'title' => 'ننوتل',
 
-    'heading' => 'Sign in',
+    'heading' => 'سیستم ته ننوتل',
 
     'actions' => [
 
         'register' => [
-            'before' => 'or',
-            'label' => 'sign up for an account',
+            'before' => 'یا هم کولای',
+            'label' => 'نوی اکونټ جوړ کړی',
         ],
 
         'request_password_reset' => [
-            'label' => 'Forgot password?',
+            'label' => 'خپل پټ نوم مو هیر کړی دی?',
         ],
 
     ],
@@ -22,21 +22,21 @@ return [
     'form' => [
 
         'email' => [
-            'label' => 'Email address',
+            'label' => 'ایمیل آدرس',
         ],
 
         'password' => [
-            'label' => 'Password',
+            'label' => 'پټ نوم',
         ],
 
         'remember' => [
-            'label' => 'Remember me',
+            'label' => 'ما په یاد وساته',
         ],
 
         'actions' => [
 
             'authenticate' => [
-                'label' => 'Sign in',
+                'label' => 'ننوتل',
             ],
 
         ],
@@ -45,15 +45,15 @@ return [
 
     'messages' => [
 
-        'failed' => 'These credentials do not match our records.',
+        'failed' => 'تاسی معلومات غلط دی مهربانی وکړی بیا کوښښ وکړی.',
 
     ],
 
     'notifications' => [
 
         'throttled' => [
-            'title' => 'Too many login attempts',
-            'body' => 'Please try again in :seconds seconds.',
+            'title' => 'تاسی ډیر کوښښ وکړو',
+            'body' => 'په مهربانی صبر وکړی بیا کوښښ وکړی :seconds ثانیو نه وروسته .',
         ],
 
     ],

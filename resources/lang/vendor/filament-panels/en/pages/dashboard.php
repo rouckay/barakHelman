@@ -2,7 +2,7 @@
 
 return [
 
-    'title' => 'Dashboard',
+    'title' => 'خلاصه د ټول سیستم',
 
     'actions' => [
 

@@ -79,7 +79,7 @@ class AdminPanelProvider extends PanelProvider
                         'default' => 1,
                         'sm' => 2,
                         'md' => 3,
-                        'lg' => 4,
+                        'lg' => 6,
                         'xl' => 5,
                         '2xl' => null,
                     ])

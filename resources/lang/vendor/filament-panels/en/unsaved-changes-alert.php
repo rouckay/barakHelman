@@ -2,6 +2,6 @@
 
 return [
 
-    'body' => 'You have unsaved changes. Are you sure you want to leave this page?',
+    'body' => 'تاسی تغیرات ندی ثبت شوی غواړی چی بیدون د ثبت نه پاتی شی؟',
 
 ];

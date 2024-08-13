@@ -4,18 +4,18 @@ return [
 
     'title' => 'Edit :label',
 
-    'breadcrumb' => 'Edit',
+    'breadcrumb' => 'تغیر کول',
 
     'form' => [
 
         'actions' => [
 
             'cancel' => [
-                'label' => 'Cancel',
+                'label' => 'لغوه کول',
             ],
 
             'save' => [
-                'label' => 'Save changes',
+                'label' => 'تغیرات ثبت کړی',
             ],
 
         ],
@@ -25,7 +25,7 @@ return [
     'content' => [
 
         'tab' => [
-            'label' => 'Edit',
+            'label' => 'تغیرات راوستل',
         ],
 
     ],
@@ -33,7 +33,7 @@ return [
     'notifications' => [
 
         'saved' => [
-            'title' => 'Saved',
+            'title' => 'ثبت شوو',
         ],
 
     ],

@@ -4,22 +4,22 @@ return [
 
     'title' => 'Create :label',
 
-    'breadcrumb' => 'Create',
+    'breadcrumb' => 'ثبت کول',
 
     'form' => [
 
         'actions' => [
 
             'cancel' => [
-                'label' => 'Cancel',
+                'label' => 'لغوه کول',
             ],
 
             'create' => [
-                'label' => 'Create',
+                'label' => 'ثبت کول',
             ],
 
             'create_another' => [
-                'label' => 'Create & create another',
+                'label' => 'ثبت & او نوی فورم',
             ],
 
         ],
@@ -29,7 +29,7 @@ return [
     'notifications' => [
 
         'created' => [
-            'title' => 'Created',
+            'title' => 'ثبت شوو',
         ],
 
     ],
