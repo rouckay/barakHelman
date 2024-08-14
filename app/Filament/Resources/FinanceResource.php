@@ -52,10 +52,11 @@ class FinanceResource extends Resource
                             ->extraAttributes([
                                 'oninput' => 'this.value = this.value.replace(/[٠-٩]/g, function(d) { return d.charCodeAt(0) - 1632; });'
                             ])
-                            ->helperText('07 په اتومات ډول خپله سیستم لیکی تاسی خپل باقی نمبر ټایپ کړی')
-                            //     ->mask(RawJs::make(<<<'JS'
-                            //         $input.startsWith('07') ? '079-999-9999' : '079-999-9999'? :''
-                            // JS))
+                            // ->helperText('07 په اتومات ډول خپله سیستم لیکی تاسی خپل باقی نمبر ټایپ کړی')
+                            ->mask(RawJs::make(<<<'JS'
+                                    $input.startsWith('07') ? '079-999-9999' : '079-999-9999'? :''
+                            JS))
+                            ->maxLength(12)
                             ->prefixIcon('heroicon-o-phone')
                             ->label('د پلورونکی تلفن نمبر'),
                         Forms\Components\Select::make('user_id')
@@ -85,6 +86,7 @@ class FinanceResource extends Resource
                             ->required()
                             ->label('مقدار')
                             ->live()
+                            ->helperText('مقدار د خرید یا هم د مصرف')
                             ->dehydrated()
                             ->prefixIcon('heroicon-o-banknotes')
                             ->default(1)
@@ -93,12 +95,14 @@ class FinanceResource extends Resource
                             ->required()
                             ->label('قیمت فی واحد (افغانی) ')
                             ->dehydrated()
+                            ->helperText('فی واحد په افغانی باندی')
                             ->prefixIcon('heroicon-o-banknotes')
                             ->default(1)
                             ->live()
                             ->numeric(),
                         Forms\Components\Placeholder::make('total_price')
                             ->label('ټولټال لګښت (افغانی)')
+                            ->helperText('افغانی ')
                             ->content(function ($get) {
                                 $quantity = $get('quantity');
                                 $unit = $get('unit');
@@ -115,6 +119,7 @@ class FinanceResource extends Resource
                         Forms\Components\TextInput::make('dollor')
                             ->required()
                             ->label('مقدار')
+                            ->helperText('مقدار په ډالر باندی')
                             ->live()
                             ->default(1)
                             // ->afterStateUpdated(function (string $state, $operation, callable $get, callable $set) {
@@ -130,6 +135,7 @@ class FinanceResource extends Resource
                             ->prefixIcon('heroicon-o-banknotes')
                             ->numeric(),
                         Forms\Components\TextInput::make('dollor_unit')
+                            ->helperText('یو جنس قیمت په ډالر باندی')
                             ->required()
                             ->label('قیمت فی واحد (ډالر) ')
                             ->prefixIcon('heroicon-o-banknotes')
@@ -144,9 +150,11 @@ class FinanceResource extends Resource
                             ->live()
                             ->default(71)
                             ->extraInputAttributes(['color' => 'red'])
+                            ->helperText('د ډالر قیمت')
                             ->numeric(),
                         Forms\Components\Placeholder::make('dollor_to_afghani')
                             ->label('ټولټال افغانی')
+                            ->helperText('مجمعه لګښت په افغانی باندی')
                             ->content(function ($get) {
                                 $dollor = $get('dollor');
                                 $dollorPrice = $get('dollor_price');
@@ -165,6 +173,7 @@ class FinanceResource extends Resource
 
                         Forms\Components\Placeholder::make('dollor_total')
                             ->label('ټولټال لګښت (ډالر)')
+                            ->helperText('مجمعه لګښت په ډالرو باندی')
                             ->content(function ($get) {
                                 $dollor = $get('dollor');
                                 $dollorUnit = $get('dollor_unit');
@@ -248,7 +257,7 @@ class FinanceResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    // Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

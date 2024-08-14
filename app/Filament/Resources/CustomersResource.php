@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\Filter;
 use App\filament\Resources\CustomersResource\RelationManagers\NumerahasRelationManager;
 use Illuminate\Support\HtmlString;
+use Filament\Support\RawJs;
 
 class CustomersResource extends Resource
 {
@@ -37,6 +38,7 @@ class CustomersResource extends Resource
                     Grid::make()->schema([
                         Forms\Components\TextInput::make('name')
                             ->label('نوم')
+                            // ->helperText('مکمل نوم')
                             ->required()
                             ->prefixIcon('heroicon-o-user')
                             ->placeholder('نام')
@@ -46,15 +48,11 @@ class CustomersResource extends Resource
                             ->placeholder('د پلار نوم')
                             ->prefixIcon('heroicon-o-user')
                             ->maxLength(191),
-                        Forms\Components\TextInput::make('grand_father_name')
-                            ->label('د نیکه نوم')
-                            ->placeholder('د نیکه نوم')
-                            ->prefixIcon('heroicon-o-user')
-                            ->maxLength(191),
                         Forms\Components\Select::make('province')
                             ->label('ولایت')
                             ->placeholder('ولایت انتخاب کړی.')
                             ->prefixIcon('heroicon-m-globe-alt')
+                            ->helperText('دایمی اوسیدو ولایت')
                             ->options([
                                 'بلخ' => 'بلخ',
                                 'بامیان' => 'بامیان',
@@ -83,10 +81,10 @@ class CustomersResource extends Resource
                                 'پنجشیر' => 'پنجشیر',
                                 'پروان' => 'پروان',
                             ]),
-                        Forms\Components\TextInput::make('village')
-                            ->label('کلی')
-                            ->placeholder('کلی')
-                            ->prefixIcon('heroicon-m-map-pin')
+                        Forms\Components\TextInput::make('parmanent_address')
+                            ->label('دایمی داوسیدو پته ')
+                            ->placeholder('دایمی داوسیدو پته')
+                            ->prefixIcon('heroicon-o-map-pin')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('tazkira')
                             ->label('تذکره نمبر')
@@ -96,6 +94,8 @@ class CustomersResource extends Resource
                         TextInput::make('total_price')
                             ->live()
                             ->prefixIcon('heroicon-o-banknotes')
+                            ->default(1)
+                            ->numeric()
                             ->label('محمعه پیسی'),
                         Forms\Components\Placeholder::make('due_price')
                             ->label('باقی پیسی')
@@ -113,27 +113,47 @@ class CustomersResource extends Resource
                             }),
                     ])->columnSpan(6),
                     Grid::make()->schema([
+                        Forms\Components\TextInput::make('grand_father_name')
+                            ->label('د نیکه نوم')
+                            ->placeholder('د نیکه نوم')
+                            ->prefixIcon('heroicon-o-user')
+                            ->maxLength(191),
                         Forms\Components\TextInput::make('mobile_number')
                             ->label('تلفن نمبر')
-                            ->placeholder('تلفن نمبر')
                             ->prefixIcon('heroicon-o-phone')
-                            ->maxLength(191),
-                        Forms\Components\TextInput::make('parmanent_address')
-                            ->label('دایمی داوسیدو پته ')
-                            ->placeholder('دایمی داوسیدو پته')
-                            ->prefixIcon('heroicon-o-map-pin')
+                            ->numeric()
+                            ->placeholder(' 234 5678 071')
+                            ->extraAttributes([
+                                'oninput' => 'this.value = this.value.replace(/[٠-٩]/g, function(d) { return d.charCodeAt(0) - 1632; });'
+                            ])
+                            // ->helperText('07 په اتومات ډول خپله سیستم لیکی تاسی خپل باقی نمبر ټایپ کړی')
+                            ->mask(RawJs::make(<<<'JS'
+                                    $input.startsWith('07') ? '079-999-9999' : '079-999-9999'? :''
+                            JS))
+                            ->maxLength(12),
+                        Forms\Components\TextInput::make('village')
+                            ->label('کلی')
+                            ->helperText('د دایمی اوسیدو پته / کلی')
+                            ->placeholder('کلی')
+                            ->prefixIcon('heroicon-m-map-pin')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('current_address')
                             ->label('اوسنی داوسیدو پته')
                             ->prefixIcon('heroicon-o-map-pin')
                             ->placeholder('اوسنی داوسیدو پته')
+                            ->helperText('اوسنی آدرس په مکمل ډول ولیکی')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('job')
                             ->label('وظیفه')
                             ->prefixIcon('heroicon-o-briefcase')
                             ->placeholder('وظیفه')
                             ->maxLength(191),
-                        TextInput::make('payed_price')->label('رسید پیسی')->live()->prefixIcon('heroicon-o-banknotes')->dehydrated(),
+                        TextInput::make('payed_price')->label('رسید پیسی')
+                            ->live()
+                            ->default(1)
+                            ->numeric()
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->dehydrated(),
                     ])->columnSpan(6)
                 ])->columns(12)
             ]);
@@ -274,7 +294,7 @@ class CustomersResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    // Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

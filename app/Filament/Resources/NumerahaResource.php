@@ -234,7 +234,6 @@ class NumerahaResource extends Resource
                             Column::make('documents'),
                             Column::make('created_at'),
                             Column::make('updated_at'),
-                            Column::make('updated_at'),
                             Column::make('customer_id'),
                             Column::make('numera_type'),
                         ]),
@@ -242,7 +241,7 @@ class NumerahaResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    // Tables\Actions\DeleteBulkAction::make(),
                 ]),
 
             ]);
