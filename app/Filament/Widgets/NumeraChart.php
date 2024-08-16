@@ -18,7 +18,7 @@ class NumeraChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Numerahas Per Month',
+                    'label' => 'نمره (ځمکی) د میاشتی په اساس',
                     'data' => $data['NumerahasPerMonth'],
                 ],
             ],
