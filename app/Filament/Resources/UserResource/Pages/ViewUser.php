@@ -9,6 +9,8 @@ use Filament\Resources\Pages\ViewRecord;
 class ViewUser extends ViewRecord
 {
     protected static string $resource = UserResource::class;
+    protected static ?string $title = 'د یاد کارمند معلومات کتل';
+
 
     protected function getHeaderActions(): array
     {

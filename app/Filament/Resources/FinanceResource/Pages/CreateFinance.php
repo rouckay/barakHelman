@@ -9,4 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateFinance extends CreateRecord
 {
     protected static string $resource = FinanceResource::class;
+    protected static ?string $title = 'ثبت نوی مالی حساب';
+
 }

@@ -10,6 +10,8 @@ use App\Imports\MyNumerahaImport;
 class ListNumerahas extends ListRecords
 {
     protected static string $resource = NumerahaResource::class;
+    protected static ?string $title = 'لیست د ټولو نمرو (ځمکو)';
+
 
     protected function getHeaderActions(): array
     {

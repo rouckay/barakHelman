@@ -20,6 +20,8 @@ class CustomersRelationManager extends RelationManager
 {
     protected static string $relationship = 'Customers';
     protected static ?string $navigationLabel = 'ددی ځمکی مشتریان';
+    protected static ?string $title = 'د پورتنی نمری (ځمکی) ټول مشتریان';
+
     protected function getParentNumerahaData(): array
     {
         $numeraha = $this->ownerRecord; // Access the parent Numeraha model

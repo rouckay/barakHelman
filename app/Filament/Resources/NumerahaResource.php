@@ -70,7 +70,7 @@ class NumerahaResource extends Resource
                             ->maxLength(191),
                         Forms\Components\TextInput::make('save_number')
                             ->label('د ثبت نمبر')
-                            ->default('Save-' . Str::uuid()->toString()) // Auto-generate a unique save number
+                            ->default('NGMAM-' . Str::uuid()->toString()) // Auto-generate a unique save number
                             // ->disabled()
                             ->required(),
                     ])->columns(2),

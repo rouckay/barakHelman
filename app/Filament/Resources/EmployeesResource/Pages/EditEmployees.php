@@ -9,6 +9,8 @@ use Filament\Resources\Pages\EditRecord;
 class EditEmployees extends EditRecord
 {
     protected static string $resource = EmployeesResource::class;
+    protected static ?string $title = 'تغیرات راوستل د کارمند په معلوماتو کې';
+
 
     protected function getHeaderActions(): array
     {

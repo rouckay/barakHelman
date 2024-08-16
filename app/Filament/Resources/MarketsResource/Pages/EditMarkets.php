@@ -9,6 +9,8 @@ use Filament\Resources\Pages\EditRecord;
 class EditMarkets extends EditRecord
 {
     protected static string $resource = MarketsResource::class;
+    protected static ?string $title = 'تغیرات په یاد مارکیټ کی ';
+
 
     protected function getHeaderActions(): array
     {

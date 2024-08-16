@@ -20,6 +20,8 @@ use App\Models\Customers;
 class NumerahasRelationManager extends RelationManager
 {
     protected static string $relationship = 'numerahas';
+    protected static ?string $title = 'د پاسنی مشتری ټولی مربوطه ځمکی';
+
 
     public function form(Form $form): Form
     {

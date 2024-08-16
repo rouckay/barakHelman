@@ -9,6 +9,8 @@ use Filament\Resources\Pages\ViewRecord;
 class ViewFinance extends ViewRecord
 {
     protected static string $resource = FinanceResource::class;
+    protected static ?string $title = 'د مالی حساب کتل';
+
 
     protected function getHeaderActions(): array
     {

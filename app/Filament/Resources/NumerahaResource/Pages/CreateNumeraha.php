@@ -12,6 +12,8 @@ use Filament\Notifications\Notification;
 class CreateNumeraha extends CreateRecord
 {
     protected static string $resource = NumerahaResource::class;
+    protected static ?string $title = 'نوی نمره (ځمکه) ثبت ';
+
     // protected function afterCreate(Numeraha $numeraha): void
     // {
     //     Notification::make()

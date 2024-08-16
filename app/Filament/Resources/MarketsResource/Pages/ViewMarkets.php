@@ -9,6 +9,8 @@ use Filament\Resources\Pages\ViewRecord;
 class ViewMarkets extends ViewRecord
 {
     protected static string $resource = MarketsResource::class;
+    protected static ?string $title = 'د یاد مارکیټ معلومات کتل';
+
 
     protected function getHeaderActions(): array
     {

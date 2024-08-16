@@ -9,6 +9,8 @@ use Filament\Resources\Pages\ListRecords;
 class ListFinances extends ListRecords
 {
     protected static string $resource = FinanceResource::class;
+    protected static ?string $title = 'لیست د مالی حسابو';
+
 
     protected function getHeaderActions(): array
     {

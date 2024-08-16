@@ -9,4 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateMarkets extends CreateRecord
 {
     protected static string $resource = MarketsResource::class;
+    protected static ?string $title = 'ثبت نوی مارکیټ';
+
 }

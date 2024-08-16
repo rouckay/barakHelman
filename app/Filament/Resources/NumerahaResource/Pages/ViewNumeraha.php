@@ -9,6 +9,8 @@ use Filament\Resources\Pages\ViewRecord;
 class ViewNumeraha extends ViewRecord
 {
     protected static string $resource = NumerahaResource::class;
+    protected static ?string $title = 'د یاد نمره (ځمکی) کتل';
+
 
     protected function getHeaderActions(): array
     {

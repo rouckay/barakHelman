@@ -9,6 +9,8 @@ use Filament\Resources\Pages\EditRecord;
 class EditCustomerNumeraha extends EditRecord
 {
     protected static string $resource = CustomerNumerahaResource::class;
+    protected static ?string $title = 'تغیر په معامله کې';
+
 
     protected function getHeaderActions(): array
     {
