@@ -11,4 +11,8 @@ class FooterSettings extends Settings
     {
         return 'FooterSettings';
     }
+    public static function getNavigationLabel(): string
+    {
+        return 'Custom Settings Label';
+    }
 }
