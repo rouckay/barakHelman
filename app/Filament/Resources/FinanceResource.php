@@ -32,7 +32,10 @@ class FinanceResource extends Resource
     protected static ?string $navigationLabel = 'مالی مدیریت';
     protected static ?int $navigationSort = 4;
     public static ?string $label = 'مالی برخه';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function infolists(Infolist $infolist): Infolist
     {

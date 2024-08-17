@@ -21,7 +21,10 @@ class CustomerNumerahaResource extends Resource
 
     protected static ?string $navigationLabel = 'د نمرو معاملی';
     public static ?string $label = 'نمری (ځمکی) معاملی';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
     public static function form(Form $form): Form
     {
         return $form

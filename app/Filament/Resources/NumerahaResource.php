@@ -40,7 +40,10 @@ class NumerahaResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-map';
 
     protected static ?string $navigationLabel = "د نمرو (ځمکو) مدیریت";
-
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
     protected static ?int $navigationSort = 1;
     public static ?string $label = 'نمری (ځمکی)';
 

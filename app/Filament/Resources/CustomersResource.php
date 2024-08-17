@@ -29,7 +29,10 @@ class CustomersResource extends Resource
     protected static ?string $navigationLabel = 'مشتریان';
 
     public static ?string $label = 'مـشتریان';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     protected static ?string $recordTitleAttribute = 'name';
     protected static ?int $navigationSort = 2;
