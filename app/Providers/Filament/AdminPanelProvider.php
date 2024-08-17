@@ -71,7 +71,10 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
-                \TomatoPHP\FilamentPWA\FilamentPWAPlugin::make(),
+                \TomatoPHP\FilamentPWA\FilamentPWAPlugin::make()
+                ,
+                \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
+                ,
                 ReportsPlugin::make(),
                 OverlookPlugin::make()
                     ->sort(2)

@@ -42,6 +42,8 @@ class NumerahaResource extends Resource
     protected static ?string $navigationLabel = "د نمرو (ځمکو) مدیریت";
 
     protected static ?int $navigationSort = 1;
+    public static ?string $label = 'نمری (ځمکی)';
+
 
     // protected static ?string $navigationGroup = 'د ځمکو معاملی';
 
@@ -232,9 +234,9 @@ class NumerahaResource extends Resource
                             Column::make('sharwali_tarifa_price'),
                             Column::make('Customer_image'),
                             Column::make('documents'),
-                            Column::make('created_at'),
-                            Column::make('updated_at'),
-                            Column::make('customer_id'),
+                            // Column::make('created_at'),
+                            // Column::make('updated_at'),
+                            // Column::make('customer_id'),
                             Column::make('numera_type'),
                         ]),
                     ])

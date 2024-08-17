@@ -28,6 +28,9 @@ class CustomersResource extends Resource
 
     protected static ?string $navigationLabel = 'مشتریان';
 
+    public static ?string $label = 'مـشتریان';
+
+
     protected static ?string $recordTitleAttribute = 'name';
     protected static ?int $navigationSort = 2;
     public static function form(Form $form): Form

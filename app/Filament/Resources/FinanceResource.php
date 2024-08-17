@@ -31,6 +31,8 @@ class FinanceResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
     protected static ?string $navigationLabel = 'مالی مدیریت';
     protected static ?int $navigationSort = 4;
+    public static ?string $label = 'مالی برخه';
+
 
     public static function infolists(Infolist $infolist): Infolist
     {

@@ -17,6 +17,10 @@ use Filament\Forms\Form;
 class UsersReport extends Report
 {
     public ?string $heading = "Report";
+    protected static ?string $navigationGroup = 'راپورونو برخه';
+    protected static ?string $navigationLabel = 'د ډیټابیس مدیرانو برخه';
+
+
 
     public ?string $subHeading = "A great report";
 

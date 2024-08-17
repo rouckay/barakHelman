@@ -14,7 +14,11 @@ use eightyNine\Reports\components\VerticalSpace;
 
 class NumerahaReport extends Report
 {
-    public ?string $heading = "مدیریت راپورها";
+    public ?string $heading = "د نمرو (ځمکی) د راپورو برخه";
+    protected static ?string $label = 'د نمرو د راپور برخه';
+    protected static ?string $navigationLabel = 'د نمرو (ځمکو) راپورونه';
+    protected static ?string $navigationGroup = 'راپورونو برخه';
+
 
 
 

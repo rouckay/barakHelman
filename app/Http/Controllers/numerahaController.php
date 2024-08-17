@@ -12,7 +12,9 @@ class numerahaController extends Controller
      */
     public function index()
     {
-        //
+        $Numeraha = Numeraha::all();
+        // dd($Numeraha);
+        return view('home', ['Numeraha' => $Numeraha]);
     }
 
     /**

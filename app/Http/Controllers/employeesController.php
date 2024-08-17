@@ -13,7 +13,7 @@ class employeesController extends Controller
     public function index()
     {
         $employees = employees::all(); // Make sure the model name is correct
-        return view('home', ['employees' => $employees]); // Pass the variable as an array
+        // return view('home', ['employees' => $employees]); // Pass the variable as an array
     }
 
     /**

@@ -20,6 +20,7 @@ class CustomerNumerahaResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-arrow-path-rounded-square';
 
     protected static ?string $navigationLabel = 'د نمرو معاملی';
+    public static ?string $label = 'نمری (ځمکی) معاملی';
 
     public static function form(Form $form): Form
     {

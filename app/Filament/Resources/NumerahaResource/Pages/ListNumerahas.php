@@ -6,6 +6,7 @@ use App\Filament\Resources\NumerahaResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use App\Imports\MyNumerahaImport;
+use Filament\Forms\Components\Placeholder;
 
 class ListNumerahas extends ListRecords
 {
@@ -21,7 +22,6 @@ class ListNumerahas extends ListRecords
                 ->icon("heroicon-o-arrow-up-tray")
                 // ->successMessage("Data imported successfully!")
                 ->label('اپلوډ کړی')
-                // ->failureMessage("Failed to import data.")
                 ->use(MyNumerahaImport::class),
             Actions\CreateAction::make()
                 ->label('نوی نمره ثبت کړی'), // Custom label for the "Add" button
