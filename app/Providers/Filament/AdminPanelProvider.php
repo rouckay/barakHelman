@@ -21,7 +21,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use EightyNine\Reports\ReportsPlugin;
 use Awcodes\Overlook\OverlookPlugin;
 use Awcodes\Overlook\Widgets\OverlookWidget;
-
+use Guava\FilamentKnowledgeBase\KnowledgeBasePlugin;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -93,6 +93,7 @@ class AdminPanelProvider extends PanelProvider
                         \App\Filament\Resources\FinanceResource::class,
                     ])
                 ,
+                KnowledgeBasePlugin::make(),
             ])
             ->databaseNotifications()
             ->widgets([

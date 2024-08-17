@@ -25,6 +25,7 @@ class UserResource extends Resource
     public static ?string $label = 'مدیران';
 
     protected static ?int $navigationSort = 2;
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();

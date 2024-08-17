@@ -7,5 +7,7 @@ export default {
         './resources/views/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
         '<path-to-vendor>/awcodes/overlook/resources/**/*.blade.php',
+        './vendor/guava/filament-knowledge-base/src/**/*.php',
+        './vendor/guava/filament-knowledge-base/resources/**/*.blade.php',
     ],
 }
