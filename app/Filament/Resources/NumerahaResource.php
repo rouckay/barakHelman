@@ -32,7 +32,7 @@ use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use pxlrbt\FilamentExcel\Columns\Column;
 use Illuminate\Support\Str;
 use Filament\Notifications\Notification;
-
+use App\Models\CustomerNumeraha;
 class NumerahaResource extends Resource
 {
     protected static ?string $model = Numeraha::class;
@@ -201,8 +201,8 @@ class NumerahaResource extends Resource
                         ->trueLabel('پلورل شوی نمری (ځمکی)')
                         ->falseLabel(' هغه نمری (ځمکی) جی ندی پلورل شوی.')
                         ->queries(
-                            true: fn(Builder $query) => $query->where('customer_id', '>=', 1),
-                            false: fn(Builder $query) => $query->where('customer_id', '=', 0) // No condition applied when false
+                            true: fn(Builder $query) => CustomerNumeraha::query()->where('customer_id', '>=', 1),
+                            false: fn(Builder $query) => CustomerNumeraha::query()->where('customer_id', '=', 0) // No condition applied when false
                         ),
                     // Filter::make('هغه نمری (ځمکی) چی نه دی پلورل شوی.')
                     //     ->query(fn(Builder $query) => $query->where(function ($query) {
