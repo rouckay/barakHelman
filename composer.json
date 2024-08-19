@@ -19,6 +19,7 @@
         "filament/spatie-laravel-settings-plugin": "^3.2",
         "filament/widgets": "^3.2",
         "guava/filament-knowledge-base": "^1.9",
+        "hasnayeen/themes": "^3.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "laraveldaily/laravel-invoices": "^4.0",

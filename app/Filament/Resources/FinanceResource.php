@@ -29,8 +29,10 @@ class FinanceResource extends Resource
     protected static ?string $model = Finance::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
+    protected static ?string $navigationGroup = "ادارې مدیریت برخه";
+
     protected static ?string $navigationLabel = 'مالی مدیریت';
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 2;
     public static ?string $label = 'مالی برخه';
     public static function getNavigationBadge(): ?string
     {

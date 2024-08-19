@@ -26,6 +26,8 @@ class CustomersResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+    protected static ?string $navigationGroup = "د نمرو (ځمکو) مدیریت";
+
     protected static ?string $navigationLabel = 'مشتریان';
 
     public static ?string $label = 'مـشتریان';

@@ -44,10 +44,10 @@ class AdminPanelProvider extends PanelProvider
                 //     ->icon('heroicon-m-cog')
                 //     ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
                 //     ->url('/admin/settings'),
-                // NavigationItem::make('د ځمکو مدیریت')
-                //     ->icon('heroicon-m-cog')
-                //     ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
-                //     ->url('#'),
+                NavigationItem::make('د ځمکو مدیریت')
+                    ->icon('heroicon-m-cog')
+                    ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
+                    ->url('http://127.0.0.1:8000/admin/customer-numerahas'),
             ])
             ->pages([
                 Pages\Dashboard::class,
@@ -66,6 +66,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                \Hasnayeen\Themes\Http\Middleware\SetTheme::class
             ])
             ->authMiddleware([
                 Authenticate::class,
@@ -75,6 +76,7 @@ class AdminPanelProvider extends PanelProvider
                 ,
                 \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
                 ,
+                \Hasnayeen\Themes\ThemesPlugin::make(),
                 ReportsPlugin::make(),
                 OverlookPlugin::make()
                     ->sort(2)

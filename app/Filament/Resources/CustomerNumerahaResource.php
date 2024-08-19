@@ -19,8 +19,11 @@ class CustomerNumerahaResource extends Resource
     protected static ?string $model = CustomerNumeraha::class;
     protected static ?string $navigationIcon = 'heroicon-o-arrow-path-rounded-square';
 
+    protected static ?string $navigationGroup = "د نمرو (ځمکو) مدیریت";
+
     protected static ?string $navigationLabel = 'د نمرو د پلورل';
-    public static ?string $label = 'نمری (ځمکی) معاملی';
+
+    public static ?string $label = 'نمری (ځمکی) پلورل';
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();

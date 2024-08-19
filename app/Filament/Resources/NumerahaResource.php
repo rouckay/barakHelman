@@ -39,7 +39,8 @@ class NumerahaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-map';
 
-    protected static ?string $navigationLabel = "د نمرو (ځمکو) مدیریت";
+    protected static ?string $navigationGroup = "د نمرو (ځمکو) مدیریت";
+    protected static ?string $navigationLabel = "د نمرو (ځمکو) لیست";
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
@@ -65,17 +66,18 @@ class NumerahaResource extends Resource
             ->schema([
                 Card::make()->schema([
                     Grid::make()->schema([
-                        Forms\Components\TextInput::make('numero_number')
-                            ->label('د نمری (ځمکی) ای ډی')
-                            ->autofocus()
-                            ->placeholder('د نمری (ځمکی) ای ډی')
-                            ->numeric()
-                            ->unique(ignoreRecord: true)
-                            ->required()
-                            ->maxLength(191),
+                        // Forms\Components\TextInput::make('numero_number')
+                        //     ->label('د نمری (ځمکی) ای ډی')
+                        //     ->autofocus()
+                        //     ->placeholder('د نمری (ځمکی) ای ډی')
+                        //     ->numeric()
+                        //     ->unique(ignoreRecord: true)
+                        //     ->required()
+                        //     ->maxLength(191),
                         Forms\Components\TextInput::make('save_number')
                             ->label('د ثبت نمبر')
-                            ->default('NGMAM-' . Str::uuid()->toString()) // Auto-generate a unique save number
+                            ->unique(ignoreRecord: true)
+                            ->default('GM-' . Str::uuid()->toString()) // Auto-generate a unique save number
                             // ->disabled()
                             ->required(),
                     ])->columns(2),
@@ -137,11 +139,11 @@ class NumerahaResource extends Resource
                 Tables\Columns\TextColumn::make('row_number')
                     ->label('نمبر')
                     ->rowIndex(),
-                Tables\Columns\TextColumn::make('numero_number')
-                    ->sortable()
-                    ->label('د نمری (ځمکی) ای ډی')
-                    ->searchable()
-                    ->toggleable(),
+                // Tables\Columns\TextColumn::make('numero_number')
+                //     ->sortable()
+                //     ->label('د نمری (ځمکی) ای ډی')
+                //     ->searchable()
+                //     ->toggleable(),
                 Tables\Columns\TextColumn::make('save_number')
                     ->sortable()
                     ->searchable()
