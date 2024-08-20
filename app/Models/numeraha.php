@@ -13,7 +13,6 @@ class Numeraha extends Model
     // protected $primaryKey = 'numerahaID';
     use HasFactory;
     protected $fillable = [
-        'numero_number',
         'save_number',
         'date',
         // 'tarifa_no',

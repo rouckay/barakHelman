@@ -38,11 +38,10 @@ class CustomerNumerahaResource extends Resource
                     ->searchable()
                     ->searchable()
                     ->preload()
-                    ->preload()
                     ->required(),
                 Forms\Components\Select::make('numeraha_id')
                     ->label('Numeraha')
-                    ->relationship('numeraha', 'numero_number') // 'numeraha' is the relationship method in CustomerNumeraha model
+                    ->relationship('numeraha', 'save_number') // 'numeraha' is the relationship method in CustomerNumeraha model
                     ->searchable()
                     ->preload()
                     ->required(),
@@ -50,6 +49,7 @@ class CustomerNumerahaResource extends Resource
                     ->directory('customer_numeraha')
                     ->preserveFilenames()
                     ->downloadable()
+                    // ->multiple()
                     ->placeholder('اسناد')
                     // ->multiple()
                     ->openable()
