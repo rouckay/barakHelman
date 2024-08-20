@@ -100,7 +100,11 @@ class AdminPanelProvider extends PanelProvider
             ->databaseNotifications()
             ->widgets([
                 OverlookWidget::class,
+            ])
+            ->resources([
+                config('filament-logger.activity_resource')
             ]);
+        ;
         ;
 
     }

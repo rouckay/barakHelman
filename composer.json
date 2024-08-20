@@ -30,7 +30,8 @@
         "pxlrbt/filament-excel": "^2.3",
         "spatie/laravel-settings": "^3.3",
         "tomatophp/filament-pwa": "^1.0",
-        "ysfkaya/filament-phone-input": "^2.3"
+        "ysfkaya/filament-phone-input": "^2.3",
+        "z3d0x/filament-logger": "^0.7.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",
