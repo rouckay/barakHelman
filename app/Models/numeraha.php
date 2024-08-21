@@ -14,16 +14,18 @@ class Numeraha extends Model
     use HasFactory;
     protected $fillable = [
         'save_number',
+        'Land_Area',
         'date',
         // 'tarifa_no',
         'numera_price',
         'sharwali_tarifa_price',
-        'Customer_image',
         'documents',
         // 'customer_id',
         'numera_type'
     ];
-
+    protected $casts = [
+        'documents' => 'array',
+    ];
     public function Customers(): BelongsToMany
     {
         return $this->belongsToMany(Customers::class, 'customer_numerahas', 'numeraha_id', 'customer_id'); // Numeraha belongs to a Customer

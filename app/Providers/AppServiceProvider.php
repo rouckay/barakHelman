@@ -7,6 +7,7 @@ use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Guava\FilamentKnowledgeBase\Filament\Panels\KnowledgeBasePanel;
+use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -28,9 +29,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        FilamentAsset::register([
-            Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/custom-rtl.css'),
-        ]);
+        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+            $switch
+                ->locales(['per', 'en', 'ps']); // also accepts a closure
+        });
         Schema::defaultStringLength(191);
 
     }

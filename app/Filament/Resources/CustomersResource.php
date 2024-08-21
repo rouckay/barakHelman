@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\Filter;
 use App\filament\Resources\CustomersResource\RelationManagers\NumerahasRelationManager;
-use Illuminate\Support\HtmlString;
 use Filament\Support\RawJs;
 
 class CustomersResource extends Resource
@@ -94,31 +93,21 @@ class CustomersResource extends Resource
                             ->placeholder('دایمی داوسیدو پته')
                             ->prefixIcon('heroicon-o-map-pin')
                             ->maxLength(191),
+                        Forms\Components\FileUpload::make('Customer_image')
+                            ->directory('Customers_images')
+                            ->preserveFilenames()
+                            ->downloadable()
+                            ->placeholder('تصویر مشتری')
+                            ->openable()
+                            ->uploadingMessage('د مشتری عکس د اپلوډ په حال کی دی...')
+                            ->previewable()
+                            ->required()
+                            ->label('د مشتری تصویر'),
                         Forms\Components\TextInput::make('tazkira')
                             ->label('تذکره نمبر')
                             ->placeholder('تذکره نمبر')
                             ->prefixIcon('heroicon-o-identification')
-                            ->maxLength(191),
-                        TextInput::make('total_price')
-                            ->live()
-                            ->prefixIcon('heroicon-o-banknotes')
-                            ->default(1)
-                            ->numeric()
-                            ->label('محمعه پیسی'),
-                        Forms\Components\Placeholder::make('due_price')
-                            ->label('باقی پیسی')
-                            ->disabled()
-                            ->content(function ($get) {
-                                $payed_price = $get('payed_price');
-                                $total_price = $get('total_price');
-                                if (!is_numeric($payed_price) || !is_numeric($total_price)) {
-                                    return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی یوازې عددي ارزښتونه اضافه کړی!</strong></p>');
-
-                                } else if ($payed_price <= 0 || $total_price <= 0) {
-                                    return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی د 1 څخه جګ عدد انتخاب کړی!</strong></p>');
-                                }
-                                return $total_price - $payed_price;
-                            }),
+                            ->maxLength(191)
                     ])->columnSpan(6),
                     Grid::make()->schema([
                         Forms\Components\TextInput::make('grand_father_name')
@@ -139,6 +128,7 @@ class CustomersResource extends Resource
                                     $input.startsWith('07') ? '079-999-9999' : '079-999-9999'? :''
                             JS))
                             ->maxLength(12),
+
                         Forms\Components\TextInput::make('village')
                             ->label('کلی')
                             ->helperText('د دایمی اوسیدو پته / کلی')
@@ -151,17 +141,6 @@ class CustomersResource extends Resource
                             ->placeholder('اوسنی داوسیدو پته')
                             ->helperText('اوسنی آدرس په مکمل ډول ولیکی')
                             ->maxLength(191),
-                        Forms\Components\TextInput::make('job')
-                            ->label('وظیفه')
-                            ->prefixIcon('heroicon-o-briefcase')
-                            ->placeholder('وظیفه')
-                            ->maxLength(191),
-                        TextInput::make('payed_price')->label('رسید پیسی')
-                            ->live()
-                            ->default(1)
-                            ->numeric()
-                            ->prefixIcon('heroicon-o-banknotes')
-                            ->dehydrated(),
                     ])->columnSpan(6)
                 ])->columns(12)
             ]);

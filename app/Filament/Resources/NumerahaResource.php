@@ -48,8 +48,10 @@ class NumerahaResource extends Resource
     protected static ?int $navigationSort = 1;
     public static ?string $label = 'نمری (ځمکی)';
 
+    // custome code for saving data
 
     // protected static ?string $navigationGroup = 'د ځمکو معاملی';
+
 
     // Add this method in the appropriate place (e.g., Filament Resource or Table class)
 
@@ -66,38 +68,42 @@ class NumerahaResource extends Resource
             ->schema([
                 Card::make()->schema([
                     Grid::make()->schema([
-                        // Forms\Components\TextInput::make('numero_number')
-                        //     ->label('د نمری (ځمکی) ای ډی')
-                        //     ->autofocus()
-                        //     ->placeholder('د نمری (ځمکی) ای ډی')
-                        //     ->numeric()
-                        //     ->unique(ignoreRecord: true)
-                        //     ->required()
-                        //     ->maxLength(191),
                         Forms\Components\TextInput::make('save_number')
                             ->label('د ثبت نمبر')
                             ->unique(ignoreRecord: true)
-                            ->default('GM-' . Str::uuid()->toString()) // Auto-generate a unique save number
+                            ->default('GM-' . Str::substr((string) Str::uuid(), 0, 8)) // Auto-generate a unique save number
                             // ->disabled()
+                            ->prefixIcon('heroicon-o-sparkles')
                             ->required(),
+                        Forms\Components\TextInput::make('Land_Area')
+                            ->label('د نمری (ځمکی) مساحت')
+                            ->placeholder('د نمری (ځمکی) مساحت')
+                            ->numeric()
+                            ->prefix(' متر مربع (m2)')
+                            ->autofocus()
+                            ->required()
+                            ->maxLength(191),
                     ])->columns(2),
                     Grid::make()->schema([
                         Forms\Components\TextInput::make('date')
                             ->label('نیټه')
                             ->default(now()->toDateString())
                             ->placeholder('نیټه')
+                            ->prefixIcon('heroicon-o-calendar-days')
                             ->required()
                             ->maxLength(191),
                         Forms\Components\TextInput::make('numera_price')
                             ->label('د نمری (ځمکی) قیمت')
                             ->required()
                             ->numeric()
+                            ->prefixIcon('heroicon-o-banknotes')
                             ->placeholder('د نمری (ځمکی) قیمت')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('sharwali_tarifa_price')
                             ->label('د ښاروالی د تعرفی پیسی')
                             ->required()
                             ->numeric()
+                            ->prefixIcon('heroicon-o-document-text')
                             ->placeholder('د ښاروالی د تعرفی پیسی')
                             ->maxLength(191),
                     ])->columns(3),
@@ -108,6 +114,7 @@ class NumerahaResource extends Resource
                     Forms\Components\Select::make('numera_type')
                         ->label('د نمری (ځمکی) تفصیل')
                         ->placeholder('د نمری (ځمکی) تفصیل')
+                        ->prefixIcon('heroicon-o-chat-bubble-bottom-center-text')
                         ->options([
                             '3 بسوه ای' => '3 بسوه ای',
                             '2 بسوه ای' => '2 بسوه ای',
@@ -119,6 +126,8 @@ class NumerahaResource extends Resource
                         ->directory('Numeraha_documents')
                         ->preserveFilenames()
                         ->downloadable()
+                        // ->multiple()
+                        ->rules('required|array') // validate as an array
                         ->placeholder('اسناد')
                         // ->multiple()
                         ->openable()
@@ -130,6 +139,7 @@ class NumerahaResource extends Resource
                         ->label('د ځمکی اسناد'),
                 ])->columnSpan(6)
             ])->columns(12);
+        ;
     }
 
     public static function table(Table $table): Table
@@ -139,11 +149,11 @@ class NumerahaResource extends Resource
                 Tables\Columns\TextColumn::make('row_number')
                     ->label('نمبر')
                     ->rowIndex(),
-                // Tables\Columns\TextColumn::make('numero_number')
-                //     ->sortable()
-                //     ->label('د نمری (ځمکی) ای ډی')
-                //     ->searchable()
-                //     ->toggleable(),
+                Tables\Columns\TextColumn::make('LandـArea')
+                    ->sortable()
+                    ->label('د نمری (ځمکی) ای ډی')
+                    ->searchable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('save_number')
                     ->sortable()
                     ->searchable()

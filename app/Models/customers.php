@@ -22,6 +22,7 @@ class Customers extends Model
         'mobile_number',
         'parmanent_address',
         'current_address',
+        'Customer_image',
         // 'numeraha_id',
         'payed_price',
         // 'due_price',

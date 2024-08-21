@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\HtmlString;
 
 class CustomerNumerahaResource extends Resource
 {
@@ -59,8 +60,33 @@ class CustomerNumerahaResource extends Resource
                     // ->maxFiles(5)
                     // ->required()
                     ->label('د ځمکی اسناد')
-                    ->required()
-                ,
+                    ->required(),
+                Forms\Components\TextInput::make('payed_price')->label('رسید پیسی')
+                    ->live()
+                    ->default(1)
+                    ->numeric()
+                    ->prefixIcon('heroicon-o-banknotes')
+                    ->dehydrated(),
+                Forms\Components\TextInput::make('total_price')
+                    ->live()
+                    ->prefixIcon('heroicon-o-banknotes')
+                    ->default(1)
+                    ->numeric()
+                    ->label('محمعه پیسی'),
+                Forms\Components\Placeholder::make('due_price')
+                    ->label('باقی پیسی')
+                    ->disabled()
+                    ->content(function ($get) {
+                        $payed_price = $get('payed_price');
+                        $total_price = $get('total_price');
+                        if (!is_numeric($payed_price) || !is_numeric($total_price)) {
+                            return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی یوازې عددي ارزښتونه اضافه کړی!</strong></p>');
+
+                        } else if ($payed_price <= 0 || $total_price <= 0) {
+                            return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی د 1 څخه جګ عدد انتخاب کړی!</strong></p>');
+                        }
+                        return $total_price - $payed_price;
+                    }),
                 Forms\Components\TextInput::make('remarks')
                     ->maxLength(191),
             ]);

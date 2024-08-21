@@ -15,6 +15,7 @@ return new class extends Migration {
         Schema::create('numerahas', function (Blueprint $table) {
             $table->id();
             // $table->string('numero_number');
+            $table->string('Land_Area');
             $table->string('date');
             $table->string('numera_price');
             $table->string('sharwali_tarifa_price');
