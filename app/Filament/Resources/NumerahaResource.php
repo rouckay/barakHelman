@@ -213,8 +213,8 @@ class NumerahaResource extends Resource
                         ->trueLabel('پلورل شوی نمری (ځمکی)')
                         ->falseLabel(' هغه نمری (ځمکی) جی ندی پلورل شوی.')
                         ->queries(
-                            true: fn(Builder $query) => CustomerNumeraha::query()->where('customer_id', '>=', 1),
-                            false: fn(Builder $query) => CustomerNumeraha::query()->where('customer_id', '=', 0) // No condition applied when false
+                            true: fn(Builder $query) => $query->whereHas('customers'),
+                            false: fn(Builder $query) => $query->whereDoesntHave('customers')
                         ),
                     // Filter::make('هغه نمری (ځمکی) چی نه دی پلورل شوی.')
                     //     ->query(fn(Builder $query) => $query->where(function ($query) {

@@ -44,10 +44,16 @@ class AdminPanelProvider extends PanelProvider
                 //     ->icon('heroicon-m-cog')
                 //     ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
                 //     ->url('/admin/settings'),
-                NavigationItem::make('د ځمکو مدیریت')
-                    ->icon('heroicon-m-cog')
+                NavigationItem::make('پلورل شوی ځمکی')
+                    ->icon('heroicon-m-map')
                     ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
-                    ->url('customer-numerahas'),
+                    ->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=1')
+                ,
+                NavigationItem::make('خالی نمری')
+                    ->icon('heroicon-o-map')
+                    ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
+                    ->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=0')
+                ,
             ])
             ->pages([
                 Pages\Dashboard::class,

@@ -28,11 +28,11 @@ class ListNumerahas extends ListRecords
                 ->color('info'),
             Actions\ViewAction::make()
                 ->label('پلورل شوی ځمکی')
-                ->url('customer-numerahas')
+                ->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=1')
                 ->color('danger'),
             Actions\ViewAction::make()
                 ->label('پاتی نمری (ځمکی) چی ندی پلورل شوی.')
-                ->url('customer-numerahas')
+                ->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=0')
                 ->color('warning'),
             \EightyNine\ExcelImport\ExcelImportAction::make()
                 // ->color("primary")
