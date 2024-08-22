@@ -33,65 +33,88 @@ class CustomerNumerahaResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('customer_id')
-                    ->label('Customer')
-                    ->relationship('customer', 'name') // 'customer' is the relationship method in CustomerNumeraha model
-                    ->searchable()
-                    ->searchable()
-                    ->preload()
-                    ->required(),
-                Forms\Components\Select::make('numeraha_id')
-                    ->label('Numeraha')
-                    ->relationship('numeraha', 'save_number') // 'numeraha' is the relationship method in CustomerNumeraha model
-                    ->searchable()
-                    ->preload()
-                    ->required(),
-                // Forms\Components\Repeater::make('documents')->schema([
-                Forms\Components\FileUpload::make('documents')
-                    ->directory('customer_numeraha')
-                    ->preserveFilenames()
-                    ->downloadable()
-                    // ->multiple()
-                    ->placeholder('اسناد')
-                    // ->multiple()
-                    ->openable()
-                    ->uploadingMessage('فایل شما در حال اپلود به دیتابیس هست...')
-                    ->previewable()
-                    // ->minFiles(1)
-                    // ->maxFiles(5)
-                    // ->required()
-                    ->label('د ځمکی اسناد')
-                    ->required(),
-                // ]),
-                Forms\Components\TextInput::make('payed_price')->label('رسید پیسی')
-                    ->live()
-                    ->default(1)
-                    ->numeric()
-                    ->prefixIcon('heroicon-o-banknotes')
-                    ->dehydrated(),
-                Forms\Components\TextInput::make('total_price')
-                    ->live()
-                    ->prefixIcon('heroicon-o-banknotes')
-                    ->default(1)
-                    ->numeric()
-                    ->label('محمعه پیسی'),
-                Forms\Components\Placeholder::make('due_price')
-                    ->label('باقی پیسی')
-                    ->disabled()
-                    ->content(function ($get) {
-                        $payed_price = $get('payed_price');
-                        $total_price = $get('total_price');
-                        if (!is_numeric($payed_price) || !is_numeric($total_price)) {
-                            return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی یوازې عددي ارزښتونه اضافه کړی!</strong></p>');
+                Forms\Components\Card::make()->schema([
+                    Forms\Components\Grid::make()->schema([
+                        Forms\Components\Select::make('customer_id')
+                            ->label('مشتری')
+                            ->relationship('customer', 'name') // 'customer' is the relationship method in CustomerNumeraha model
+                            ->searchable()
+                            ->placeholder('خپل مشتری انتخاب کړی')
+                            ->preload()
+                            ->required(),
+                        Forms\Components\Select::make('numeraha_id')
+                            ->label('نمره (ځمکه)')
+                            ->relationship('numeraha', 'save_number') // 'numeraha' is the relationship method in CustomerNumeraha model
+                            ->searchable()
+                            ->placeholder('د مشتری د پاره ځمکه انتخاب کړی')
+                            ->preload()
+                            ->required(),
+                    ])->columns(2),
+                    Forms\Components\RichEditor::make('remarks')
+                        ->label('اضافه معلومات')
+                        ->placeholder('د ځمکی په باره که اضافه معلومات مو دلته اضافه کړی')
+                        ->maxLength(191),
+                ])->columnSpan(6),
+                Forms\Components\Card::make()->schema([
+                    // Forms\Components\Repeater::make('documents')->schema([
+                    Forms\Components\FileUpload::make('documents')
+                        ->directory('customer_numeraha')
+                        ->preserveFilenames()
+                        ->downloadable()
+                        // ->multiple()
+                        ->placeholder('اسناد')
+                        // ->multiple()
+                        ->openable()
+                        ->uploadingMessage('فایل شما در حال اپلود به دیتابیس هست...')
+                        ->previewable()
+                        // ->minFiles(1)
+                        // ->maxFiles(5)
+                        // ->required()
+                        ->label('د ځمکی اسناد')
+                        ->required(),
+                    // ]),
+                    Forms\Components\FileUpload::make('Responsible_Person_Img')
+                        ->directory('customer_Responsible_images')
+                        ->preserveFilenames()
+                        ->downloadable()
+                        ->placeholder('تصویر د مشتری وکیل')
+                        ->openable()
+                        ->uploadingMessage('ستاسی تصویر د اپلوډ په حال کی دی...')
+                        ->previewable()
+                        ->image()
+                        // ->required()
+                        ->label('د مشتری وکیل')
+                        ->required(),
+                    Forms\Components\Grid::make()->schema([
+                        Forms\Components\TextInput::make('payed_price')->label('رسید پیسی')
+                            ->live()
+                            ->default(1)
+                            ->numeric()
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->dehydrated(),
+                        Forms\Components\TextInput::make('total_price')
+                            ->live()
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->default(1)
+                            ->numeric()
+                            ->label('محمعه پیسی'),
+                        Forms\Components\Placeholder::make('due_price')
+                            ->label('باقی پیسی')
+                            ->disabled()
+                            ->content(function ($get) {
+                                $payed_price = $get('payed_price');
+                                $total_price = $get('total_price');
+                                if (!is_numeric($payed_price) || !is_numeric($total_price)) {
+                                    return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی یوازې عددي ارزښتونه اضافه کړی!</strong></p>');
 
-                        } else if ($payed_price <= 0 || $total_price <= 0) {
-                            return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی د 1 څخه جګ عدد انتخاب کړی!</strong></p>');
-                        }
-                        return $total_price - $payed_price;
-                    }),
-                Forms\Components\TextInput::make('remarks')
-                    ->maxLength(191),
-            ]);
+                                } else if ($payed_price <= 0 || $total_price <= 0) {
+                                    return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی د 1 څخه جګ عدد انتخاب کړی!</strong></p>');
+                                }
+                                return $total_price - $payed_price;
+                            }),
+                    ])->columns(3)
+                ])->columnSpan(6),
+            ])->columns(12);
     }
 
     public static function table(Table $table): Table

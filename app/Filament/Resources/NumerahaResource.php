@@ -33,6 +33,9 @@ use pxlrbt\FilamentExcel\Columns\Column;
 use Illuminate\Support\Str;
 use Filament\Notifications\Notification;
 use App\Models\CustomerNumeraha;
+use Awcodes\FilamentBadgeableColumn\Components\Badge;
+use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
+
 class NumerahaResource extends Resource
 {
     protected static ?string $model = Numeraha::class;
@@ -146,6 +149,7 @@ class NumerahaResource extends Resource
     {
         return $table
             ->columns([
+
                 Tables\Columns\TextColumn::make('row_number')
                     ->label('نمبر')
                     ->rowIndex(),
@@ -159,6 +163,14 @@ class NumerahaResource extends Resource
                     ->searchable()
                     ->label('د ثبت نمبر')
                     ->toggleable(),
+
+                BadgeableColumn::make('save_number')
+                    ->suffixBadges([
+                        Badge::make('hot')
+                            ->label(fn($record) => ' مشتریان: ' . $record->customers()->count())
+                            ->color('success')
+                            ->visible(fn($record) => $record->customers()->count() > 0),
+                    ]),
                 Tables\Columns\TextColumn::make('date')
                     ->sortable()
                     ->date()

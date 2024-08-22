@@ -9,5 +9,6 @@ export default {
         '<path-to-vendor>/awcodes/overlook/resources/**/*.blade.php',
         './vendor/guava/filament-knowledge-base/src/**/*.php',
         './vendor/guava/filament-knowledge-base/resources/**/*.blade.php',
+        '<path-to-vendor>/awcodes/filament-badgeable-column/resources/**/*.blade.php',
     ],
 }

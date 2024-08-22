@@ -15,6 +15,7 @@ class CustomerNumeraha extends Model
         'customer_id',
         'numeraha_id',
         'documents',
+        'Responsible_Person_Img',
         'payed_price',
         'total_price',
         'remarks',

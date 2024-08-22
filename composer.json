@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.2",
         "afsakar/filament-translate-action": "^1.1",
+        "awcodes/filament-badgeable-column": "^2.3",
         "awcodes/overlook": "^2.2",
         "aymanalhattami/filament-page-with-sidebar": "^2.5",
         "bezhansalleh/filament-language-switch": "^3.1",

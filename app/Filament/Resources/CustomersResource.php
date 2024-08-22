@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\Filter;
 use App\filament\Resources\CustomersResource\RelationManagers\NumerahasRelationManager;
 use Filament\Support\RawJs;
+use Awcodes\FilamentBadgeableColumn\Components\Badge;
+use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
 
 class CustomersResource extends Resource
 {
@@ -158,6 +160,13 @@ class CustomersResource extends Resource
                     ->label('نوم')
                     ->toggleable()
                     ->searchable(),
+                BadgeableColumn::make('name')
+                    ->suffixBadges([
+                        Badge::make('hot')
+                            ->label(fn($record) => ' نمری (ځمکی): ' . $record->numerahas()->count())
+                            ->color('success')
+                            ->visible(fn($record) => $record->numerahas()->count() > 0),
+                    ]),
                 Tables\Columns\TextColumn::make('father_name')
                     ->sortable()
                     ->label('د پلار نوم')
