@@ -47,7 +47,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationItem::make('د ځمکو مدیریت')
                     ->icon('heroicon-m-cog')
                     ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
-                    ->url('http://127.0.0.1:8000/admin/customer-numerahas'),
+                    ->url('customer-numerahas'),
             ])
             ->pages([
                 Pages\Dashboard::class,

@@ -46,6 +46,7 @@ class CustomerNumerahaResource extends Resource
                     ->searchable()
                     ->preload()
                     ->required(),
+                // Forms\Components\Repeater::make('documents')->schema([
                 Forms\Components\FileUpload::make('documents')
                     ->directory('customer_numeraha')
                     ->preserveFilenames()
@@ -61,6 +62,7 @@ class CustomerNumerahaResource extends Resource
                     // ->required()
                     ->label('د ځمکی اسناد')
                     ->required(),
+                // ]),
                 Forms\Components\TextInput::make('payed_price')->label('رسید پیسی')
                     ->live()
                     ->default(1)

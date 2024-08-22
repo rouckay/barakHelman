@@ -17,8 +17,25 @@ class ListNumerahas extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+
+            Actions\ViewAction::make()
+                ->label('لیستونه د مشتریانو')
+                ->url('customers')
+                ->color('success'),
+            Actions\ViewAction::make()
+                ->label('د نمرو (ځمکو) پلورل')
+                ->url('customer-numerahas')
+                ->color('info'),
+            Actions\ViewAction::make()
+                ->label('پلورل شوی ځمکی')
+                ->url('customer-numerahas')
+                ->color('danger'),
+            Actions\ViewAction::make()
+                ->label('پاتی نمری (ځمکی) چی ندی پلورل شوی.')
+                ->url('customer-numerahas')
+                ->color('warning'),
             \EightyNine\ExcelImport\ExcelImportAction::make()
-                ->color("primary")
+                // ->color("primary")
                 ->icon("heroicon-o-arrow-up-tray")
                 // ->successMessage("Data imported successfully!")
                 ->label('اپلوډ کړی')

@@ -14,6 +14,22 @@ class ListCustomerNumerahas extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            Actions\ViewAction::make()
+                ->label('لیستونه د مشتریانو')
+                ->url('customers')
+                ->color('success'),
+            Actions\ViewAction::make()
+                ->label('د نمرو (ځمکو) پلورل')
+                ->url('customer-numerahas')
+                ->color('info'),
+            Actions\ViewAction::make()
+                ->label('پلورل شوی ځمکی')
+                ->url('customer-numerahas')
+                ->color('danger'),
+            Actions\ViewAction::make()
+                ->label('پاتی نمری (ځمکی) چی ندی پلورل شوی.')
+                ->url('customer-numerahas')
+                ->color('warning'),
             Actions\CreateAction::make()
                 ->label(' نوی معامله ثبت کړی')
             ,
