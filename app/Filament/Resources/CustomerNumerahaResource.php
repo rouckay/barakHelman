@@ -57,19 +57,19 @@ class CustomerNumerahaResource extends Resource
                 ])->columnSpan(6),
                 Forms\Components\Card::make()->schema([
                     // Forms\Components\Repeater::make('documents')->schema([
-                    Forms\Components\FileUpload::make('documents')
+                    Forms\Components\FileUpload::make('multipleDocs')
                         ->directory('customer_numeraha')
                         ->preserveFilenames()
                         ->downloadable()
-                        // ->multiple()
-                        ->placeholder('اسناد')
-                        // ->multiple()
+                        ->multiple()
+                        ->placeholder('ټول آسناد')
                         ->openable()
                         ->uploadingMessage('فایل شما در حال اپلود به دیتابیس هست...')
                         ->previewable()
                         // ->minFiles(1)
-                        // ->maxFiles(5)
-                        // ->required()
+                        ->maxFiles(5)
+                        ->acceptedFileTypes(['application/pdf', 'image/*'])
+                        ->required()
                         ->label('د ځمکی اسناد')
                         ->required(),
                     // ]),
@@ -85,6 +85,45 @@ class CustomerNumerahaResource extends Resource
                         // ->required()
                         ->label('د مشتری وکیل')
                         ->required(),
+                    Forms\components\Grid::make()->schema([
+                        Forms\Components\TextInput::make('first_phase')
+                            ->label('لمړی قست')
+                            ->required()
+                            ->numeric()
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->placeholder('لمړی قست')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('second_phase')
+                            ->label('دوهم قست')
+                            ->required()
+                            ->numeric()
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->placeholder('دوهم قست')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('third_phase')
+                            ->label('دریم قست')
+                            ->required()
+                            ->numeric()
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->placeholder('دریم قست')
+                            ->maxLength(191)
+                    ])->columns(3),
+                    Forms\components\Grid::make()->schema([
+                        Forms\Components\TextInput::make('fourth_phase')
+                            ->label('څلورم قست')
+                            ->required()
+                            ->numeric()
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->placeholder('څلورم قست')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('fifth_phase')
+                            ->label('پنځم قست')
+                            ->required()
+                            ->numeric()
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->placeholder('پنځم قست')
+                            ->maxLength(191),
+                    ])->columns(2),
                     Forms\Components\Grid::make()->schema([
                         Forms\Components\TextInput::make('payed_price')->label('رسید پیسی')
                             ->live()
@@ -112,7 +151,7 @@ class CustomerNumerahaResource extends Resource
                                 }
                                 return $total_price - $payed_price;
                             }),
-                    ])->columns(3)
+                    ])->columns(3),
                 ])->columnSpan(6),
             ])->columns(12);
     }
@@ -123,20 +162,31 @@ class CustomerNumerahaResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('customer.name')
                     ->numeric()
+                    ->label('نوم د مشتری')
+                    ->toggleable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('numeraha_id')
                     ->numeric()
+                    ->toggleable()
+                    ->label('د نمری (ځمکی) آی ډی')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('documents')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('multipleDocs')
+                    ->searchable()
+                    ->label('د نمری (ځمکی) اسناد')
+                    ->toggleable()
+                ,
                 Tables\Columns\TextColumn::make('remarks')
+                    ->toggleable()
+                    ->label('اضافه معلومات')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
+                    ->label('د ثبت نیټه ')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
+                    ->label('د بدلون نیټه')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -144,8 +194,10 @@ class CustomerNumerahaResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('کتل'),
+                Tables\Actions\EditAction::make()
+                    ->label('بدلون'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

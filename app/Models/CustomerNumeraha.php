@@ -14,12 +14,24 @@ class CustomerNumeraha extends Model
     protected $fillable = [
         'customer_id',
         'numeraha_id',
-        'documents',
+        'multipleDocs',
         'Responsible_Person_Img',
         'payed_price',
         'total_price',
         'remarks',
     ];
+
+    // Custom code For converting MultipleDocs to Json when Saving
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($model) {
+            if (is_array($model->multipleDocs)) {
+                $model->multipleDocs = json_encode($model->multipleDocs);
+            }
+        });
+    }
 
     public function customer(): BelongsTo
     {

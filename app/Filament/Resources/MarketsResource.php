@@ -82,9 +82,11 @@ class MarketsResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable()
+                    ->toggleable()
                     ->label('نوم'),
                 Tables\Columns\TextColumn::make('description')
                     ->sortable()
+                    ->toggleable()
                     ->label('تفصیل')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('lengthm_m2')
@@ -99,18 +101,20 @@ class MarketsResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nomerah_owner')
                     ->sortable()
+                    ->toggleable()
                     ->label('د ځمکی مالک ')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('owner_phone_number')
-
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
+                    ->label('د ثبت نیټه ')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
+                    ->label('د بدلون نیټه')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([

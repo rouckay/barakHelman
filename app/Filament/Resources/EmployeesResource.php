@@ -128,10 +128,12 @@ class EmployeesResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label('نوم')
                     ->sortable()
+                    ->toggleable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('lastName')
                     ->label('تخلص')
                     ->sortable()
+                    ->toggleable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('FatherName')
                     ->label('د پلار نوم')
@@ -177,12 +179,12 @@ class EmployeesResource extends Resource
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('ثبت تاریخ')
+                    ->label('د ثبت نیټه ')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('د تغیر تاریخ')
+                    ->label('د بدلون نیټه')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

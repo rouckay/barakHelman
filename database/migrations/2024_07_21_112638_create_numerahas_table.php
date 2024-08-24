@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->string('sharwali_tarifa_price');
             $table->string('Customer_image')->nullable();
             $table->string('documents')->nullable();
+            $table->longText('description')->nullable();
             $table->string('numeraha_type');
             $table->timestamps();
         });

@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->foreignId('numeraha_id')->constrained()->onDelete('cascade');
-            $table->string('documents');
-            $table->string('Responsible_Person_Img');
+            $table->json('Responsible_Person_Img')->nullable();
+            $table->json('multipleDocs');
             $table->string('payed_price');
             $table->string('total_price');
             $table->string('remarks')->nullable();

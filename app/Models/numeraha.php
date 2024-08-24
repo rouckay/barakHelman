@@ -20,6 +20,7 @@ class Numeraha extends Model
         'numera_price',
         'sharwali_tarifa_price',
         'documents',
+        'description',
         // 'customer_id',
         'numera_type'
     ];

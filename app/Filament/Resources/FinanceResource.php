@@ -205,30 +205,36 @@ class FinanceResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('row_number')
                     ->label('نمبر')
+                    ->toggleable()
                     ->rowIndex(),
                 Tables\Columns\TextColumn::make('quantity')
                     ->numeric()
                     ->searchable()
                     ->label('مقدار')
+                    ->toggleable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('unit')
                     ->numeric()
                     ->searchable()
+                    ->toggleable()
                     ->label('فی واحد')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('dollor')
                     ->numeric()
+                    ->toggleable()
                     ->searchable()
                     ->label('دالر')
                     ->sortable(),
                 PhoneColumn::make('phone_number')->displayFormat(PhoneInputNumberType::NATIONAL)
                     ->numeric()
                     ->searchable()
+                    ->toggleable()
                     ->label('شماره تلفن')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->searchable()
+                    ->toggleable()
                     ->label('مصرف کننده')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')

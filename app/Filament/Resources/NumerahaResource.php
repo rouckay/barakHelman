@@ -87,6 +87,14 @@ class NumerahaResource extends Resource
                             ->required()
                             ->maxLength(191),
                     ])->columns(2),
+                    Forms\Components\RichEditor::make('description')
+                        ->label('اضافه معلومات')
+                        ->placeholder('اضافه معلومات')
+                        ->maxLength(1000),
+                ])->columnSpan(6),
+                Card::make()->schema([
+                    // Grid::make()->schema([
+                    // ]),
                     Grid::make()->schema([
                         Forms\Components\TextInput::make('date')
                             ->label('نیټه')
@@ -110,10 +118,6 @@ class NumerahaResource extends Resource
                             ->placeholder('د ښاروالی د تعرفی پیسی')
                             ->maxLength(191),
                     ])->columns(3),
-                ])->columnSpan(6),
-                Card::make()->schema([
-                    // Grid::make()->schema([
-                    // ]),
                     Forms\Components\Select::make('numera_type')
                         ->label('د نمری (ځمکی) تفصیل')
                         ->placeholder('د نمری (ځمکی) تفصیل')
@@ -122,6 +126,7 @@ class NumerahaResource extends Resource
                             '3 بسوه ای' => '3 بسوه ای',
                             '2 بسوه ای' => '2 بسوه ای',
                             '1 بسوه ای' => '1 بسوه ای',
+                            'بلندـمنزل' => 'بلند منزل',
                         ])
                         ->required()
                         ->searchable(),
