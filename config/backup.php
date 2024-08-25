@@ -79,9 +79,6 @@ return [
              */
             'databases' => [
                 'mysql',
-                // 'connection' => env('DB_CONNECTION', 'mysql'),
-                'host' => env('DB_HOST', '127.0.0.1'),
-
             ],
         ],
 

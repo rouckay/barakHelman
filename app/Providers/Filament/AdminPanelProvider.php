@@ -81,7 +81,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentSpatieLaravelBackupPlugin::make()
-                ,
+                    ->usingPage(Backups::class)
+                    ->usingPolingInterval('10s')
+                    ->timeout(120),
                 \TomatoPHP\FilamentPWA\FilamentPWAPlugin::make()
                 ,
                 \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
