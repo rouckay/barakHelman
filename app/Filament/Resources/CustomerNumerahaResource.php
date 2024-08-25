@@ -14,7 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\HtmlString;
-
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 class CustomerNumerahaResource extends Resource
 {
     protected static ?string $model = CustomerNumeraha::class;

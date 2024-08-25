@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CustomerNumeraha extends Model
 {
+
     use HasFactory;
+
 
     protected $fillable = [
         'customer_id',

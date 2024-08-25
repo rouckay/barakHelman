@@ -22,6 +22,8 @@ use EightyNine\Reports\ReportsPlugin;
 use Awcodes\Overlook\OverlookPlugin;
 use Awcodes\Overlook\Widgets\OverlookWidget;
 use Guava\FilamentKnowledgeBase\KnowledgeBasePlugin;
+use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
+use App\Filament\Pages\Backups;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -78,6 +80,8 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
+                FilamentSpatieLaravelBackupPlugin::make()
+                ,
                 \TomatoPHP\FilamentPWA\FilamentPWAPlugin::make()
                 ,
                 \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
@@ -99,9 +103,8 @@ class AdminPanelProvider extends PanelProvider
                         \App\Filament\Resources\CustomersResource::class,
                         \App\Filament\Resources\EmployeesResource::class,
                         \App\Filament\Resources\FinanceResource::class,
-                    ])
-                ,
-                KnowledgeBasePlugin::make(),
+                    ]),
+                // KnowledgeBasePlugin::make(),
             ])
             ->databaseNotifications()
             ->widgets([
