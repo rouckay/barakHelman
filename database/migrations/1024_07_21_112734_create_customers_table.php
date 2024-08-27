@@ -20,12 +20,9 @@ return new class extends Migration {
             $table->string('village')->nullable();
             $table->string('tazkira')->nullable();
             $table->string('mobile_number')->nullable();
-            $table->string('parmanent_address')->nullable();
-            $table->string('current_address')->nullable();
             $table->string('job')->nullable();
             $table->foreignIdFor(Numeraha::class)->nullable();
             $table->string('Customer_image')->nullable();
-            // $table->string('due_price');
             $table->timestamps();
         });
     }

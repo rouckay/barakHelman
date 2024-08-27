@@ -22,6 +22,7 @@ class UserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-m-user';
     protected static ?string $navigationGroup = 'ډیټابیس مدیریان';
     protected static ?string $navigationLabel = 'کاربران';
+    protected static ?string $recordTitleAttribute = 'name';
     public static ?string $label = 'مدیران';
 
     protected static ?int $navigationSort = 2;

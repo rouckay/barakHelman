@@ -15,8 +15,8 @@ class Backups extends BaseBackups
         return 'Application Backups';
     }
 
-    public static function getNavigationGroup(): ?string
-    {
-        return 'Core';
-    }
+    // public static function getNavigationGroup(): ?string
+    // {
+    //     return 'Core';
+    // }
 }

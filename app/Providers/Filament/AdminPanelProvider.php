@@ -42,20 +42,17 @@ class AdminPanelProvider extends PanelProvider
             // ->sidebarFullyCollapsibleOnDesktop()
             ->sidebarCollapsibleOnDesktop()
             ->navigationItems([
-                // NavigationItem::make('Settings')
-                //     ->icon('heroicon-m-cog')
-                //     ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
-                //     ->url('/admin/settings'),
-                NavigationItem::make('پلورل شوی ځمکی')
+                NavigationItem::make('د پلورل شویو نمرو لیست')
                     ->icon('heroicon-m-map')
                     ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
-                    ->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=1')
+                    ->url('admin/numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=1')
+                    ->sort(3)
                 ,
-                NavigationItem::make('خالی نمری')
+                NavigationItem::make('د پاتی نمرو لیست')
                     ->icon('heroicon-o-map')
                     ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
-                    ->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=0')
-                ,
+                    ->url('admin/numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=0')
+                    ->sort(3)
             ])
             ->pages([
                 Pages\Dashboard::class,
@@ -81,7 +78,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentSpatieLaravelBackupPlugin::make()
-                    ->usingPage(Backups::class)
+                    // ->usingPage(Backups::class)
                     ->usingPolingInterval('10s')
                     ->timeout(120),
                 \TomatoPHP\FilamentPWA\FilamentPWAPlugin::make()

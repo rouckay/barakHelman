@@ -16,17 +16,10 @@ class MyNumerahaImport implements ToCollection
         foreach ($collection as $row) {
             // Assuming the columns in your CSV match these model attributes
             Numeraha::create([
-                'numero_number' => $row[0],
-                'save_number' => $row[1],
-                'date' => $row[2],
-                'numera_price' => $row[3],
-                'sharwali_tarifa_price' => $row[4],
-                'Customer_image' => $row[5],
-                'documents' => $row[6],
-                'created_at' => $row[7],  // Ensure this is a valid datetime format
-                'updated_at' => $row[8],  // Ensure this is a valid datetime format
-                'customer_id' => (int) $row[9],  // Cast to integer
-                'numera_type' => $row[10],
+                'Land_Area' => $row[0],
+                'numera_id' => $row[1],
+                'date' => $row[2],  // Cast to integer
+                'numera_type' => $row[3],
             ]);
         }
     }

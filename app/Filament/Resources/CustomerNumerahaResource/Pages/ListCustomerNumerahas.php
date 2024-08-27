@@ -31,7 +31,7 @@ class ListCustomerNumerahas extends ListRecords
                 ->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=0')
                 ->color('warning'),
             Actions\CreateAction::make()
-                ->label(' نوی نمره خرڅه کړی.')
+                ->label('د نوی نمری پلورل')
             ,
         ];
     }

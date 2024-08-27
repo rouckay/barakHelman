@@ -14,12 +14,10 @@ return new class extends Migration {
     {
         Schema::create('numerahas', function (Blueprint $table) {
             $table->id();
-            // $table->string('numero_number');
+            $table->string('numera_id');
             $table->string('Land_Area');
-            $table->string('date');
-            $table->string('numera_price');
-            $table->string('sharwali_tarifa_price');
-            $table->string('Customer_image')->nullable();
+            $table->string('date')->nullable();
+            $table->string('sharwali_tarifa_price')->nullable();
             $table->string('documents')->nullable();
             $table->longText('description')->nullable();
             $table->string('numeraha_type');

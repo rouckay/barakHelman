@@ -40,8 +40,8 @@ class ListNumerahas extends ListRecords
                 // ->successMessage("Data imported successfully!")
                 ->label('اپلوډ کړی')
                 ->use(MyNumerahaImport::class),
-            Actions\CreateAction::make()
-                ->label('نوی نمره ثبت کړی'), // Custom label for the "Add" button
+            // Actions\CreateAction::make()
+            //     ->label('نوی نمره ثبت کړی'), // Custom label for the "Add" button
         ];
     }
 }

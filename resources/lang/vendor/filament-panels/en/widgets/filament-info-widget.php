@@ -5,11 +5,11 @@ return [
     'actions' => [
 
         'open_documentation' => [
-            'label' => 'Documentation',
+            'label' => 'معرفی د سیستم جوړولو سره ',
         ],
 
         'open_github' => [
-            'label' => 'GitHub',
+            'label' => 'ګټ هاب',
         ],
 
     ],

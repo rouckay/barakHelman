@@ -15,7 +15,7 @@ return [
         ],
 
         'open_database_notifications' => [
-            'label' => 'Open notifications',
+            'label' => 'ټول اعلانات وګوری',
         ],
 
         'open_user_menu' => [
@@ -25,11 +25,11 @@ return [
         'sidebar' => [
 
             'collapse' => [
-                'label' => 'Collapse sidebar',
+                'label' => 'منیو وړکی کړی.',
             ],
 
             'expand' => [
-                'label' => 'Expand sidebar',
+                'label' => 'منیو غټه کړی',
             ],
 
         ],

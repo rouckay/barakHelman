@@ -20,13 +20,11 @@ class Customers extends Model
         'village',
         'tazkira',
         'mobile_number',
-        'parmanent_address',
-        'current_address',
         'Customer_image',
         // 'numeraha_id',
-        'payed_price',
+        // 'payed_price',
         // 'due_price',
-        'total_price',
+        // 'total_price',
         'job',
     ];
 

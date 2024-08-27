@@ -13,7 +13,7 @@ class ManageFooter extends SettingsPage
 {
     protected static ?string $navigationIcon = 'heroicon-m-cog';
     protected static ?string $navigationLabel = 'تظیمات';
-    protected static ?int $navigationSort = 9;
+    // protected static ?int $navigationSort = 9;
 
     protected static string $settings = FooterSettings::class;
 

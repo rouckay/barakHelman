@@ -13,11 +13,11 @@ class Numeraha extends Model
     // protected $primaryKey = 'numerahaID';
     use HasFactory;
     protected $fillable = [
-        'save_number',
+        'numera_id',
         'Land_Area',
         'date',
         // 'tarifa_no',
-        'numera_price',
+        // 'numera_price',
         'sharwali_tarifa_price',
         'documents',
         'description',

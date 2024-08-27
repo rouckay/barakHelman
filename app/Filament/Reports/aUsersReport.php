@@ -2,6 +2,7 @@
 
 namespace App\Filament\Reports;
 
+use App\Models\User;
 use EightyNine\Reports\Report;
 use EightyNine\Reports\Components\Body;
 use EightyNine\Reports\Components\Footer;
@@ -9,20 +10,19 @@ use EightyNine\Reports\Components\Header;
 use EightyNine\Reports\Components\Text;
 use EightyNine\Reports\Components\Image;
 use EightyNine\Reports\Components\Input;
+
+use EightyNine\Reports\Components\VerticalSpace;
 use Filament\Forms\Form;
-use eightyNine\Reports\components\VerticalSpace;
 
-class NumerahaReport extends Report
+class UsersReport extends Report
 {
-    public ?string $heading = "د نمرو (ځمکی) د راپورو برخه";
-    protected static ?string $label = 'د نمرو د راپور برخه';
-    protected static ?string $navigationLabel = 'د نمرو (ځمکو) راپورونه';
-    protected static ?string $navigationGroup = 'راپورونو برخه';
+    public ?string $heading = "Report";
+    // protected static ?string $navigationGroup = 'راپورونو برخه';
+    protected static ?string $navigationLabel = 'د ډیټابیس مدیرانو برخه';
 
 
 
-
-    // public ?string $subHeading = "A great report";
+    public ?string $subHeading = "A great report";
 
     public function header(Header $header): Header
     {
@@ -32,15 +32,15 @@ class NumerahaReport extends Report
                     ->schema([
                         Header\Layout\HeaderColumn::make()
                             ->schema([
-                                Text::make("User registration report")
+                                Text::make("Users Report")
                                     ->title()
                                     ->primary(),
-                                Text::make("A user registration report")
+                                Text::make("A  report")
                                     ->subtitle(),
                             ]),
                         Header\Layout\HeaderColumn::make()
                             ->schema([
-                                Image::make(''),
+                                Image::make('imagePath'),
                             ])
                             ->alignRight(),
                     ]),
@@ -53,19 +53,17 @@ class NumerahaReport extends Report
         return $body
             ->schema([
                 Body\Layout\BodyColumn::make()
-                // ->schema([
-                //     Body\Table::make()
-                //     // ->data(
-
-                //     // )
-                //     ,
-                //     // VerticalSpace::make(),
-                //     Body\Table::make()
-                //     // ->data(
-                //     //     fn(?array $filters) => $this->verificationSummary($filters)
-                //     // )
-                //     ,
-                // ]),
+                    ->schema([
+                        Body\Table::make()
+                            ->data(
+                                fn(?array $filters) => User::query()->get()
+                            ),
+                        // VerticalSpace::make(),
+                        // Body\Table::make()
+                        //     ->data(
+                        //         fn(?array $filters) => $this->verificationSummary($filters)
+                        //     ),
+                    ]),
             ]);
     }
 
@@ -73,7 +71,22 @@ class NumerahaReport extends Report
     {
         return $footer
             ->schema([
-                // ...
+                Footer\Layout\FooterRow::make()
+                    ->schema([
+                        Footer\Layout\FooterColumn::make()
+                            ->schema([
+                                Text::make("All users Report")
+                                    ->title()
+                                    ->primary(),
+                                Text::make("Filter Users")
+                                    ->subtitle(),
+                            ]),
+                        Footer\Layout\FooterColumn::make()
+                            ->schema([
+                                Text::make("Generated on: " . now()->format('Y-m-d H:i:s')),
+                            ])
+                            ->alignRight(),
+                    ]),
             ]);
     }
 

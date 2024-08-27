@@ -14,8 +14,12 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->foreignId('numeraha_id')->constrained()->onDelete('cascade');
-            $table->json('Responsible_Person_Img')->nullable();
             $table->json('multipleDocs');
+            $table->string('first_phase');
+            $table->string('second_phase');
+            $table->string('third_phase');
+            $table->string('fourth_phase');
+            $table->string('fifth_phase');
             $table->string('payed_price');
             $table->string('total_price');
             $table->string('remarks')->nullable();

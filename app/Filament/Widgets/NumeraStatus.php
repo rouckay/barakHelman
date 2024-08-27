@@ -42,13 +42,13 @@ class NumeraStatus extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'هغه نمری (ځمکی) چی مشتریان لری',
+                    'label' => 'پلورل شوی نمری',
                     'data' => $withCustomerCounts,
                     'borderColor' => 'rgba(54, 162, 235, 1)',
                     'backgroundColor' => 'rgba(54, 162, 235, 0.2)',
                 ],
                 [
-                    'label' => 'هغه نمری (ځمکی) چی مشتریان نه لری',
+                    'label' => 'پاتی نمری',
                     'data' => $withoutCustomerCounts,
                     'borderColor' => 'rgba(255, 99, 132, 1)',
                     'backgroundColor' => 'rgba(255, 99, 132, 0.2)',

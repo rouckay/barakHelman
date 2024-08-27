@@ -2,15 +2,15 @@
 
 return [
 
-    'title' => 'Register',
+    'title' => 'ثبت نام',
 
-    'heading' => 'Sign up',
+    'heading' => 'نوم لیکنه',
 
     'actions' => [
 
         'login' => [
-            'before' => 'or',
-            'label' => 'sign in to your account',
+            'before' => 'یا هم ',
+            'label' => 'خپل حساب ته مو د ننه شی',
         ],
 
     ],
@@ -18,26 +18,26 @@ return [
     'form' => [
 
         'email' => [
-            'label' => 'Email address',
+            'label' => 'ایمیل آدرس',
         ],
 
         'name' => [
-            'label' => 'Name',
+            'label' => 'نوم',
         ],
 
         'password' => [
-            'label' => 'Password',
-            'validation_attribute' => 'password',
+            'label' => 'پټ نوم',
+            'validation_attribute' => 'پټ نوم',
         ],
 
         'password_confirmation' => [
-            'label' => 'Confirm password',
+            'label' => 'پټ نوم تایید کړی',
         ],
 
         'actions' => [
 
             'register' => [
-                'label' => 'Sign up',
+                'label' => 'نوم لیکنه',
             ],
 
         ],
@@ -47,8 +47,8 @@ return [
     'notifications' => [
 
         'throttled' => [
-            'title' => 'Too many registration attempts',
-            'body' => 'Please try again in :seconds seconds.',
+            'title' => 'څو ځله اشتباه کوښښ',
+            'body' => 'مهربانی وکړی صبر وکړی :seconds ثانیی.',
         ],
 
     ],

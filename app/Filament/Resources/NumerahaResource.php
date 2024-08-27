@@ -43,12 +43,13 @@ class NumerahaResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-map';
 
     protected static ?string $navigationGroup = "د نمرو (ځمکو) مدیریت";
-    protected static ?string $navigationLabel = "د نمرو (ځمکو) لیست";
+    protected static ?string $navigationLabel = "د نمرو مکمل لیست";
+    protected static ?int $navigationSort = 1;
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
     }
-    protected static ?int $navigationSort = 1;
     public static ?string $label = 'نمری (ځمکی)';
 
     // custome code for saving data
@@ -71,13 +72,14 @@ class NumerahaResource extends Resource
             ->schema([
                 Card::make()->schema([
                     Grid::make()->schema([
-                        Forms\Components\TextInput::make('save_number')
-                            ->label('د ثبت نمبر')
+                        Forms\Components\TextInput::make('numera_id')
+                            ->label('د نمری آی ډی')
                             ->unique(ignoreRecord: true)
                             ->default('GM-' . Str::substr((string) Str::uuid(), 0, 8)) // Auto-generate a unique save number
-                            // ->disabled()
+                            ->disabled()
                             ->prefixIcon('heroicon-o-sparkles')
-                            ->required(),
+                            ->required()
+                        ,
                         Forms\Components\TextInput::make('Land_Area')
                             ->label('د نمری (ځمکی) مساحت')
                             ->placeholder('د نمری (ځمکی) مساحت')
@@ -103,48 +105,47 @@ class NumerahaResource extends Resource
                             ->prefixIcon('heroicon-o-calendar-days')
                             ->required()
                             ->maxLength(191),
-                        Forms\Components\TextInput::make('numera_price')
-                            ->label('د نمری (ځمکی) قیمت')
-                            ->required()
-                            ->numeric()
-                            ->prefixIcon('heroicon-o-banknotes')
-                            ->placeholder('د نمری (ځمکی) قیمت')
-                            ->maxLength(191),
-                        Forms\Components\TextInput::make('sharwali_tarifa_price')
-                            ->label('د ښاروالی د تعرفی پیسی')
-                            ->required()
-                            ->numeric()
-                            ->prefixIcon('heroicon-o-document-text')
-                            ->placeholder('د ښاروالی د تعرفی پیسی')
-                            ->maxLength(191),
+                        // Forms\Components\TextInput::make('numera_price')
+                        //     ->label('د نمری (ځمکی) قیمت')
+                        //     ->required()
+                        //     ->numeric()
+                        //     ->prefixIcon('heroicon-o-banknotes')
+                        //     ->placeholder('د نمری (ځمکی) قیمت')
+                        //     ->maxLength(191),
                     ])->columns(3),
                     Forms\Components\Select::make('numera_type')
                         ->label('د نمری (ځمکی) تفصیل')
                         ->placeholder('د نمری (ځمکی) تفصیل')
                         ->prefixIcon('heroicon-o-chat-bubble-bottom-center-text')
                         ->options([
+                            '10 بسوه ای' => '10 بسوه ای',
+                            '9 بسوه ای' => '9 بسوه ای',
+                            '8 بسوه ای' => '8 بسوه ای',
+                            '7 بسوه ای' => '7 بسوه ای',
+                            '6 بسوه ای' => '6 بسوه ای',
+                            '5 بسوه ای' => '5 بسوه ای',
+                            '4 بسوه ای' => '4 بسوه ای',
                             '3 بسوه ای' => '3 بسوه ای',
-                            '2 بسوه ای' => '2 بسوه ای',
-                            '1 بسوه ای' => '1 بسوه ای',
+                            '2.5 بسوه ای' => '2.5 بسوه ای',
                             'بلندـمنزل' => 'بلند منزل',
                         ])
                         ->required()
                         ->searchable(),
-                    Forms\Components\FileUpload::make('documents')
-                        ->directory('Numeraha_documents')
-                        ->preserveFilenames()
-                        ->downloadable()
-                        // ->multiple()
-                        ->rules('required|array') // validate as an array
-                        ->placeholder('اسناد')
-                        // ->multiple()
-                        ->openable()
-                        ->uploadingMessage('فایل شما در حال اپلود به دیتابیس هست...')
-                        ->previewable()
-                        // ->minFiles(1)
-                        // ->maxFiles(5)
-                        // ->required()
-                        ->label('د ځمکی اسناد'),
+                    // Forms\Components\FileUpload::make('documents')
+                    //     ->directory('Numeraha_documents')
+                    //     ->preserveFilenames()
+                    //     ->downloadable()
+                    //     // ->multiple()
+                    //     ->rules('required|array') // validate as an array
+                    //     ->placeholder('اسناد')
+                    //     // ->multiple()
+                    //     ->openable()
+                    //     ->uploadingMessage('فایل شما در حال اپلود به دیتابیس هست...')
+                    //     ->previewable()
+                    //     // ->minFiles(1)
+                    //     // ->maxFiles(5)
+                    //     // ->required()
+                    //     ->label('د ځمکی اسناد'),
                 ])->columnSpan(6)
             ])->columns(12);
         ;
@@ -156,55 +157,38 @@ class NumerahaResource extends Resource
             ->columns([
 
                 Tables\Columns\TextColumn::make('row_number')
-                    ->label('نمبر')
+                    ->label('شمیره')
                     ->rowIndex(),
-                Tables\Columns\TextColumn::make('LandـArea')
-                    ->sortable()
-                    ->label('د نمری (ځمکی) ای ډی')
-                    ->searchable()
-                    ->toggleable(),
-                Tables\Columns\TextColumn::make('save_number')
+                Tables\Columns\TextColumn::make('numera_id')
                     ->sortable()
                     ->searchable()
-                    ->label('د ثبت نمبر')
+                    ->label('د نمری آی ډی')
                     ->toggleable(),
-
-                BadgeableColumn::make('save_number')
+                Tables\Columns\TextColumn::make('numera_type')
+                    ->sortable()
+                    ->label(' تفصیل')
+                    ->searchable()
+                    ->toggleable()
+                ,
+                BadgeableColumn::make('Land_Area')
                     ->suffixBadges([
                         Badge::make('hot')
                             ->label(fn($record) => ' مشتریان: ' . $record->customers()->count())
                             ->color('success')
                             ->visible(fn($record) => $record->customers()->count() > 0),
                     ]),
-                Tables\Columns\TextColumn::make('date')
+                Tables\Columns\TextColumn::make('Land_Area')
                     ->sortable()
-                    ->date()
-                    ->label('نیټه')
+                    ->label('د نمری مساحت')
                     ->searchable()
-                    ->toggleable(),
-                Tables\Columns\TextColumn::make('numera_price')
-                    ->sortable()
-                    ->label('د نمری (ځمکی) قیمت')
                     ->toggleable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('sharwali_tarifa_price')
-                    ->sortable()
-                    ->label('د ښاروالی د تعرفی پیسی')
-                    ->toggleable()
-                    ->searchable(),
-                Tables\Columns\ImageColumn::make('Customer_image')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->label('د مشتری عکس')
                 ,
-                Tables\Columns\TextColumn::make('documents')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->label('اسناد')
-                    ->searchable(),
-                // Tables\Columns\TextColumn::make('Customers')
-                //     ->numeric()
-                //     ->sortable()
-                //     ->label('مشتری')
-                //     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('description')
+                    ->sortable()
+                    ->label('ملاحظات')
+                    ->searchable()
+                    ->toggleable()
+                ,
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -247,12 +231,12 @@ class NumerahaResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->label('بدلون')
                 ,
-                Tables\Actions\ButtonAction::make('downloadInvoice')
-                    ->label('تعرفه ترلاسه کړی')
-                    ->url(fn(Numeraha $record) => route('download.invoice', $record)) // Use route to generate URL
-                    ->icon('heroicon-o-printer')
-                    ->color('primary')
-                    ->requiresConfirmation(),
+                // Tables\Actions\ButtonAction::make('downloadInvoice')
+                //     ->label('تعرفه ترلاسه کړی')
+                //     ->url(fn(Numeraha $record) => route('download.invoice', $record)) // Use route to generate URL
+                //     ->icon('heroicon-o-printer')
+                //     ->color('primary')
+                //     ->requiresConfirmation(),
                 ExportAction::make()
                     ->label('ډنلوډ کول')
                     ->color('success')

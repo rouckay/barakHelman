@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Filament\Resources;
-
 use App\Filament\Resources\CustomersResource\Pages;
 use App\Models\Customers;
 use Filament\Forms;
@@ -27,9 +26,9 @@ class CustomersResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationGroup = "د نمرو (ځمکو) مدیریت";
+    protected static ?string $navigationGroup = "د مشتریانو مدیریت";
 
-    protected static ?string $navigationLabel = 'مشتریان';
+    protected static ?string $navigationLabel = 'مشتریان لیست';
 
     public static ?string $label = 'مـشتریان';
     public static function getNavigationBadge(): ?string
@@ -38,13 +37,13 @@ class CustomersResource extends Resource
     }
 
     protected static ?string $recordTitleAttribute = 'name';
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 7;
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Card::make()->schema([
-                    Grid::make()->schema([
+                Forms\Components\Card::make()->schema([
+                    Forms\Components\Grid::make()->schema([
                         Forms\Components\TextInput::make('name')
                             ->label('نوم')
                             // ->helperText('مکمل نوم')
@@ -90,28 +89,13 @@ class CustomersResource extends Resource
                                 'پنجشیر' => 'پنجشیر',
                                 'پروان' => 'پروان',
                             ]),
-                        Forms\Components\TextInput::make('parmanent_address')
-                            ->label('دایمی داوسیدو پته ')
-                            ->placeholder('دایمی داوسیدو پته')
-                            ->prefixIcon('heroicon-o-map-pin')
-                            ->maxLength(191),
-                        Forms\Components\FileUpload::make('Customer_image')
-                            ->directory('Customers_images')
-                            ->preserveFilenames()
-                            ->downloadable()
-                            ->placeholder('تصویر مشتری')
-                            ->openable()
-                            ->uploadingMessage('د مشتری عکس د اپلوډ په حال کی دی...')
-                            ->previewable()
-                            ->required()
-                            ->label('د مشتری تصویر'),
-                        Forms\Components\TextInput::make('tazkira')
-                            ->label('تذکره نمبر')
-                            ->placeholder('تذکره نمبر')
-                            ->prefixIcon('heroicon-o-identification')
+                        Forms\Components\TextInput::make('village')
+                            ->label('کلی')
+                            ->placeholder('کلی')
+                            ->prefixIcon('heroicon-m-map-pin')
                             ->maxLength(191)
                     ])->columnSpan(6),
-                    Grid::make()->schema([
+                    Forms\Components\Grid::make()->schema([
                         Forms\Components\TextInput::make('grand_father_name')
                             ->label('د نیکه نوم')
                             ->placeholder('د نیکه نوم')
@@ -130,19 +114,111 @@ class CustomersResource extends Resource
                                     $input.startsWith('07') ? '079-999-9999' : '079-999-9999'? :''
                             JS))
                             ->maxLength(12),
-
+                        Forms\Components\TextInput::make('tazkira')
+                            ->label('تذکره نمبر')
+                            ->placeholder('تذکره نمبر')
+                            ->prefixIcon('heroicon-o-identification')
+                            ->maxLength(191),
+                        Forms\Components\FileUpload::make('Customer_image')
+                            ->directory('Customers_images')
+                            ->preserveFilenames()
+                            ->downloadable()
+                            ->placeholder('تصویر مشتری')
+                            ->openable()
+                            ->uploadingMessage('د مشتری عکس د اپلوډ په حال کی دی...')
+                            ->previewable()
+                            ->required()
+                            ->label('د مشتری تصویر'),
+                    ])->columnSpan(6)
+                ])->columns(12),
+                Forms\Components\Placeholder::make('د مشتری د وکیل معلومات'),
+                Forms\Components\Card::make()->schema([
+                    Forms\Components\Grid::make()->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label('نوم')
+                            // ->helperText('مکمل نوم')
+                            ->required()
+                            ->prefixIcon('heroicon-o-user')
+                            ->placeholder('نام')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('father_name')
+                            ->label('د پلار نوم')
+                            ->placeholder('د پلار نوم')
+                            ->prefixIcon('heroicon-o-user')
+                            ->maxLength(191),
+                        Forms\Components\Select::make('province')
+                            ->label('ولایت')
+                            ->placeholder('ولایت انتخاب کړی.')
+                            ->prefixIcon('heroicon-m-globe-alt')
+                            ->helperText('دایمی اوسیدو ولایت')
+                            ->options([
+                                'بلخ' => 'بلخ',
+                                'بامیان' => 'بامیان',
+                                'بادغیس' => 'بادغیس',
+                                'بدخشان' => 'بدخشان',
+                                'بغلان' => 'بغلان',
+                                'دایکندی' => 'دایکندی',
+                                'فراه' => 'فراه',
+                                'فاریاب' => 'فاریاب',
+                                'غزنی' => 'غزنی',
+                                'غور' => 'غور',
+                                'هلمند' => 'هلمند',
+                                'هرات' => 'هرات',
+                                'جوزجان' => 'جوزجان',
+                                'کابل' => 'کابل',
+                                'قندهار' => 'قندهار',
+                                'کاپیسا' => 'کاپیسا',
+                                'کندز' => 'کندز',
+                                'خوست' => 'خوست',
+                                'کنر' => 'کنر',
+                                'لغمان' => 'لغمان',
+                                'لوگر' => 'لوگر',
+                                'ننگرهار' => 'ننگرهار',
+                                'نیمروز' => 'نیمروز',
+                                'نورستان' => 'نورستان',
+                                'پنجشیر' => 'پنجشیر',
+                                'پروان' => 'پروان',
+                            ]),
                         Forms\Components\TextInput::make('village')
                             ->label('کلی')
-                            ->helperText('د دایمی اوسیدو پته / کلی')
                             ->placeholder('کلی')
                             ->prefixIcon('heroicon-m-map-pin')
+                            ->maxLength(191)
+                    ])->columnSpan(6),
+                    Forms\Components\Grid::make()->schema([
+                        Forms\Components\TextInput::make('grand_father_name')
+                            ->label('د نیکه نوم')
+                            ->placeholder('د نیکه نوم')
+                            ->prefixIcon('heroicon-o-user')
                             ->maxLength(191),
-                        Forms\Components\TextInput::make('current_address')
-                            ->label('اوسنی داوسیدو پته')
-                            ->prefixIcon('heroicon-o-map-pin')
-                            ->placeholder('اوسنی داوسیدو پته')
-                            ->helperText('اوسنی آدرس په مکمل ډول ولیکی')
+                        Forms\Components\TextInput::make('mobile_number')
+                            ->label('تلفن نمبر')
+                            ->prefixIcon('heroicon-o-phone')
+                            ->numeric()
+                            ->placeholder(' 234 5678 071')
+                            ->extraAttributes([
+                                'oninput' => 'this.value = this.value.replace(/[٠-٩]/g, function(d) { return d.charCodeAt(0) - 1632; });'
+                            ])
+                            // ->helperText('07 په اتومات ډول خپله سیستم لیکی تاسی خپل باقی نمبر ټایپ کړی')
+                            ->mask(RawJs::make(<<<'JS'
+                                    $input.startsWith('07') ? '079-999-9999' : '079-999-9999'? :''
+                            JS))
+                            ->maxLength(12),
+                        Forms\Components\TextInput::make('tazkira')
+                            ->label('تذکره نمبر')
+                            ->placeholder('تذکره نمبر')
+                            ->prefixIcon('heroicon-o-identification')
                             ->maxLength(191),
+                        Forms\Components\FileUpload::make('Customer_image')
+                            ->directory('Customers_images')
+                            ->preserveFilenames()
+                            ->downloadable()
+                            ->placeholder('تصویر مشتری')
+                            ->openable()
+                            ->uploadingMessage('د مشتری عکس د اپلوډ په حال کی دی...')
+                            ->previewable()
+                            ->required()
+                            ->label('د مشتری تصویر'),
                     ])->columnSpan(6)
                 ])->columns(12)
             ]);
@@ -224,15 +300,6 @@ class CustomersResource extends Resource
                     ->label('د بدلون نیټه')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('payed_price')
-                    ->label('رسید پیسی')
-                ,
-                Tables\Columns\TextColumn::make('total_price')
-                    ->label('محمعه پیسی'),
-
-                Tables\Columns\TextColumn::make('total_price')
-                    ->label('محمعه پیسی')
-
             ])
             ->filters([
                 Filter::make('due_price_range')
