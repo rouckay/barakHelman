@@ -42,7 +42,7 @@ class NumerahaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-map';
 
-    protected static ?string $navigationGroup = "د نمرو (ځمکو) مدیریت";
+    // protected static ?string $navigationGroup = "د نمرو (ځمکو) مدیریت";
     protected static ?string $navigationLabel = "د نمرو مکمل لیست";
     protected static ?int $navigationSort = 1;
 

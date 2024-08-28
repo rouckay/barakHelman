@@ -468,7 +468,7 @@ class CustomerNumerahaResource extends Resource
                     ->label('نوم د مشتری')
                     ->toggleable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('numeraha_id')
+                Tables\Columns\TextColumn::make('numeraha.numera_id')
                     ->numeric()
                     ->toggleable()
                     ->label('د نمری (ځمکی) آی ډی')
