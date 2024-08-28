@@ -164,25 +164,24 @@ class NumerahaResource extends Resource
                     ->searchable()
                     ->label('د نمری آی ډی')
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('numera_type')
-                    ->sortable()
-                    ->label(' تفصیل')
-                    ->searchable()
-                    ->toggleable()
-                ,
-                BadgeableColumn::make('Land_Area')
+                BadgeableColumn::make('numera_id')
                     ->suffixBadges([
                         Badge::make('hot')
                             ->label(fn($record) => ' مشتریان: ' . $record->customers()->count())
                             ->color('success')
                             ->visible(fn($record) => $record->customers()->count() > 0),
                     ]),
+                Tables\Columns\TextColumn::make('numera_type')
+                    ->sortable()
+                    ->label(' تفصیل')
+                    ->searchable()
+                    ->toggleable()
+                ,
                 Tables\Columns\TextColumn::make('Land_Area')
                     ->sortable()
                     ->label('د نمری مساحت')
                     ->searchable()
-                    ->toggleable()
-                ,
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('description')
                     ->sortable()
                     ->label('ملاحظات')
