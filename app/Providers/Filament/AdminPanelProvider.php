@@ -26,7 +26,7 @@ use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 use App\Filament\Pages\Backups;
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
 use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
-
+use Filament\FontProviders\SpatieGoogleFontProvider;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -111,7 +111,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->resources([
                 config('filament-logger.activity_resource')
-            ]);
+            ])->font('Inter', provider: SpatieGoogleFontProvider::class);
+        ;
         ;
         ;
 
