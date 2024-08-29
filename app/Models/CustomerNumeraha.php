@@ -22,6 +22,7 @@ class CustomerNumeraha extends Model
         'third_phase',
         'fourth_phase',
         'fifth_phase',
+        'sixth_phase',
         'payed_price',
         'total_price',
         'remarks',

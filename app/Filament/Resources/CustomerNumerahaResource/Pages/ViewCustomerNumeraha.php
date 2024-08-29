@@ -9,7 +9,7 @@ use Filament\Resources\Pages\ViewRecord;
 class ViewCustomerNumeraha extends ViewRecord
 {
     protected static string $resource = CustomerNumerahaResource::class;
-    protected static ?string $title = 'د معاملې کتل';
+    protected static ?string $title = 'دغه پیرل شوی نمری کتل';
 
     protected function getHeaderActions(): array
     {

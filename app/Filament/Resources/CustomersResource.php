@@ -56,6 +56,11 @@ class CustomersResource extends Resource
                             ->placeholder('د پلار نوم')
                             ->prefixIcon('heroicon-o-user')
                             ->maxLength(191),
+                        Forms\Components\TextInput::make('job')
+                            ->label('وظیفه')
+                            ->placeholder('وظیفه')
+                            ->prefixIcon('heroicon-o-identification')
+                            ->maxLength(191),
                         Forms\Components\Select::make('province')
                             ->label('ولایت')
                             ->placeholder('ولایت انتخاب کړی.')
@@ -134,19 +139,24 @@ class CustomersResource extends Resource
                 Forms\Components\Placeholder::make('د مشتری د وکیل معلومات'),
                 Forms\Components\Card::make()->schema([
                     Forms\Components\Grid::make()->schema([
-                        Forms\Components\TextInput::make('name')
+                        Forms\Components\TextInput::make('responsable_name')
                             ->label('نوم')
                             // ->helperText('مکمل نوم')
                             ->required()
                             ->prefixIcon('heroicon-o-user')
                             ->placeholder('نام')
                             ->maxLength(191),
-                        Forms\Components\TextInput::make('father_name')
+                        Forms\Components\TextInput::make('responsable_father_name')
                             ->label('د پلار نوم')
                             ->placeholder('د پلار نوم')
                             ->prefixIcon('heroicon-o-user')
                             ->maxLength(191),
-                        Forms\Components\Select::make('province')
+                        Forms\Components\TextInput::make('responsable_job')
+                            ->label('وظیفه')
+                            ->placeholder('وظیفه')
+                            ->prefixIcon('heroicon-o-identification')
+                            ->maxLength(191),
+                        Forms\Components\Select::make('responsable_province')
                             ->label('ولایت')
                             ->placeholder('ولایت انتخاب کړی.')
                             ->prefixIcon('heroicon-m-globe-alt')
@@ -179,19 +189,19 @@ class CustomersResource extends Resource
                                 'پنجشیر' => 'پنجشیر',
                                 'پروان' => 'پروان',
                             ]),
-                        Forms\Components\TextInput::make('village')
+                        Forms\Components\TextInput::make('responsable_village')
                             ->label('کلی')
                             ->placeholder('کلی')
                             ->prefixIcon('heroicon-m-map-pin')
                             ->maxLength(191)
                     ])->columnSpan(6),
                     Forms\Components\Grid::make()->schema([
-                        Forms\Components\TextInput::make('grand_father_name')
+                        Forms\Components\TextInput::make('responsable_grand_father_name')
                             ->label('د نیکه نوم')
                             ->placeholder('د نیکه نوم')
                             ->prefixIcon('heroicon-o-user')
                             ->maxLength(191),
-                        Forms\Components\TextInput::make('mobile_number')
+                        Forms\Components\TextInput::make('responsable_mobile_number')
                             ->label('تلفن نمبر')
                             ->prefixIcon('heroicon-o-phone')
                             ->numeric()
@@ -204,13 +214,13 @@ class CustomersResource extends Resource
                                     $input.startsWith('07') ? '079-999-9999' : '079-999-9999'? :''
                             JS))
                             ->maxLength(12),
-                        Forms\Components\TextInput::make('tazkira')
+                        Forms\Components\TextInput::make('responsable_tazkira')
                             ->label('تذکره نمبر')
                             ->placeholder('تذکره نمبر')
                             ->prefixIcon('heroicon-o-identification')
                             ->maxLength(191),
-                        Forms\Components\FileUpload::make('Customer_image')
-                            ->directory('Customers_images')
+                        Forms\Components\FileUpload::make('responsable_image')
+                            ->directory('responsable_image')
                             ->preserveFilenames()
                             ->downloadable()
                             ->placeholder('تصویر مشتری')

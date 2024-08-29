@@ -9,7 +9,7 @@ use Filament\Resources\Pages\ListRecords;
 class ListCustomerNumerahas extends ListRecords
 {
     protected static string $resource = CustomerNumerahaResource::class;
-    protected static ?string $title = 'معاملات';
+    protected static ?string $title = 'پیرل شوی نمری (ځمکی)';
 
     protected function getHeaderActions(): array
     {

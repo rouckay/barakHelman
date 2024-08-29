@@ -24,6 +24,7 @@ use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Placeholder;
+use App\Models\Numeraha;
 class CustomerNumerahaResource extends Resource
 {
     protected static ?string $model = CustomerNumeraha::class;
@@ -263,9 +264,44 @@ class CustomerNumerahaResource extends Resource
                             ->preload()
                             ->required()
                             ->reactive()
+                            ->options(function () {
+                                // Fetching all options and providing a fallback label for any null or empty numera_id
+                                return Numeraha::all()->pluck('numera_id', 'id')->mapWithKeys(function ($numera_id, $id) {
+                                    return [$id => $numera_id ?: "د نمری آی ډی (ID: $id)"];
+                                });
+                            })
                             ->afterStateUpdated(function (callable $set, $state) {
                                 if ($state) {
-                                    // Fetch customer IDs and names based on selected numeraha_id
+                                    // Fetch Numeraha details based on selected numeraha_id
+                                    $numeraha = Numeraha::find($state);
+                                    if ($numeraha) {
+                                        // Set the details to be displayed in the placeholder
+                                        $set('numeraha_details', [
+                                            'id' => $numeraha->numera_id,
+                                            'north' => $numeraha->north,
+                                            'south' => $numeraha->south,
+                                            'east' => $numeraha->east,
+                                            'west' => $numeraha->west,
+                                        ]);
+                                    } else {
+                                        // Clear the details if no valid numeraha_id is selected
+                                        $set('numeraha_details', null);
+                                    }
+                                    // The Numerah Details fetcing is finished -------------------------------------------------------------------------------------------
+                    
+
+
+                                    // Initially disable createOptionForm
+                                    // $set('can_create_option', false);
+                    
+                                    // if ($numeraha) {
+                                    //     // Check if any of the specified fields are empty
+                                    //     if (empty($numeraha->north) || empty($numeraha->south) || empty($numeraha->east) || empty($numeraha->west)) {
+                                    //         // Enable createOptionForm if any field is empty
+                                    //         $set('can_create_option', true);
+                                    //     }
+                                    // }
+                                    // Fetch customer IDs and names based on selected numeraha_id ----------------------------------------------------------------------------
                                     $customers = Customers::whereHas('numerahas', function ($query) use ($state) {
                                         $query->where('numeraha_id', $state);
                                     })->get();
@@ -284,14 +320,73 @@ class CustomerNumerahaResource extends Resource
                                 } else {
                                     // Clear the list if no numeraha_id is selected
                                     $set('customer_list', []);
+                                    $set('numeraha_details', null);
                                 }
-                            }),
-
+                            })
+                        // ->createOptionForm(function (callable $set, callable $get) {
+                        //     // Conditionally return the form if can_create_option is true
+                        //     if ($get('can_create_option')) {
+                        //         $numeraha = Numeraha::find($get('numeraha_id'));
+                        //         if ($numeraha) {
+                        //             return [
+                        //                 TextInput::make('north')
+                        //                     ->label('North')
+                        //                     ->required(),
+                        //                 TextInput::make('south')
+                        //                     ->label('South')
+                        //                     ->required(),
+                        //                 TextInput::make('east')
+                        //                     ->label('East')
+                        //                     ->required(),
+                        //                 TextInput::make('west')
+                        //                     ->label('West')
+                        //                     ->required(),
+                        //                 // Add other fields as needed
+                        //             ];
+                        //         }
+                        //     }
+                        //     // If the condition is not met, return an empty array to disable createOptionForm
+                        //     return [];
+                        // })
+                        ,
 
                     ])->columns(2),
+                    Placeholder::make('numeraha_details')
+                        ->label('د ځمکی معلومات')
+                        ->content(function ($get) {
+                            $numeraha = $get('numeraha_details');
+
+                            if (!$numeraha) {
+                                return new HtmlString('<p>هیڅ معلومات موجود ندي</p>');
+                            }
+
+                            // Display the details in an HTML format
+                            $details = '<table class="w-full border border-gray-300">
+                <thead>
+                    <tr class="bg-green-200">
+                        <th class="px-4 py-2 border-b">آی ډی</th>
+                        <th class="px-4 py-2 border-b">شمال</th>
+                        <th class="px-4 py-2 border-b">جنوب</th>
+                        <th class="px-4 py-2 border-b">شرق</th>
+                        <th class="px-4 py-2 border-b">غرب</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="px-4 py-2 border-b">' . $numeraha['id'] . '</td>
+                        <td class="px-4 py-2 border-b">' . $numeraha['north'] . '</td>
+                        <td class="px-4 py-2 border-b">' . $numeraha['south'] . '</td>
+                        <td class="px-4 py-2 border-b">' . $numeraha['east'] . '</td>
+                        <td class="px-4 py-2 border-b">' . $numeraha['west'] . '</td>
+                    </tr>
+                </tbody>
+            </table>';
+
+                            return new HtmlString($details);
+                        }),
                     Placeholder::make('customer_names')
                         ->label('ددی ځمکی مشتریان')
-                        ->content(function ($get) {
+                        ->content(function ($get, $record) {
                             $customers = $get('customer_list');
 
                             if (empty($customers)) {
@@ -399,7 +494,17 @@ class CustomerNumerahaResource extends Resource
                             ->prefixIcon('heroicon-o-banknotes')
                             ->placeholder('پنځم قست')
                             ->maxLength(191),
-                    ])->columns(2),
+                        Forms\Components\TextInput::make('sixth_phase')
+                            ->label('شپژم قست')
+                            ->numeric()
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(function ($state, $set, $get) {
+                                self::updatePayedPrice($state, $get, $set, 'sixth_phase');
+                            })
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->placeholder('شپژم قست')
+                            ->maxLength(191),
+                    ])->columns(3),
                     Forms\Components\Grid::make()->schema([
                         Forms\Components\TextInput::make('payed_price')
                             ->label('رسید پیسی')
@@ -433,6 +538,7 @@ class CustomerNumerahaResource extends Resource
                         TextInput::make('third_phase_hidden')->hidden()->default(0),
                         TextInput::make('fourth_phase_hidden')->hidden()->default(0),
                         TextInput::make('fifth_phase_hidden')->hidden()->default(0),
+                        TextInput::make('sixth_phase_hidden')->hidden()->default(0),
                     ])->columns(3),
                 ]),
             ])->columns(12);
@@ -450,8 +556,9 @@ class CustomerNumerahaResource extends Resource
         $thirdPhase = $get('third_phase_hidden') ?? 0;
         $fourthPhase = $get('fourth_phase_hidden') ?? 0;
         $fifthPhase = $get('fifth_phase_hidden') ?? 0;
+        $sixthPhase = $get('sixth_phase_hidden') ?? 0;
 
-        $payedPrice = $firstPhase + $secondPhase + $thirdPhase + $fourthPhase + $fifthPhase;
+        $payedPrice = $firstPhase + $secondPhase + $thirdPhase + $fourthPhase + $fifthPhase + $sixthPhase;
 
         // Set the updated payed_price
         $set('payed_price', $payedPrice);

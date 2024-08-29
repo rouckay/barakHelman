@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\Customers;
 use App\Models\Employees;
+use App\Models\CustomerNumeraha;
 use App\Models\Finance;
 use App\Models\Numeraha;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -41,14 +42,14 @@ class StatsOverview extends BaseWidget
                 ->color('info')
                 ->chart([1, 4, 6, 4, 4, 2, 1, 4, 2, 2, 2, 5])
             ,
-            Stat::make('مارکیټونه', Employees::count())
-                ->description('ټولټال مارکیټونه ')
+            Stat::make('اجناس', CustomerNumeraha::count())
+                ->description('ټولټال اجناس ')
                 ->descriptionIcon('heroicon-o-building-office-2')
                 ->color('warning')
                 ->chart([1, 2, 4, 5, 2, 8, 2, 7, 3, 2, 5, 2])
             ,
-            Stat::make('معاملی', Employees::count())
-                ->description('ټوټال معاملی د نمرو (ځمکو) ')
+            Stat::make('نمری (ځمکی)', CustomerNumeraha::count())
+                ->description('ټوټال پلورل شوی نمرو (ځمکو) ')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->color('success')
                 ->chart([1, 5, 1, 4, 4, 8, 2, 7, 3, 2, 5, 9])

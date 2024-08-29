@@ -24,6 +24,9 @@ use Awcodes\Overlook\Widgets\OverlookWidget;
 use Guava\FilamentKnowledgeBase\KnowledgeBasePlugin;
 use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 use App\Filament\Pages\Backups;
+use Awcodes\FilamentBadgeableColumn\Components\Badge;
+use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -42,17 +45,14 @@ class AdminPanelProvider extends PanelProvider
             // ->sidebarFullyCollapsibleOnDesktop()
             ->sidebarCollapsibleOnDesktop()
             ->navigationItems([
-                NavigationItem::make('د پلورل شویو نمرو لیست')
+                NavigationItem::make('Selled_numeraha')
                     ->icon('heroicon-m-map')
+                    ->label('د پلورل شویو نمرو لیست')
                     ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
-                    ->url('admin/numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=1')
+                    ->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=1')
                     ->sort(3)
                 ,
-                NavigationItem::make('د پاتی نمرو لیست')
-                    ->icon('heroicon-o-map')
-                    ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
-                    ->url('admin/numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=0')
-                    ->sort(3)
+                NavigationItem::make('remaining_numeraha')->icon('heroicon-o-map')->label('د پاتی نمرو لیست')->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=0')->sort(3),
             ])
             ->pages([
                 Pages\Dashboard::class,

@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('third_phase');
             $table->string('fourth_phase');
             $table->string('fifth_phase');
+            $table->string('sixth_phase');
             $table->string('payed_price');
             $table->string('total_price');
             $table->string('remarks')->nullable();

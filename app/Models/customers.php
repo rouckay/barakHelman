@@ -21,11 +21,16 @@ class Customers extends Model
         'tazkira',
         'mobile_number',
         'Customer_image',
-        // 'numeraha_id',
-        // 'payed_price',
-        // 'due_price',
-        // 'total_price',
         'job',
+        'responsable_name',
+        'responsable_father_name',
+        'responsable_grand_father_name',
+        'responsable_province',
+        'responsable_village',
+        'responsable_tazkira',
+        'responsable_mobile_number',
+        'responsable_image',
+        'responsable_job',
     ];
 
     public function numerahas(): BelongsToMany

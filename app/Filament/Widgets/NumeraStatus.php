@@ -8,7 +8,7 @@ use Filament\Widgets\ChartWidget;
 
 class NumeraStatus extends ChartWidget
 {
-    protected static ?string $heading = 'د نمری (ځمکی) معاملی';
+    protected static ?string $heading = 'د نمری (ځمکی) پلورل';
     protected static ?int $sort = 2;
 
     protected function getData(): array

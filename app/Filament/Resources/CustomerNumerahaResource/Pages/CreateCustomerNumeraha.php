@@ -9,7 +9,7 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateCustomerNumeraha extends CreateRecord
 {
     protected static string $resource = CustomerNumerahaResource::class;
-    protected static ?string $title = 'معاملاتو ثبت';
+    protected static ?string $title = 'نمره (ځمکه) خرڅه کړی';
     protected function getFooterActions(): array
     {
         return [

@@ -54,9 +54,6 @@ class NumerahaResource extends Resource
 
     // custome code for saving data
 
-    // protected static ?string $navigationGroup = 'د ځمکو معاملی';
-
-
     // Add this method in the appropriate place (e.g., Filament Resource or Table class)
 
     protected function handleExcelImport($records)
@@ -78,8 +75,7 @@ class NumerahaResource extends Resource
                             ->default('GM-' . Str::substr((string) Str::uuid(), 0, 8)) // Auto-generate a unique save number
                             ->disabled()
                             ->prefixIcon('heroicon-o-sparkles')
-                            ->required()
-                        ,
+                            ->required(),
                         Forms\Components\TextInput::make('Land_Area')
                             ->label('د نمری (ځمکی) مساحت')
                             ->placeholder('د نمری (ځمکی) مساحت')
@@ -98,6 +94,44 @@ class NumerahaResource extends Resource
                     // Grid::make()->schema([
                     // ]),
                     Grid::make()->schema([
+                        Forms\Components\TextInput::make('north')
+                            ->label('شمال')
+                            ->required()
+                            ->placeholder('د نمری (ځمکی) شمال طرف')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('south')
+                            ->label('جنوب')
+                            ->required()
+                            ->placeholder('د نمری (ځمکی) جنوب طرف')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('east')
+                            ->label('شمال')
+                            ->required()
+                            ->placeholder('د نمری (ځمکی) شرق طرف')
+                            ->maxLength(191),
+                        Forms\Components\TextInput::make('west')
+                            ->label('غرب')
+                            ->required()
+                            ->placeholder('د نمری (ځمکی) غرب طرف')
+                            ->maxLength(191),
+                        Forms\Components\Select::make('numera_type')
+                            ->label('د نمری (ځمکی) تفصیل')
+                            ->placeholder('د نمری (ځمکی) تفصیل')
+                            ->prefixIcon('heroicon-o-chat-bubble-bottom-center-text')
+                            ->options([
+                                '10 بسوه ای' => '10 بسوه ای',
+                                '9 بسوه ای' => '9 بسوه ای',
+                                '8 بسوه ای' => '8 بسوه ای',
+                                '7 بسوه ای' => '7 بسوه ای',
+                                '6 بسوه ای' => '6 بسوه ای',
+                                '5 بسوه ای' => '5 بسوه ای',
+                                '4 بسوه ای' => '4 بسوه ای',
+                                '3 بسوه ای' => '3 بسوه ای',
+                                '2.5 بسوه ای' => '2.5 بسوه ای',
+                                'بلندـمنزل' => 'بلند منزل',
+                            ])
+                            ->required()
+                            ->searchable(),
                         Forms\Components\TextInput::make('date')
                             ->label('نیټه')
                             ->default(now()->toDateString())
@@ -105,32 +139,7 @@ class NumerahaResource extends Resource
                             ->prefixIcon('heroicon-o-calendar-days')
                             ->required()
                             ->maxLength(191),
-                        // Forms\Components\TextInput::make('numera_price')
-                        //     ->label('د نمری (ځمکی) قیمت')
-                        //     ->required()
-                        //     ->numeric()
-                        //     ->prefixIcon('heroicon-o-banknotes')
-                        //     ->placeholder('د نمری (ځمکی) قیمت')
-                        //     ->maxLength(191),
-                    ])->columns(3),
-                    Forms\Components\Select::make('numera_type')
-                        ->label('د نمری (ځمکی) تفصیل')
-                        ->placeholder('د نمری (ځمکی) تفصیل')
-                        ->prefixIcon('heroicon-o-chat-bubble-bottom-center-text')
-                        ->options([
-                            '10 بسوه ای' => '10 بسوه ای',
-                            '9 بسوه ای' => '9 بسوه ای',
-                            '8 بسوه ای' => '8 بسوه ای',
-                            '7 بسوه ای' => '7 بسوه ای',
-                            '6 بسوه ای' => '6 بسوه ای',
-                            '5 بسوه ای' => '5 بسوه ای',
-                            '4 بسوه ای' => '4 بسوه ای',
-                            '3 بسوه ای' => '3 بسوه ای',
-                            '2.5 بسوه ای' => '2.5 بسوه ای',
-                            'بلندـمنزل' => 'بلند منزل',
-                        ])
-                        ->required()
-                        ->searchable(),
+                    ])->columns(2),
                     // Forms\Components\FileUpload::make('documents')
                     //     ->directory('Numeraha_documents')
                     //     ->preserveFilenames()

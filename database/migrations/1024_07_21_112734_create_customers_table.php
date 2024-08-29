@@ -23,6 +23,15 @@ return new class extends Migration {
             $table->string('job')->nullable();
             $table->foreignIdFor(Numeraha::class)->nullable();
             $table->string('Customer_image')->nullable();
+            $table->string('responsable_name');
+            $table->string('responsable_father_name')->nullable();
+            $table->string('responsable_grand_father_name')->nullable();
+            $table->string('responsable_province')->nullable();
+            $table->string('responsable_village')->nullable();
+            $table->string('responsable_tazkira')->nullable();
+            $table->string('responsable_mobile_number')->nullable();
+            $table->string('responsable_image')->nullable();
+            $table->string('responsable_job')->nullable();
             $table->timestamps();
         });
     }
