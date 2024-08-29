@@ -13,6 +13,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\HtmlString;
@@ -569,34 +570,34 @@ class CustomerNumerahaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('row_number')
+                TextColumn::make('row_number')
                     ->label('نمبر')
                     ->rowIndex(),
-                Tables\Columns\TextColumn::make('customer.name')
+                TextColumn::make('customer.name')
                     ->numeric()
                     ->label('نوم د مشتری')
                     ->toggleable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('numeraha.numera_id')
+                TextColumn::make('numeraha.numera_id')
                     ->numeric()
                     ->toggleable()
                     ->label('د نمری (ځمکی) آی ډی')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('multipleDocs')
+                TextColumn::make('multipleDocs')
                     ->searchable()
                     ->label('د نمری (ځمکی) اسناد')
                     ->toggleable()
                 ,
-                Tables\Columns\TextColumn::make('remarks')
+                TextColumn::make('remarks')
                     ->toggleable()
                     ->label('اضافه معلومات')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->label('د ثبت نیټه ')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->label('د بدلون نیټه')
                     ->sortable()
