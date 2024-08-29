@@ -12,6 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\Filter;
@@ -42,8 +43,8 @@ class CustomersResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Card::make()->schema([
-                    Forms\Components\Grid::make()->schema([
+                Card::make()->schema([
+                    Grid::make()->schema([
                         Forms\Components\TextInput::make('name')
                             ->label('نوم')
                             // ->helperText('مکمل نوم')
@@ -238,10 +239,10 @@ class CustomersResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('row_number')
+                TextColumn::make('row_number')
                     ->label('نمبر')
                     ->rowIndex(),
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->sortable()
                     ->label('نوم')
                     ->toggleable()
@@ -253,58 +254,58 @@ class CustomersResource extends Resource
                             ->color('success')
                             ->visible(fn($record) => $record->numerahas()->count() > 0),
                     ]),
-                Tables\Columns\TextColumn::make('father_name')
+                TextColumn::make('father_name')
                     ->sortable()
                     ->label('د پلار نوم')
                     ->toggleable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('grand_father_name')
+                TextColumn::make('grand_father_name')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->label('د نیکه نوم')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('province')
+                TextColumn::make('province')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->label('ولایت')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('village')
+                TextColumn::make('village')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->label('کلی')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('tazkira')
+                TextColumn::make('tazkira')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->label('تذکره نمبر')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('mobile_number')
+                TextColumn::make('mobile_number')
                     ->sortable()
                     ->toggleable()
                     ->label('تلفن نمبر')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('parmanent_address')
+                TextColumn::make('parmanent_address')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->label('دایمی داوسیدو پته ')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('current_address')
+                TextColumn::make('current_address')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->label('اوسنی داوسیدو پته ')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('job')
+                TextColumn::make('job')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->label('وظیفه')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->label('د ثبت نیټه ')
                     ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->date()
                     ->label('د بدلون نیټه')
