@@ -31,6 +31,7 @@
         "mcamara/laravel-localization": "^2.0",
         "psr/simple-cache": "^2.0",
         "pxlrbt/filament-excel": "^2.3",
+        "pxlrbt/filament-spotlight": "^1.2",
         "shuvroroy/filament-spatie-laravel-backup": "^2.2",
         "spatie/laravel-settings": "^3.3",
         "tomatophp/filament-pwa": "^1.0",

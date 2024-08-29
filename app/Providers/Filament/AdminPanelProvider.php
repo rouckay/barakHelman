@@ -27,6 +27,7 @@ use App\Filament\Pages\Backups;
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
 use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
 use Filament\FontProviders\SpatieGoogleFontProvider;
+use pxlrbt\FilamentSpotlight\SpotlightPlugin;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -77,6 +78,7 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
+                SpotlightPlugin::make(),
                 FilamentSpatieLaravelBackupPlugin::make()
                     // ->usingPage(Backups::class)
                     ->usingPolingInterval('10s')
