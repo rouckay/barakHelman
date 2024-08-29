@@ -16,7 +16,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.1" # or the version your Laravel app requires
+          php-version: "8.2" # or the version your Laravel app requires
           extensions: mbstring, intl, bcmath, gd, xml, ctype, json, mysql
 
       - name: Install Composer dependencies
