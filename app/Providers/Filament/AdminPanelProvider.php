@@ -51,9 +51,14 @@ class AdminPanelProvider extends PanelProvider
                     ->label('د پلورل شویو نمرو لیست')
                     ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
                     ->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=1')
-                    ->sort(3)
+                    ->sort(2)
                 ,
-                NavigationItem::make('remaining_numeraha')->icon('heroicon-o-map')->label('د پاتی نمرو لیست')->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=0')->sort(3),
+                NavigationItem::make('remaining_numeraha')
+                    ->icon('heroicon-o-map')
+                    ->label('د پاتی نمرو لیست')
+                    ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
+                    ->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=0')
+                    ->sort(3),
             ])
             ->pages([
                 Pages\Dashboard::class,

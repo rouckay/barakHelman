@@ -239,7 +239,7 @@ class CustomersResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('row_number')
+                Tables\Columns\TextColumn::make('row_number')
                     ->label('نمبر')
                     ->rowIndex(),
                 TextColumn::make('name')
@@ -254,7 +254,7 @@ class CustomersResource extends Resource
                             ->color('success')
                             ->visible(fn($record) => $record->numerahas()->count() > 0),
                     ]),
-                TextColumn::make('father_name')
+                Tables\Columns\TextColumn::make('father_name')
                     ->sortable()
                     ->label('د پلار نوم')
                     ->toggleable()
