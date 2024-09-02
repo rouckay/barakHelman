@@ -28,6 +28,7 @@ use Awcodes\FilamentBadgeableColumn\Components\Badge;
 use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
 use Filament\FontProviders\SpatieGoogleFontProvider;
 use pxlrbt\FilamentSpotlight\SpotlightPlugin;
+use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -36,7 +37,6 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->profile()
             ->login()
             ->colors([
                 'primary' => Color::Green,
@@ -46,14 +46,32 @@ class AdminPanelProvider extends PanelProvider
             // ->sidebarFullyCollapsibleOnDesktop()
             ->sidebarCollapsibleOnDesktop()
             ->navigationItems([
-                NavigationItem::make('Selled_numeraha')
-                    ->icon('heroicon-m-map')
-                    ->label('د پلورل شویو نمرو لیست')
-                    ->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')
-                    ->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=1')
-                    ->sort(3)
-                ,
-                NavigationItem::make('remaining_numeraha')->icon('heroicon-o-map')->label('د پاتی نمرو لیست')->isActiveWhen(fn() => request()->route()->getName() === 'filament.admin.resources.settings.index')->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=0')->sort(3),
+                NavigationItem::make('my-profile')
+                    ->icon('heroicon-m-user')
+                    ->label('زما پروفایل')
+                    ->url('http://barakhelman.test/admin/my-profile')
+                    ->sort(6),
+                // ->navigationItems([
+                //     NavigationItem::make('Selled_numeraha')
+                //         ->icon('heroicon-m-map')
+                //         ->label('د پلورل شویو نمرو لیست')
+                //         ->isActiveWhen(fn() => request()->routeIs('filament.admin.resources.numerahas.index'))
+                //         ->url(route('filament.admin.resources.numerahas.index', [
+                //             'tableFilters' => [
+                //                 'پلورل%20شوی%20نمری%20(ځمکی)' => ['value' => 1]
+                //             ]
+                //         ]))
+                //         ->sort(2),
+                //     NavigationItem::make('remaining_numeraha')
+                //         ->icon('heroicon-o-map')
+                //         ->label('د پاتی نمرو لیست')
+                //         ->isActiveWhen(fn() => request()->routeIs('filament.admin.resources.numerahas.index'))
+                //         ->url(route('filament.admin.resources.numerahas.index', [
+                //             'tableFilters' => [
+                //                 'پلورل%20شوی%20نمری%20(ځمکی)' => ['value' => 0]
+                //             ]
+                //         ]))
+                //         ->sort(3),
             ])
             ->pages([
                 Pages\Dashboard::class,
@@ -78,6 +96,26 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
+                FilamentEditProfilePlugin::make()
+                    ->slug('my-profile')
+                    ->setTitle('My Profile')
+                    ->setNavigationLabel('My Profile')
+                    ->setNavigationGroup('Group Profile')
+                    ->setIcon('heroicon-o-user')
+                    ->setSort(10)
+                    ->canAccess(fn() => auth()->user()->id === 1)
+                    ->shouldRegisterNavigation(false)
+                    ->shouldShowDeleteAccountForm(false)
+                    ->shouldShowSanctumTokens()
+                    ->shouldShowBrowserSessionsForm()
+                    ->shouldShowAvatarForm()
+                    ->shouldShowSanctumTokens(
+                        condition: fn() => auth()->user()->id === 1, //optional
+                    )->shouldShowBrowserSessionsForm(
+                        fn() => auth()->user()->id === 1, //optional
+                        //OR
+                        false //optional
+                    ),
                 SpotlightPlugin::make(),
                 FilamentSpatieLaravelBackupPlugin::make()
                     // ->usingPage(Backups::class)
@@ -114,9 +152,5 @@ class AdminPanelProvider extends PanelProvider
             ->resources([
                 config('filament-logger.activity_resource')
             ])->font('Inter', provider: SpatieGoogleFontProvider::class);
-        ;
-        ;
-        ;
-
     }
 }
