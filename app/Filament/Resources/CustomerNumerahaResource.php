@@ -8,9 +8,12 @@ use App\Filament\Resources\CustomerNumerahaResource\RelationManagers\CustomersRe
 use App\Models\CustomerNumeraha;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\FileUpload;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\HtmlString;
@@ -47,7 +50,7 @@ class CustomerNumerahaResource extends Resource
 
                 Card::make()->schema([
                     Grid::make()->schema([
-                        Forms\Components\Select::make('customer_id')
+                        Select::make('customer_id')
                             ->label('مشتری')
                             ->relationship('customer', 'name') // 'customer' is the relationship method in CustomerNumeraha model
                             ->searchable()
@@ -67,21 +70,21 @@ class CustomerNumerahaResource extends Resource
                             ->required()
                             ->dehydrated()
                             ->createOptionForm([
-                                Forms\Components\Card::make()->schema([
-                                    Forms\Components\Grid::make()->schema([
-                                        Forms\Components\TextInput::make('name')
+                                Card::make()->schema([
+                                    Grid::make()->schema([
+                                        TextInput::make('name')
                                             ->label('نوم')
                                             // ->helperText('مکمل نوم')
                                             ->required()
                                             ->prefixIcon('heroicon-o-user')
                                             ->placeholder('نام')
                                             ->maxLength(191),
-                                        Forms\Components\TextInput::make('father_name')
+                                        TextInput::make('father_name')
                                             ->label('د پلار نوم')
                                             ->placeholder('د پلار نوم')
                                             ->prefixIcon('heroicon-o-user')
                                             ->maxLength(191),
-                                        Forms\Components\Select::make('province')
+                                        Select::make('province')
                                             ->label('ولایت')
                                             ->placeholder('ولایت انتخاب کړی.')
                                             ->prefixIcon('heroicon-m-globe-alt')
@@ -113,12 +116,12 @@ class CustomerNumerahaResource extends Resource
                                                 'پنجشیر' => 'پنجشیر',
                                                 'پروان' => 'پروان',
                                             ]),
-                                        Forms\Components\TextInput::make('district')
+                                        TextInput::make('district')
                                             ->label('ولسوالی')
                                             ->placeholder('ولسوالی')
                                             ->prefixIcon('heroicon-o-identification')
                                             ->maxLength(191),
-                                        Forms\Components\FileUpload::make('Customer_image')
+                                        FileUpload::make('Customer_image')
                                             ->directory('Customers_images')
                                             ->preserveFilenames()
                                             ->downloadable()
@@ -129,13 +132,13 @@ class CustomerNumerahaResource extends Resource
                                             ->required()
                                             ->label('د مشتری انځور'),
                                     ])->columnSpan(6),
-                                    Forms\Components\Grid::make()->schema([
-                                        Forms\Components\TextInput::make('grand_father_name')
+                                    Grid::make()->schema([
+                                        TextInput::make('grand_father_name')
                                             ->label('د نیکه نوم')
                                             ->placeholder('د نیکه نوم')
                                             ->prefixIcon('heroicon-o-user')
                                             ->maxLength(191),
-                                        Forms\Components\TextInput::make('mobile_number')
+                                        TextInput::make('mobile_number')
                                             ->label('تلفن نمبر')
                                             ->prefixIcon('heroicon-o-phone')
                                             ->numeric()
@@ -148,35 +151,35 @@ class CustomerNumerahaResource extends Resource
                                                     $input.startsWith('07') ? '079-999-9999' : '079-999-9999'? :''
                                             JS))
                                             ->maxLength(12),
-                                        Forms\Components\TextInput::make('village')
+                                        TextInput::make('village')
                                             ->label('کلی')
                                             ->placeholder('کلی')
                                             ->prefixIcon('heroicon-m-map-pin')
                                             ->maxLength(191),
-                                        Forms\Components\TextInput::make('tazkira')
+                                        TextInput::make('tazkira')
                                             ->label('تذکره نمبر')
                                             ->placeholder('تذکره نمبر')
                                             ->prefixIcon('heroicon-o-identification')
                                             ->maxLength(191),
                                     ])->columnSpan(6)
                                 ])->columns(12),
-                                Forms\Components\Placeholder::make('')
+                                Placeholder::make('')
                                     ->content(new HtmlString('<strong>د مشتری د وکیل معلومات</strong>')),
-                                Forms\Components\Card::make()->schema([
-                                    Forms\Components\Grid::make()->schema([
-                                        Forms\Components\TextInput::make('name')
+                                Card::make()->schema([
+                                    Grid::make()->schema([
+                                        TextInput::make('name')
                                             ->label('نوم')
                                             // ->helperText('مکمل نوم')
                                             ->required()
                                             ->prefixIcon('heroicon-o-user')
                                             ->placeholder('نام')
                                             ->maxLength(191),
-                                        Forms\Components\TextInput::make('father_name')
+                                        TextInput::make('father_name')
                                             ->label('د پلار نوم')
                                             ->placeholder('د پلار نوم')
                                             ->prefixIcon('heroicon-o-user')
                                             ->maxLength(191),
-                                        Forms\Components\Select::make('province')
+                                        Select::make('province')
                                             ->label('ولایت')
                                             ->placeholder('ولایت انتخاب کړی.')
                                             ->prefixIcon('heroicon-m-globe-alt')
@@ -208,12 +211,12 @@ class CustomerNumerahaResource extends Resource
                                                 'پنجشیر' => 'پنجشیر',
                                                 'پروان' => 'پروان',
                                             ]),
-                                        Forms\Components\TextInput::make('district')
+                                        TextInput::make('district')
                                             ->label('ولسوالی')
                                             ->placeholder('ولسوالی')
                                             ->prefixIcon('heroicon-o-identification')
                                             ->maxLength(191),
-                                        Forms\Components\FileUpload::make('Customer_image')
+                                        FileUpload::make('Customer_image')
                                             ->directory('Customers_images')
                                             ->preserveFilenames()
                                             ->downloadable()
@@ -224,13 +227,13 @@ class CustomerNumerahaResource extends Resource
                                             ->required()
                                             ->label('د مشتری د وکیل انځور'),
                                     ])->columnSpan(6),
-                                    Forms\Components\Grid::make()->schema([
-                                        Forms\Components\TextInput::make('grand_father_name')
+                                    Grid::make()->schema([
+                                        TextInput::make('grand_father_name')
                                             ->label('د نیکه نوم')
                                             ->placeholder('د نیکه نوم')
                                             ->prefixIcon('heroicon-o-user')
                                             ->maxLength(191),
-                                        Forms\Components\TextInput::make('mobile_number')
+                                        TextInput::make('mobile_number')
                                             ->label('تلفن نمبر')
                                             ->prefixIcon('heroicon-o-phone')
                                             ->numeric()
@@ -243,12 +246,12 @@ class CustomerNumerahaResource extends Resource
                                                         $input.startsWith('07') ? '079-999-9999' : '079-999-9999'? :''
                                                 JS))
                                             ->maxLength(12),
-                                        Forms\Components\TextInput::make('village')
+                                        TextInput::make('village')
                                             ->label('کلی')
                                             ->placeholder('کلی')
                                             ->prefixIcon('heroicon-m-map-pin')
                                             ->maxLength(191),
-                                        Forms\Components\TextInput::make('tazkira')
+                                        TextInput::make('tazkira')
                                             ->label('تذکره نمبر')
                                             ->placeholder('تذکره نمبر')
                                             ->prefixIcon('heroicon-o-identification')
@@ -256,7 +259,7 @@ class CustomerNumerahaResource extends Resource
                                     ])->columnSpan(6)
                                 ])->columns(12),
                             ]),
-                        Forms\Components\Select::make('numeraha_id')
+                        Select::make('numeraha_id')
                             ->label('نمره (ځمکه)')
                             ->relationship('numeraha', 'numera_id') // 'numeraha' is the relationship method in CustomerNumeraha model
                             ->searchable()
@@ -567,34 +570,34 @@ class CustomerNumerahaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('row_number')
+                TextColumn::make('row_number')
                     ->label('نمبر')
                     ->rowIndex(),
-                Tables\Columns\TextColumn::make('customer.name')
+                TextColumn::make('customer.name')
                     ->numeric()
                     ->label('نوم د مشتری')
                     ->toggleable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('numeraha.numera_id')
+                TextColumn::make('numeraha.numera_id')
                     ->numeric()
                     ->toggleable()
                     ->label('د نمری (ځمکی) آی ډی')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('multipleDocs')
+                TextColumn::make('multipleDocs')
                     ->searchable()
                     ->label('د نمری (ځمکی) اسناد')
                     ->toggleable()
                 ,
-                Tables\Columns\TextColumn::make('remarks')
+                TextColumn::make('remarks')
                     ->toggleable()
                     ->label('اضافه معلومات')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->label('د ثبت نیټه ')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->label('د بدلون نیټه')
                     ->sortable()
