@@ -115,6 +115,15 @@ class CustomerNumerahaResource extends Resource
                                                 'نورستان' => 'نورستان',
                                                 'پنجشیر' => 'پنجشیر',
                                                 'پروان' => 'پروان',
+                                                'سمنگان' => 'سمنگان',
+                                                'سرپل' => 'سرپل',
+                                                'تخار' => 'تخار',
+                                                'ارزگان' => 'ارزگان',
+                                                'وردک' => 'وردک',
+                                                'زابل' => 'زابل',
+                                                'پکتیا' => 'پکتیا',
+                                                'پکتیکا' => 'پکتیکا',
+
                                             ]),
                                         TextInput::make('district')
                                             ->label('ولسوالی')
@@ -167,19 +176,19 @@ class CustomerNumerahaResource extends Resource
                                     ->content(new HtmlString('<strong>د مشتری د وکیل معلومات</strong>')),
                                 Card::make()->schema([
                                     Grid::make()->schema([
-                                        TextInput::make('name')
+                                        TextInput::make('responsable_name')
                                             ->label('نوم')
                                             // ->helperText('مکمل نوم')
                                             ->required()
                                             ->prefixIcon('heroicon-o-user')
                                             ->placeholder('نام')
                                             ->maxLength(191),
-                                        TextInput::make('father_name')
+                                        TextInput::make('responsable_father_name')
                                             ->label('د پلار نوم')
                                             ->placeholder('د پلار نوم')
                                             ->prefixIcon('heroicon-o-user')
                                             ->maxLength(191),
-                                        Select::make('province')
+                                        Select::make('responsable_province')
                                             ->label('ولایت')
                                             ->placeholder('ولایت انتخاب کړی.')
                                             ->prefixIcon('heroicon-m-globe-alt')
@@ -210,14 +219,22 @@ class CustomerNumerahaResource extends Resource
                                                 'نورستان' => 'نورستان',
                                                 'پنجشیر' => 'پنجشیر',
                                                 'پروان' => 'پروان',
+                                                'سمنگان' => 'سمنگان',
+                                                'سرپل' => 'سرپل',
+                                                'تخار' => 'تخار',
+                                                'ارزگان' => 'ارزگان',
+                                                'وردک' => 'وردک',
+                                                'زابل' => 'زابل',
+                                                'پکتیا' => 'پکتیا',
+                                                'پکتیکا' => 'پکتیکا',
                                             ]),
-                                        TextInput::make('district')
+                                        TextInput::make('responsable_district')
                                             ->label('ولسوالی')
                                             ->placeholder('ولسوالی')
                                             ->prefixIcon('heroicon-o-identification')
                                             ->maxLength(191),
-                                        FileUpload::make('Customer_image')
-                                            ->directory('Customers_images')
+                                        FileUpload::make('responsable_image')
+                                            ->directory('responsable_images')
                                             ->preserveFilenames()
                                             ->downloadable()
                                             ->placeholder('د مشتری د وکیل انځور')
@@ -228,7 +245,7 @@ class CustomerNumerahaResource extends Resource
                                             ->label('د مشتری د وکیل انځور'),
                                     ])->columnSpan(6),
                                     Grid::make()->schema([
-                                        TextInput::make('grand_father_name')
+                                        TextInput::make('responsable_grand_father_name')
                                             ->label('د نیکه نوم')
                                             ->placeholder('د نیکه نوم')
                                             ->prefixIcon('heroicon-o-user')
@@ -246,12 +263,12 @@ class CustomerNumerahaResource extends Resource
                                                         $input.startsWith('07') ? '079-999-9999' : '079-999-9999'? :''
                                                 JS))
                                             ->maxLength(12),
-                                        TextInput::make('village')
+                                        TextInput::make('responsable_village')
                                             ->label('کلی')
                                             ->placeholder('کلی')
                                             ->prefixIcon('heroicon-m-map-pin')
                                             ->maxLength(191),
-                                        TextInput::make('tazkira')
+                                        TextInput::make('responsable_tazkira')
                                             ->label('تذکره نمبر')
                                             ->placeholder('تذکره نمبر')
                                             ->prefixIcon('heroicon-o-identification')
