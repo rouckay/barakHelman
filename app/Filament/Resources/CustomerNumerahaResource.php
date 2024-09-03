@@ -123,7 +123,6 @@ class CustomerNumerahaResource extends Resource
                                                 'زابل' => 'زابل',
                                                 'پکتیا' => 'پکتیا',
                                                 'پکتیکا' => 'پکتیکا',
-
                                             ]),
                                         TextInput::make('district')
                                             ->label('ولسوالی')
@@ -250,7 +249,7 @@ class CustomerNumerahaResource extends Resource
                                             ->placeholder('د نیکه نوم')
                                             ->prefixIcon('heroicon-o-user')
                                             ->maxLength(191),
-                                        TextInput::make('mobile_number')
+                                        TextInput::make('responsable_mobile_number')
                                             ->label('تلفن نمبر')
                                             ->prefixIcon('heroicon-o-phone')
                                             ->numeric()
@@ -456,6 +455,7 @@ class CustomerNumerahaResource extends Resource
                         Forms\Components\TextInput::make('first_phase')
                             ->label('لمړی قست')
                             ->numeric()
+                            ->prefix(now()->toDateString())
                             ->live(onBlur: true)
                             ->prefixIcon('heroicon-o-banknotes')
                             ->placeholder('لمړی قست')

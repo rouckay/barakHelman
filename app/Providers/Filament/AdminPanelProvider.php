@@ -29,6 +29,7 @@ use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
 use Filament\FontProviders\SpatieGoogleFontProvider;
 use pxlrbt\FilamentSpotlight\SpotlightPlugin;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
+use \Okeonline\FilamentArchivable\FilamentArchivablePlugin;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -116,6 +117,7 @@ class AdminPanelProvider extends PanelProvider
                         //OR
                         false //optional
                     ),
+                \Okeonline\FilamentArchivable\FilamentArchivablePlugin::make(),
                 SpotlightPlugin::make(),
                 FilamentSpatieLaravelBackupPlugin::make()
                     // ->usingPage(Backups::class)

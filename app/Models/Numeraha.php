@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use \LaravelArchivable\Archivable;
 class Numeraha extends Model
 {
     // protected $primaryKey = 'numerahaID';
     use HasFactory;
+    use Archivable;
     protected $fillable = [
         'numera_id',
         'Land_Area',

@@ -35,7 +35,10 @@ use Filament\Notifications\Notification;
 use App\Models\CustomerNumeraha;
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
 use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
-
+use Okeonline\FilamentArchivable\Tables\Filters\ArchivedFilter;
+use Okeonline\FilamentArchivable\Tables\Actions\ArchiveAction;
+use Okeonline\FilamentArchivable\Tables\Actions\UnArchiveAction;
+use LaravelArchivable\Scopes\ArchivableScope;
 class NumerahaResource extends Resource
 {
     protected static ?string $model = Numeraha::class;
@@ -61,6 +64,14 @@ class NumerahaResource extends Resource
         foreach ($records as $record) {
             // Process each record, e.g., save to the database
         }
+    }
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class, // only if soft deleting is also active, otherwise it can be ommitted
+                ArchivableScope::class,
+            ]);
     }
     public static function form(Form $form): Form
     {
@@ -211,6 +222,7 @@ class NumerahaResource extends Resource
             ])
             ->filters(
                 [
+                    ArchivedFilter::make(),
                     // SelectFilter::make('customer')
                     //     ->label('به اساس مشتری')
                     //     ->relationship('customers', 'name'),
@@ -262,7 +274,9 @@ class NumerahaResource extends Resource
                             // Column::make('customer_id'),
                             Column::make('numera_type'),
                         ]),
-                    ])
+                    ]),
+                ArchiveAction::make(),
+                UnArchiveAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
