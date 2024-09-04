@@ -17,8 +17,8 @@ class EditNumeraha extends EditRecord
         return [
             Actions\ViewAction::make()
                 ->label('کتل'),
-            Actions\DeleteAction::make()
-                ->label('حذف کول'),
+            // Actions\DeleteAction::make()
+            //     ->label('حذف کول'),
         ];
     }
 }

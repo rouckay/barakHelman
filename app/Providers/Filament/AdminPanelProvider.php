@@ -10,7 +10,6 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -123,34 +122,13 @@ class AdminPanelProvider extends PanelProvider
                     // ->usingPage(Backups::class)
                     ->usingPolingInterval('10s')
                     ->timeout(120),
-                \TomatoPHP\FilamentPWA\FilamentPWAPlugin::make()
-                ,
-                \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
-                ,
+                \TomatoPHP\FilamentPWA\FilamentPWAPlugin::make(),
+                \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make(),
                 \Hasnayeen\Themes\ThemesPlugin::make(),
                 ReportsPlugin::make(),
-                OverlookPlugin::make()
-                    ->sort(2)
-                    ->columns([
-                        'default' => 1,
-                        'sm' => 2,
-                        'md' => 3,
-                        'lg' => 6,
-                        'xl' => 5,
-                        '2xl' => null,
-                    ])
-                    ->includes([
-                        \App\Filament\Resources\CustomerNumerahaResource::class,
-                        \App\Filament\Resources\CustomersResource::class,
-                        \App\Filament\Resources\EmployeesResource::class,
-                        \App\Filament\Resources\FinanceResource::class,
-                    ]),
-                // KnowledgeBasePlugin::make(),
+                KnowledgeBasePlugin::make(),
             ])
             ->databaseNotifications()
-            ->widgets([
-                OverlookWidget::class,
-            ])
             ->resources([
                 config('filament-logger.activity_resource')
             ])->font('Inter', provider: SpatieGoogleFontProvider::class);

@@ -275,14 +275,15 @@ class NumerahaResource extends Resource
                             Column::make('numera_type'),
                         ]),
                     ]),
-                ArchiveAction::make(),
-                UnArchiveAction::make(),
+                ArchiveAction::make()
+                    ->label('آرشیف کړی'),
+                UnArchiveAction::make()
+                    ->label('آرشیف نه حذف کړی'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     // Tables\Actions\DeleteBulkAction::make(),
                 ]),
-
             ]);
     }
 
