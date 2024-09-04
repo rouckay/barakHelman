@@ -14,7 +14,6 @@
         "aymanalhattami/filament-page-with-sidebar": "^2.5",
         "bezhansalleh/filament-language-switch": "^3.1",
         "eightynine/filament-excel-import": "^3.1",
-        "eightynine/filament-reports": "^3.0",
         "filament/filament": "^3.2",
         "filament/notifications": "^3.2",
         "filament/spatie-laravel-google-fonts-plugin": "^3.2",
