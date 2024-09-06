@@ -250,12 +250,6 @@ class NumerahaResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->label('بدلون')
                 ,
-                // Tables\Actions\ButtonAction::make('downloadInvoice')
-                //     ->label('تعرفه ترلاسه کړی')
-                //     ->url(fn(Numeraha $record) => route('download.invoice', $record)) // Use route to generate URL
-                //     ->icon('heroicon-o-printer')
-                //     ->color('primary')
-                //     ->requiresConfirmation(),
                 ExportAction::make()
                     ->label('ډنلوډ کول')
                     ->color('success')

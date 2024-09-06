@@ -17,7 +17,6 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use EightyNine\Reports\ReportsPlugin;
 use Awcodes\Overlook\OverlookPlugin;
 use Awcodes\Overlook\Widgets\OverlookWidget;
 use Guava\FilamentKnowledgeBase\KnowledgeBasePlugin;
@@ -125,7 +124,6 @@ class AdminPanelProvider extends PanelProvider
                 \TomatoPHP\FilamentPWA\FilamentPWAPlugin::make(),
                 \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make(),
                 \Hasnayeen\Themes\ThemesPlugin::make(),
-                ReportsPlugin::make(),
                 KnowledgeBasePlugin::make(),
             ])
             ->databaseNotifications()

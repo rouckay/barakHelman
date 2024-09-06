@@ -33,6 +33,7 @@
         "maatwebsite/excel": "^3.1",
         "mcamara/laravel-localization": "^2.0",
         "okeonline/filament-archivable": "^0.0.2",
+        "pelmered/filament-money-field": "^1.4",
         "psr/simple-cache": "^2.0",
         "pxlrbt/filament-excel": "^2.3",
         "pxlrbt/filament-spotlight": "^1.2",

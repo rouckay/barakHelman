@@ -341,34 +341,7 @@ class CustomerNumerahaResource extends Resource
                                     $set('customer_list', []);
                                     $set('numeraha_details', null);
                                 }
-                            })
-                        // ->createOptionForm(function (callable $set, callable $get) {
-                        //     // Conditionally return the form if can_create_option is true
-                        //     if ($get('can_create_option')) {
-                        //         $numeraha = Numeraha::find($get('numeraha_id'));
-                        //         if ($numeraha) {
-                        //             return [
-                        //                 TextInput::make('north')
-                        //                     ->label('North')
-                        //                     ->required(),
-                        //                 TextInput::make('south')
-                        //                     ->label('South')
-                        //                     ->required(),
-                        //                 TextInput::make('east')
-                        //                     ->label('East')
-                        //                     ->required(),
-                        //                 TextInput::make('west')
-                        //                     ->label('West')
-                        //                     ->required(),
-                        //                 // Add other fields as needed
-                        //             ];
-                        //         }
-                        //     }
-                        //     // If the condition is not met, return an empty array to disable createOptionForm
-                        //     return [];
-                        // })
-                        ,
-
+                            }),
                     ])->columns(2),
                     Placeholder::make('numeraha_details')
                         ->label('د ځمکی معلومات')
@@ -453,12 +426,12 @@ class CustomerNumerahaResource extends Resource
                 Card::make()->schema([
                     Forms\Components\Grid::make()->schema([
                         Forms\Components\TextInput::make('first_phase')
-                            ->label('لمړی قست')
+                            ->label('لمړی قسط')
                             ->numeric()
                             ->prefix(now()->toDateString())
                             ->live(onBlur: true)
                             ->prefixIcon('heroicon-o-banknotes')
-                            ->placeholder('لمړی قست')
+                            ->placeholder('لمړی قسط')
                             ->maxLength(191)
                             ->afterStateUpdated(function ($state, $set, $get) {
                                 self::updatePayedPrice($state, $get, $set, 'first_phase');
@@ -468,11 +441,11 @@ class CustomerNumerahaResource extends Resource
                             ->hidden()
                             ->default(0),
                         Forms\Components\TextInput::make('second_phase')
-                            ->label('دوهم قست')
+                            ->label('دوهم قسط')
                             ->numeric()
                             ->live(onBlur: true)
                             ->prefixIcon('heroicon-o-banknotes')
-                            ->placeholder('دوهم قست')
+                            ->placeholder('دوهم قسط')
                             ->maxLength(191)
                             ->afterStateUpdated(function ($state, $set, $get) {
                                 self::updatePayedPrice($state, $get, $set, 'second_phase');
@@ -482,47 +455,47 @@ class CustomerNumerahaResource extends Resource
                             ->hidden()
                             ->default(0),
                         Forms\Components\TextInput::make('third_phase')
-                            ->label('دریم قست')
+                            ->label('دریم قسط')
                             ->numeric()
                             ->live(onBlur: true)
                             ->afterStateUpdated(function ($state, $set, $get) {
                                 self::updatePayedPrice($state, $get, $set, 'third_phase');
                             })
                             ->prefixIcon('heroicon-o-banknotes')
-                            ->placeholder('دریم قست')
+                            ->placeholder('دریم قسط')
                             ->maxLength(191),
                     ])->columns(3),
 
                     Forms\Components\Grid::make()->schema([
                         Forms\Components\TextInput::make('fourth_phase')
-                            ->label('څلورم قست')
+                            ->label('څلورم قسط')
                             ->numeric()
                             ->live(onBlur: true)
                             ->afterStateUpdated(function ($state, $set, $get) {
                                 self::updatePayedPrice($state, $get, $set, 'fourth_phase');
                             })
                             ->prefixIcon('heroicon-o-banknotes')
-                            ->placeholder('څلورم قست')
+                            ->placeholder('څلورم قسط')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('fifth_phase')
-                            ->label('پنځم قست')
+                            ->label('پنځم قسط')
                             ->numeric()
                             ->live(onBlur: true)
                             ->afterStateUpdated(function ($state, $set, $get) {
                                 self::updatePayedPrice($state, $get, $set, 'fifth_phase');
                             })
                             ->prefixIcon('heroicon-o-banknotes')
-                            ->placeholder('پنځم قست')
+                            ->placeholder('پنځم قسط')
                             ->maxLength(191),
                         Forms\Components\TextInput::make('sixth_phase')
-                            ->label('شپژم قست')
+                            ->label('شپژم قسط')
                             ->numeric()
                             ->live(onBlur: true)
                             ->afterStateUpdated(function ($state, $set, $get) {
                                 self::updatePayedPrice($state, $get, $set, 'sixth_phase');
                             })
                             ->prefixIcon('heroicon-o-banknotes')
-                            ->placeholder('شپژم قست')
+                            ->placeholder('شپژم قسط')
                             ->maxLength(191),
                     ])->columns(3),
                     Forms\Components\Grid::make()->schema([
@@ -532,7 +505,7 @@ class CustomerNumerahaResource extends Resource
                             ->live()
                             ->prefixIcon('heroicon-o-banknotes'),
                         Forms\Components\TextInput::make('total_price')
-                            ->label('محمعه پیسی')
+                            ->label('ټولټال پیسی')
                             ->numeric()
                             ->live()
                             ->dehydrated()
@@ -553,12 +526,14 @@ class CustomerNumerahaResource extends Resource
 
                                 return $total_price - $payed_price;
                             }),
+                        // all hidden data is here ---------------------------------------------------------------------------------------------------------------
                         TextInput::make('first_phase_hidden')->hidden()->default(0),
                         TextInput::make('second_phase_hidden')->hidden()->default(0),
                         TextInput::make('third_phase_hidden')->hidden()->default(0),
                         TextInput::make('fourth_phase_hidden')->hidden()->default(0),
                         TextInput::make('fifth_phase_hidden')->hidden()->default(0),
                         TextInput::make('sixth_phase_hidden')->hidden()->default(0),
+                        // end of all hidden data is here ---------------------------------------------------------------------------------------------------------
                     ])->columns(3),
                 ]),
             ])->columns(12);
@@ -628,6 +603,12 @@ class CustomerNumerahaResource extends Resource
                     ->label('کتل'),
                 Tables\Actions\EditAction::make()
                     ->label('بدلون'),
+                Tables\Actions\ButtonAction::make('downloadInvoice')
+                    ->label('تعرفه ترلاسه کړی')
+                    ->url(fn(CustomerNumeraha $record) => route('download.invoice', $record)) // Use route to generate URL
+                    ->icon('heroicon-o-printer')
+                    ->color('primary')
+                    ->requiresConfirmation(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
