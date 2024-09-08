@@ -503,13 +503,20 @@ class CustomerNumerahaResource extends Resource
                             ->label('رسید پیسی')
                             ->numeric()
                             ->live()
-                            ->prefixIcon('heroicon-o-banknotes'),
+                            ->required()
+                            ->prefixIcon('heroicon-o-banknotes')
+                            ->extraAttributes([
+                                'x-ref' => 'payed_price', // Reference for Alpine.js
+                            ]),
                         Forms\Components\TextInput::make('total_price')
                             ->label('ټولټال پیسی')
                             ->numeric()
                             ->live()
+                            ->required()
                             ->dehydrated()
-                            ->prefixIcon('heroicon-o-banknotes'),
+                            ->prefixIcon('heroicon-o-banknotes')->extraAttributes([
+                                    'x-ref' => 'total_price', // Reference for Alpine.js
+                                ]),
                         Forms\Components\Placeholder::make('due_price')
                             ->label('باقی پیسی')
                             ->content(function ($get) {
@@ -518,12 +525,12 @@ class CustomerNumerahaResource extends Resource
 
                                 if (!is_numeric($payed_price) || !is_numeric($total_price)) {
                                     return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی یوازې عددي ارزښتونه اضافه کړی!</strong></p>');
-                                }
-
-                                if ($payed_price <= 0 || $total_price <= 0) {
+                                } else if ($payed_price <= 0 || $total_price <= 0) {
                                     return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>مهربانی وکړی د 1 څخه جګ عدد انتخاب کړی!</strong></p>');
-                                }
+                                } else if ($payed_price > $total_price) {
 
+                                    return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>رسید پیسی باید د مجمعی پیسو څخه کم!</strong></p>');
+                                }
                                 return $total_price - $payed_price;
                             }),
                         // all hidden data is here ---------------------------------------------------------------------------------------------------------------
@@ -558,6 +565,7 @@ class CustomerNumerahaResource extends Resource
         // Set the updated payed_price
         $set('payed_price', $payedPrice);
     }
+
     public static function table(Table $table): Table
     {
         return $table

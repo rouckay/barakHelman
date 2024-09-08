@@ -6,19 +6,19 @@ return [
         'backup_destination_list' => [
             'table' => [
                 'actions' => [
-                    'download' => 'Download',
-                    'delete' => 'Delete',
+                    'download' => 'ډنلوډ',
+                    'delete' => 'حذف',
                 ],
 
                 'fields' => [
-                    'path' => 'Path',
-                    'disk' => 'Disk',
-                    'date' => 'Date',
-                    'size' => 'Size',
+                    'path' => 'د ثبت ځای یی',
+                    'disk' => 'د ذخیری ځای',
+                    'date' => 'نیټه',
+                    'size' => 'مقدار',
                 ],
 
                 'filters' => [
-                    'disk' => 'Disk',
+                    'disk' => 'د ذخیری ځای',
                 ],
             ],
         ],
@@ -26,12 +26,12 @@ return [
         'backup_destination_status_list' => [
             'table' => [
                 'fields' => [
-                    'name' => 'Name',
-                    'disk' => 'Disk',
-                    'healthy' => 'Healthy',
-                    'amount' => 'Amount',
-                    'newest' => 'Newest',
-                    'used_storage' => 'Used Storage',
+                    'name' => 'نوم',
+                    'disk' => 'د ذخیری ځای',
+                    'healthy' => 'روغتیا',
+                    'amount' => 'تعداد',
+                    'newest' => 'اخیری بک اپ',
+                    'used_storage' => 'اشغال شوی حافظه',
                 ],
             ],
         ],
@@ -40,21 +40,21 @@ return [
     'pages' => [
         'backups' => [
             'actions' => [
-                'create_backup' => 'Create Backup',
+                'create_backup' => 'نوی بک اپ',
             ],
 
-            'heading' => 'Backups',
+            'heading' => 'د بک اپ لیست',
 
             'messages' => [
-                'backup_success' => 'Creating a new backup in background.',
-                'backup_delete_success' => 'Deleting this backup in background.',
+                'backup_success' => 'ستاسی بک اپ روان دی په سیستم کی',
+                'backup_delete_success' => 'بک اپ حذف کول روان دی په سیستم کی',
             ],
 
             'modal' => [
                 'buttons' => [
-                    'only_db' => 'Only DB',
-                    'only_files' => 'Only Files',
-                    'db_and_files' => 'DB & Files',
+                    'only_db' => 'یوازی د ډیټابیس',
+                    'only_files' => 'یوازی د اسنادو',
+                    'db_and_files' => 'د دواړو هم د اسنادو هم د ډیټابیس',
                 ],
 
                 'label' => 'Please choose an option',
@@ -62,7 +62,7 @@ return [
 
             'navigation' => [
                 'group' => 'Settings',
-                'label' => 'Backups',
+                'label' => 'بک آب',
             ],
         ],
     ],

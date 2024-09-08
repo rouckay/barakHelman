@@ -5,6 +5,7 @@ namespace App\Filament\Resources\CustomerNumerahaResource\Pages;
 use App\Filament\Resources\CustomerNumerahaResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Support\HtmlString;
 
 class ListCustomerNumerahas extends ListRecords
 {
@@ -32,7 +33,9 @@ class ListCustomerNumerahas extends ListRecords
                 ->color('warning'),
             Actions\CreateAction::make()
                 ->label('د نوی نمری پلورل')
-            ,
+                ->extraAttributes([
+                    'x-ref' => 'create_button', // Reference for the button
+                ]),
         ];
     }
 }

@@ -49,6 +49,7 @@
         //     userLinkRTL.setAttribute('disabled', false);
         // }
     </script>
+     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.x.x/dist/alpine.min.js" defer></script>
 </head>
 
 <body>
@@ -893,6 +894,35 @@
     <script src="../../../polyfill.io/v3/polyfill.min58be.js?features=window.scroll"></script>
     <script src="vendors/list.js/list.min.js"></script>
     <script src="assets/js/theme.js"></script>
+
+    @yield('content')
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initialize Alpine.js if it's not already initialized
+        if (window.Alpine) {
+            window.Alpine.start();
+        }
+
+        // Add event listeners to dynamically enable/disable the button
+        const payedPriceInput = document.querySelector('[x-ref="payed_price"]');
+        const totalPriceInput = document.querySelector('[x-ref="total_price"]');
+        const createButton = document.querySelector('[x-ref="create_button"]');
+
+        function updateButtonState() {
+            if (payedPriceInput && totalPriceInput && createButton) {
+                createButton.disabled = !payedPriceInput.value || !totalPriceInput.value;
+            }
+        }
+
+        // Attach event listeners to input fields
+        payedPriceInput?.addEventListener('input', updateButtonState);
+        totalPriceInput?.addEventListener('input', updateButtonState);
+
+        // Initial button state update
+        updateButtonState();
+    });
+</script>
 </body>
 
 

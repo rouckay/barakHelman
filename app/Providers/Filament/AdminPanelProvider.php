@@ -50,27 +50,18 @@ class AdminPanelProvider extends PanelProvider
                     ->label('زما پروفایل')
                     ->url('http://barakhelman.test/admin/my-profile')
                     ->sort(6),
-                // ->navigationItems([
-                //     NavigationItem::make('Selled_numeraha')
-                //         ->icon('heroicon-m-map')
-                //         ->label('د پلورل شویو نمرو لیست')
-                //         ->isActiveWhen(fn() => request()->routeIs('filament.admin.resources.numerahas.index'))
-                //         ->url(route('filament.admin.resources.numerahas.index', [
-                //             'tableFilters' => [
-                //                 'پلورل%20شوی%20نمری%20(ځمکی)' => ['value' => 1]
-                //             ]
-                //         ]))
-                //         ->sort(2),
-                //     NavigationItem::make('remaining_numeraha')
-                //         ->icon('heroicon-o-map')
-                //         ->label('د پاتی نمرو لیست')
-                //         ->isActiveWhen(fn() => request()->routeIs('filament.admin.resources.numerahas.index'))
-                //         ->url(route('filament.admin.resources.numerahas.index', [
-                //             'tableFilters' => [
-                //                 'پلورل%20شوی%20نمری%20(ځمکی)' => ['value' => 0]
-                //             ]
-                //         ]))
-                //         ->sort(3),
+                NavigationItem::make('Selled_numeraha')
+                    ->icon('heroicon-m-map')
+                    ->label('د پلورل شویو نمرو لیست')
+                    ->isActiveWhen(fn() => request()->routeIs('filament.admin.resources.numerahas.index'))
+                    ->url(env('APP_URL') . 'admin/numerahas?tableFilters[%D9%BE%D9%84%D9%88%D8%B1%D9%84%20%D8%B4%D9%88%DB%8C%20%D9%86%D9%85%D8%B1%DB%8C%20(%DA%81%D9%85%DA%A9%DB%8C)][value]=1')
+                    ->sort(2),
+                NavigationItem::make('remaining_numeraha')
+                    ->icon('heroicon-o-map')
+                    ->label('د پاتی نمرو لیست')
+                    ->isActiveWhen(fn() => request()->routeIs('filament.admin.resources.numerahas.index'))
+                    ->url(env('APP_URL') . 'admin/numerahas?tableFilters[%D9%BE%D9%84%D9%88%D8%B1%D9%84%20%D8%B4%D9%88%DB%8C%20%D9%86%D9%85%D8%B1%DB%8C%20(%DA%81%D9%85%DA%A9%DB%8C)][value]=0')
+                    ->sort(3),
             ])
             ->pages([
                 Pages\Dashboard::class,
