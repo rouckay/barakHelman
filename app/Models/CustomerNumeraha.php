@@ -9,10 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CustomerNumeraha extends Model
 {
-
     use HasFactory;
-
-
     protected $fillable = [
         'customer_id',
         'numeraha_id',
@@ -49,5 +46,6 @@ class CustomerNumeraha extends Model
     {
         return $this->belongsTo(Numeraha::class);
     }
+
 
 }

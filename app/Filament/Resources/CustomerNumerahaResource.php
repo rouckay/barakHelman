@@ -307,12 +307,12 @@ class CustomerNumerahaResource extends Resource
                                         $set('numeraha_details', null);
                                     }
                                     // The Numerah Details fetcing is finished -------------------------------------------------------------------------------------------
-                    
+
 
 
                                     // Initially disable createOptionForm
                                     // $set('can_create_option', false);
-                    
+
                                     // if ($numeraha) {
                                     //     // Check if any of the specified fields are empty
                                     //     if (empty($numeraha->north) || empty($numeraha->south) || empty($numeraha->east) || empty($numeraha->west)) {
@@ -425,6 +425,15 @@ class CustomerNumerahaResource extends Resource
                 ])->columnSpan(4),
                 Card::make()->schema([
                     Forms\Components\Grid::make()->schema([
+                        Forms\Components\TextInput::make('total_price')
+                            ->label('د نمری اصلی قیمت')
+                            ->numeric()
+                            ->live()
+                            ->required()
+                            ->dehydrated()
+                            ->prefixIcon('heroicon-o-banknotes')->extraAttributes([
+                                    'x-ref' => 'total_price', // Reference for Alpine.js
+                                ]),
                         Forms\Components\TextInput::make('first_phase')
                             ->label('لمړی قسط')
                             ->numeric()
@@ -450,10 +459,11 @@ class CustomerNumerahaResource extends Resource
                             ->afterStateUpdated(function ($state, $set, $get) {
                                 self::updatePayedPrice($state, $get, $set, 'second_phase');
                             }),
-
                         TextInput::make('payed_price_initial')
                             ->hidden()
                             ->default(0),
+                    ])->columns(3),
+                    Forms\Components\Grid::make()->schema([
                         Forms\Components\TextInput::make('third_phase')
                             ->label('دریم قسط')
                             ->numeric()
@@ -464,9 +474,6 @@ class CustomerNumerahaResource extends Resource
                             ->prefixIcon('heroicon-o-banknotes')
                             ->placeholder('دریم قسط')
                             ->maxLength(191),
-                    ])->columns(3),
-
-                    Forms\Components\Grid::make()->schema([
                         Forms\Components\TextInput::make('fourth_phase')
                             ->label('څلورم قسط')
                             ->numeric()
@@ -497,10 +504,8 @@ class CustomerNumerahaResource extends Resource
                             ->prefixIcon('heroicon-o-banknotes')
                             ->placeholder('شپژم قسط')
                             ->maxLength(191),
-                    ])->columns(3),
-                    Forms\Components\Grid::make()->schema([
                         Forms\Components\TextInput::make('payed_price')
-                            ->label('رسید پیسی')
+                            ->label('ټولټال تحویل شوی پیسی')
                             ->numeric()
                             ->live()
                             ->required()
@@ -508,15 +513,6 @@ class CustomerNumerahaResource extends Resource
                             ->extraAttributes([
                                 'x-ref' => 'payed_price', // Reference for Alpine.js
                             ]),
-                        Forms\Components\TextInput::make('total_price')
-                            ->label('ټولټال پیسی')
-                            ->numeric()
-                            ->live()
-                            ->required()
-                            ->dehydrated()
-                            ->prefixIcon('heroicon-o-banknotes')->extraAttributes([
-                                    'x-ref' => 'total_price', // Reference for Alpine.js
-                                ]),
                         Forms\Components\Placeholder::make('due_price')
                             ->label('باقی پیسی')
                             ->content(function ($get) {
@@ -533,6 +529,9 @@ class CustomerNumerahaResource extends Resource
                                 }
                                 return $total_price - $payed_price;
                             }),
+                    ])->columns(3),
+                    Forms\Components\Grid::make()->schema([
+
                         // all hidden data is here ---------------------------------------------------------------------------------------------------------------
                         TextInput::make('first_phase_hidden')->hidden()->default(0),
                         TextInput::make('second_phase_hidden')->hidden()->default(0),
@@ -591,7 +590,8 @@ class CustomerNumerahaResource extends Resource
                 TextColumn::make('remarks')
                     ->toggleable()
                     ->label('اضافه معلومات')
-                    ->searchable(),
+                    ->searchable()
+                    ->html(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->label('د ثبت نیټه ')

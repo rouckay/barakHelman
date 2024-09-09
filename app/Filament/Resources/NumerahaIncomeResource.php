@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\HtmlString;
 use Filament\Tables\Columns\Summarizers\Average;
 use Filament\Tables\Columns\Summarizers\Sum;
+use Filament\Tables\Columns\Summarizers\Count;
 class NumerahaIncomeResource extends Resource
 {
     protected static ?string $model = CustomerNumeraha::class;
@@ -41,62 +42,49 @@ class NumerahaIncomeResource extends Resource
                 Tables\Columns\TextColumn::make('row_number')
                     ->label('نمبر')
                     ->rowIndex(),
-                Tables\Columns\TextColumn::make('payed_price')
-                    ->label('رسید پیسی')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('numeraha.numera_id')
+                    ->label('د نمری آی ډی')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('numeraha.description')
+                    ->label('تفصیل')
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->html(),
+                Tables\Columns\TextColumn::make('numeraha.numera_type')
+                    ->label('مساحت (متر مربع)')
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable()
+                    ->html(),
+                Tables\Columns\TextColumn::make('customer.name')
+                    ->label('د مشتری نوم')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('customer.mobile_number')
+                    ->label('د اړیکی شمیره')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('total_price')
-                    ->label('ټولټال پیسی')
+                    ->label('د نمری اصلی قیمت')
                     ->numeric()
                     ->sortable()
                     ->searchable()
-                    ->summarize(Sum::make()->label('ټولټال پیسی')),
+                    ->summarize([
+                        Sum::make()->label('ټولټال پیسی'),
+                        Count::make()->label('ټولی پلورل شوی'),
+                    ]),
+                Tables\Columns\TextColumn::make('payed_price')
+                    ->label('تحویل شوی پیسی')
+                    ->numeric()
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('due_price')
                     ->getStateUsing(fn($record) => $record->total_price - $record->payed_price)
                     ->badge()
                     ->label('باقی پیسی')
                     ->color('success'),
-                Tables\Columns\TextColumn::make('customer.name')
-                    ->label('د مشتری نوم')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('numeraha.numera_id')
-                    ->label('د نمری آی ډی')
-                    ->sortable()
-                    ->searchable(),
-                // Tables\Columns\TextColumn::make('total_price')
-                //     ->label('ټولټال پیسی')
-                //     ->sortable()
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('payed_price')
-                //     ->label('رسید پیسی')
-                //     ->sortable()
-                //     ->searchable(),
-                Tables\Columns\TextColumn::make('first_phase')
-                    ->label('لمړی قسط')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('second_phase')
-                    ->label('دوهم قسط')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('third_phase')
-                    ->label('دریم قسط')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('fourth_phase')
-                    ->label('څلورم قسط')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('fifth_phase')
-                    ->label('پنځم قسط')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('sixth_phase')
-                    ->label('شپژم قسط')
-                    ->sortable()
-                    ->searchable(),
             ])
             ->filters([
                 // Define any filters you want to apply

@@ -39,6 +39,8 @@ use Okeonline\FilamentArchivable\Tables\Filters\ArchivedFilter;
 use Okeonline\FilamentArchivable\Tables\Actions\ArchiveAction;
 use Okeonline\FilamentArchivable\Tables\Actions\UnArchiveAction;
 use LaravelArchivable\Scopes\ArchivableScope;
+use Filament\Tables\Columns\Summarizers\Sum;
+
 class NumerahaResource extends Resource
 {
     protected static ?string $model = Numeraha::class;
@@ -174,16 +176,64 @@ class NumerahaResource extends Resource
     {
         return $table
             ->columns([
-
                 Tables\Columns\TextColumn::make('row_number')
-                    ->label('شمیره')
+                    ->label('نمبر')
                     ->rowIndex(),
+                // Tables\Columns\TextColumn::make('numeraha.payed_price')
+                //     ->label('رسید پیسی')
+                //     ->numeric()
+                //     ->sortable()
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('numeraha.total_price')
+                //     ->label('ټولټال پیسی')
+                //     ->numeric()
+                //     ->sortable()
+                //     ->searchable()
+                //     ->summarize(Sum::make()->label('ټولټال پیسی')),
+                // Tables\Columns\TextColumn::make('due_price')
+                //     ->getStateUsing(fn($record) => $record->total_price - $record->payed_price)
+                //     ->badge()
+                //     ->label('باقی پیسی')
+                //     ->color('success'),
+                // Tables\Columns\TextColumn::make('customer.name')
+                //     ->label('د مشتری نوم')
+                //     ->sortable()
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('numeraha.numera_id')
+                //     ->label('د نمری آی ډی')
+                //     ->sortable()
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('first_phase')
+                //     ->label('لمړی قسط')
+                //     ->sortable()
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('second_phase')
+                //     ->label('دوهم قسط')
+                //     ->sortable()
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('third_phase')
+                //     ->label('دریم قسط')
+                //     ->sortable()
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('fourth_phase')
+                //     ->label('څلورم قسط')
+                //     ->sortable()
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('fifth_phase')
+                //     ->label('پنځم قسط')
+                //     ->sortable()
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('sixth_phase')
+                //     ->label('شپژم قسط')
+                //     ->sortable()
+                //     ->searchable(),
+                //////////////////////////////////////////////////////////////////
                 Tables\Columns\TextColumn::make('numera_id')
                     ->sortable()
-                    ->searchable()
-                    ->label('د نمری آی ډی')
                     ->toggleable(),
                 BadgeableColumn::make('numera_id')
+                    ->label('د نمری آی ډی')
+                    ->searchable()
                     ->suffixBadges([
                         Badge::make('hot')
                             ->label(fn($record) => ' مشتریان: ' . $record->customers()->count())
@@ -206,6 +256,7 @@ class NumerahaResource extends Resource
                     ->label('ملاحظات')
                     ->searchable()
                     ->toggleable()
+                    ->html()
                 ,
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -250,25 +301,25 @@ class NumerahaResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->label('بدلون')
                 ,
-                ExportAction::make()
-                    ->label('ډنلوډ کول')
-                    ->color('success')
-                    ->icon('heroicon-o-document-arrow-down')
-                    ->exports([
-                        ExcelExport::make()->withColumns([
-                            Column::make('numero_number'),
-                            Column::make('save_number'),
-                            Column::make('date'),
-                            Column::make('numera_price'),
-                            Column::make('sharwali_tarifa_price'),
-                            Column::make('Customer_image'),
-                            Column::make('documents'),
-                            // Column::make('created_at'),
-                            // Column::make('updated_at'),
-                            // Column::make('customer_id'),
-                            Column::make('numera_type'),
-                        ]),
-                    ]),
+                // ExportAction::make()
+                //     ->label('ډنلوډ کول')
+                //     ->color('success')
+                //     ->icon('heroicon-o-document-arrow-down')
+                //     ->exports([
+                //         ExcelExport::make()->withColumns([
+                //             Column::make('numero_number'),
+                //             Column::make('save_number'),
+                //             Column::make('date'),
+                //             Column::make('numera_price'),
+                //             Column::make('sharwali_tarifa_price'),
+                //             Column::make('Customer_image'),
+                //             Column::make('documents'),
+                //             // Column::make('created_at'),
+                //             // Column::make('updated_at'),
+                //             // Column::make('customer_id'),
+                //             Column::make('numera_type'),
+                //         ]),
+                //     ]),
                 ArchiveAction::make()
                     ->label('آرشیف کړی'),
                 UnArchiveAction::make()

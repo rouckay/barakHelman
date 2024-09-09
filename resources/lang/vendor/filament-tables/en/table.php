@@ -47,7 +47,7 @@ return [
 
     'summary' => [
 
-        'heading' => 'خلاصه د ټول عوایدو',
+        'heading' => 'لنډیز د ټول عوایدو',
 
         'subheadings' => [
             'all' => 'All :label',
