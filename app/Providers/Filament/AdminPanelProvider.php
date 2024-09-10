@@ -48,7 +48,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationItem::make('my-profile')
                     ->icon('heroicon-m-user')
                     ->label('زما پروفایل')
-                    ->url('http://barakhelman.test/admin/my-profile')
+                    ->url(env('APP_URL') . 'admin/my-profile')
                     ->sort(6),
                 NavigationItem::make('Selled_numeraha')
                     ->icon('heroicon-m-map')
