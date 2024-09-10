@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Filament\Resources;
+use NumberFormatter;
 
 use App\Filament\Resources\NumerahaIncomeResource\Pages;
 use App\Filament\Resources\NumerahaIncomeResource\RelationManagers;
@@ -17,6 +18,62 @@ use Illuminate\Support\HtmlString;
 use Filament\Tables\Columns\Summarizers\Average;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\Summarizers\Count;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Carbon\Carbon;
+
+// price to number show
+function numberToWordsInPashto($number)
+{
+    $words = [
+        0 => 'صفر',
+        1 => 'یو',
+        2 => 'دوه',
+        3 => 'درې',
+        4 => 'څلور',
+        5 => 'پنځه',
+        6 => 'شپږ',
+        7 => 'اووه',
+        8 => 'اته',
+        9 => 'نهه',
+        10 => 'لس',
+        20 => 'شل',
+        30 => 'دېرش',
+        40 => 'څلوېښت',
+        50 => 'پنځوس',
+        60 => 'شپېته',
+        70 => 'اویا',
+        80 => 'اتهام',
+        90 => 'نوي',
+        100 => 'سل',
+        1000 => 'زره',
+    ];
+
+    if ($number < 11) {
+        return $words[$number];
+    }
+
+    if ($number < 100) {
+        $tens = floor($number / 10) * 10;
+        $unit = $number % 10;
+        return $unit === 0 ? $words[$tens] : $words[$tens] . ' او ' . $words[$unit];
+    }
+
+    if ($number < 1000) {
+        $hundreds = floor($number / 100);
+        $remainder = $number % 100;
+        return $remainder === 0 ? $words[$hundreds] . ' سل' : $words[$hundreds] . ' سل او ' . numberToWordsInPashto($remainder);
+    }
+
+    if ($number >= 1000) {
+        $thousands = floor($number / 1000);
+        $remainder = $number % 1000;
+        return $remainder === 0 ? $words[$thousands] . ' زره' : $words[$thousands] . ' زره او ' . numberToWordsInPashto($remainder);
+    }
+
+    return '';
+}
+
 class NumerahaIncomeResource extends Resource
 {
     protected static ?string $model = CustomerNumeraha::class;
@@ -69,6 +126,7 @@ class NumerahaIncomeResource extends Resource
                 Tables\Columns\TextColumn::make('total_price')
                     ->label('د نمری اصلی قیمت')
                     ->numeric()
+                    ->money('AFN', locale: 'en')
                     ->sortable()
                     ->searchable()
                     ->summarize([
@@ -79,15 +137,57 @@ class NumerahaIncomeResource extends Resource
                     ->label('تحویل شوی پیسی')
                     ->numeric()
                     ->sortable()
+                    ->money('AFN', locale: 'en')
                     ->searchable(),
+                TextColumn::make('price_in_words')
+                    ->label('تحویل شوی پیسی په حروفو')
+                    ->suffix(' - افغانی')
+                    ->getStateUsing(function ($record) {
+                        return numberToWordsInPashto($record->payed_price);
+                    })->badge()
+                    ->color('success'),
                 Tables\Columns\TextColumn::make('due_price')
                     ->getStateUsing(fn($record) => $record->total_price - $record->payed_price)
                     ->badge()
+                    ->money('AFN', locale: 'ps')
                     ->label('باقی پیسی')
-                    ->color('success'),
+                    ->color('danger')
+                ,
+                TextColumn::make('created_at')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->label('د ثبت تاریخ')
+                    ->since()
+                    ->dateTimeTooltip()
+                ,
+                TextColumn::make('updated_at')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->label('د ثبت تاریخ')
+                    ->since()
+                    ->dateTimeTooltip()
+                ,
             ])
             ->filters([
-                // Define any filters you want to apply
+                Filter::make('today')
+                    ->label('ورځنی')
+                    ->query(
+                        fn(Builder $query): Builder => $query
+                            ->whereDate('created_at', Carbon::today())
+                    ),
+                Filter::make('this_week')
+                    ->query(
+                        fn(Builder $query): Builder => $query
+                            ->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+                    )
+                    ->label('هفته وار'),
+                Filter::make('this_month')
+                    ->query(
+                        fn(Builder $query): Builder => $query
+                            ->whereBetween('created_at', [
+                                Carbon::now()->startOfMonth()->startOfDay(),
+                                Carbon::now()->endOfMonth()->endOfDay()
+                            ])
+                    )
+                    ->label('اونیز')
             ]);
     }
 

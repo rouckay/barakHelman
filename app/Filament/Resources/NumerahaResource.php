@@ -263,6 +263,8 @@ class NumerahaResource extends Resource
                     ->sortable()
                     ->label('د ثبت نیټه')
                     ->date()
+                    ->since()
+                    ->dateTimeTooltip()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()

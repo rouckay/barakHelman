@@ -183,11 +183,15 @@ class EmployeesResource extends Resource
                     ->label('د ثبت نیټه ')
                     ->dateTime()
                     ->sortable()
+                    ->since()
+                    ->dateTimeTooltip()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('د بدلون نیټه')
                     ->dateTime()
                     ->sortable()
+                    ->since()
+                    ->dateTimeTooltip()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([

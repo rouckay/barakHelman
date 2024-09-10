@@ -308,12 +308,16 @@ class CustomersResource extends Resource
                     ->label('د ثبت نیټه ')
                     ->date()
                     ->sortable()
+                    ->since()
+                    ->dateTimeTooltip()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->date()
                     ->label('د بدلون نیټه')
                     ->sortable()
+                    ->since()
+                    ->dateTimeTooltip()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([

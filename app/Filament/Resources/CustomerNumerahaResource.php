@@ -307,12 +307,12 @@ class CustomerNumerahaResource extends Resource
                                         $set('numeraha_details', null);
                                     }
                                     // The Numerah Details fetcing is finished -------------------------------------------------------------------------------------------
-
+                    
 
 
                                     // Initially disable createOptionForm
                                     // $set('can_create_option', false);
-
+                    
                                     // if ($numeraha) {
                                     //     // Check if any of the specified fields are empty
                                     //     if (empty($numeraha->north) || empty($numeraha->south) || empty($numeraha->east) || empty($numeraha->west)) {
@@ -596,11 +596,15 @@ class CustomerNumerahaResource extends Resource
                     ->dateTime()
                     ->label('د ثبت نیټه ')
                     ->sortable()
+                    ->since()
+                    ->dateTimeTooltip()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->label('د بدلون نیټه')
                     ->sortable()
+                    ->since()
+                    ->dateTimeTooltip()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
