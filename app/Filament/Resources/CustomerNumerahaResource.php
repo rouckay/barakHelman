@@ -28,6 +28,7 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Placeholder;
 use App\Models\Numeraha;
+use Illuminate\Support\Facades\Storage;
 class CustomerNumerahaResource extends Resource
 {
     protected static ?string $model = CustomerNumeraha::class;
@@ -516,6 +517,10 @@ class CustomerNumerahaResource extends Resource
                         Forms\Components\Placeholder::make('due_price')
                             ->label('باقی پیسی')
                             ->content(function ($get) {
+                                // badge is started here
+                    
+                                // Logic to return content with a badge
+                    
                                 $payed_price = $get('payed_price') ?? 0;
                                 $total_price = $get('total_price') ?? 0;
 
@@ -527,7 +532,8 @@ class CustomerNumerahaResource extends Resource
 
                                     return new HtmlString('<p style="color:red;border:2px solid red; padding:3px;border-radius:10px"><strong>رسید پیسی باید د مجمعی پیسو څخه کم!</strong></p>');
                                 }
-                                return $total_price - $payed_price;
+                                $due_amount = $total_price - $payed_price;
+                                return $due_amount;
                             }),
                     ])->columns(3),
                     Forms\Components\Grid::make()->schema([
@@ -584,8 +590,31 @@ class CustomerNumerahaResource extends Resource
                     ->sortable(),
                 TextColumn::make('multipleDocs')
                     ->searchable()
+                    ->formatStateUsing(function ($state) {
+                        // Decode the JSON file array
+                        $files = json_decode($state, true);
+
+                        // Create an array of anchor links for each file
+                        return implode(', ', array_map(function ($file) {
+                            // Create the URL for the file using the storage disk
+                            $fileUrl = Storage::disk('public')->url($file);
+
+                            // Check the file extension
+                            $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
+
+                            // If the file is an image, allow for previewing
+                            if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif'])) {
+                                // Render image tag with width and height for preview
+                                return '<a href="' . $fileUrl . '" target="_blank"><img src="' . $fileUrl . '" alt="Image" style="width: 100px; height: auto;">عکس انسناد</a>';
+                            }
+
+                            // Otherwise, make it a downloadable link (e.g., for PDF files)
+                            return '<a href="' . $fileUrl . '" target="_blank" download>' . basename($file) . '</a>';
+                        }, $files));
+                    })
                     ->label('د نمری (ځمکی) اسناد')
                     ->toggleable()
+                    ->html()
                 ,
                 TextColumn::make('remarks')
                     ->toggleable()
