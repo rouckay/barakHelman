@@ -41,18 +41,23 @@
                             <tr>
                                 <th class="sort" data-sort="name">د نمری (ځمکی) نمبر</th>
                                 <th class="sort" data-sort="name">د نمری (ځمکی) قیمت</th>
-                                <th class="sort" data-sort="name">د نمری نوعه تفصیل</th>
-                                <th class="sort" data-sort="name">د ثبت نمبر</th>
+                                <th class="sort" data-sort="name">د تعرفی قیمت</th>
                                 <th class="sort" data-sort="tarif">دنلود تعرفه</th>
                             </tr>
                         </thead>
                         <tbody class="list">
                             @foreach ($Numeraha as $Numeraha)
                                 <tr>
-                                    <td class="name">{{$Numeraha->numero_number}}</td>
-                                    <td class="Position">{{ $Numeraha->numera_price}}</td>
-                                    <td class="">{{ $Numeraha->numera_type }}</td>
+                                    <td class="name">{{$Numeraha->numera_id}}</td>
+                                    <td class="Position">{{ $Numeraha->numera_type}}</td>
+                                    <td class="">{{ $Numeraha->sharwali_tarifa_price }}</td>
+                                    <td>
+                                        @foreach($Numeraha->Customers as $customer)
+                                            {{ $customer->name }}<br>
+                                        @endforeach
+                                    </td>
                                     <td class="">{{ $Numeraha->save_number }}</td>
+
                                     <td class=""><i class="fa fa-download"></i></td>
                                 </tr>
                             @endforeach

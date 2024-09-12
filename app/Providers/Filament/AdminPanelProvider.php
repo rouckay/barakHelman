@@ -28,6 +28,7 @@ use Filament\FontProviders\SpatieGoogleFontProvider;
 use pxlrbt\FilamentSpotlight\SpotlightPlugin;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use \Okeonline\FilamentArchivable\FilamentArchivablePlugin;
+use App\Models\Numeraha;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -49,19 +50,27 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-m-user')
                     ->label('زما پروفایل')
                     ->url(env('APP_URL') . 'admin/my-profile')
-                    ->sort(6),
+                    ->sort(10),
                 NavigationItem::make('Selled_numeraha')
                     ->icon('heroicon-m-map')
                     ->label('د پلورل شویو نمرو لیست')
                     ->isActiveWhen(fn() => request()->routeIs('filament.admin.resources.numerahas.index'))
                     ->url(env('APP_URL') . 'admin/numerahas?tableFilters[%D9%BE%D9%84%D9%88%D8%B1%D9%84%20%D8%B4%D9%88%DB%8C%20%D9%86%D9%85%D8%B1%DB%8C%20(%DA%81%D9%85%DA%A9%DB%8C)][value]=1')
-                    ->sort(2),
+                    ->sort(2)
+                    ->badge(function () {
+                        // Replace the following with the actual logic to get the badge count
+                        return Numeraha::query()->whereHas('customers')->count();
+
+                    }),
                 NavigationItem::make('remaining_numeraha')
                     ->icon('heroicon-o-map')
                     ->label('د پاتی نمرو لیست')
                     ->isActiveWhen(fn() => request()->routeIs('filament.admin.resources.numerahas.index'))
                     ->url(env('APP_URL') . 'admin/numerahas?tableFilters[%D9%BE%D9%84%D9%88%D8%B1%D9%84%20%D8%B4%D9%88%DB%8C%20%D9%86%D9%85%D8%B1%DB%8C%20(%DA%81%D9%85%DA%A9%DB%8C)][value]=0')
-                    ->sort(3),
+                    ->sort(3)
+                    ->badge(function () {
+                        return Numeraha::query()->whereDoesntHave('customers')->count();
+                    }),
             ])
             ->pages([
                 Pages\Dashboard::class,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomerNumeraha;
 use App\Models\numeraha;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class numerahaController extends Controller
      */
     public function index()
     {
-        $Numeraha = Numeraha::all();
+        $Numeraha = numeraha::with('Customers')->get();
         // dd($Numeraha);
         return view('home', ['Numeraha' => $Numeraha]);
     }

@@ -12,6 +12,7 @@
         "afsakar/filament-translate-action": "^1.1",
         "awcodes/filament-badgeable-column": "^2.3",
         "aymanalhattami/filament-page-with-sidebar": "^2.5",
+        "barryvdh/laravel-dompdf": "^2.2",
         "bezhansalleh/filament-language-switch": "^3.1",
         "eightynine/filament-excel-import": "^3.1",
         "filament/filament": "^3.2",

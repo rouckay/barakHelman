@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\imageColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\HtmlString;
@@ -43,6 +44,18 @@ class CustomerNumerahaResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+    protected function afterUpdate($model, $request)
+    {
+        if ($request->has('multipleDocs')) {
+            // If new files are uploaded, replace the existing ones
+            $model->multipleDocs = $request->input('multipleDocs');
+        } else {
+            // If no new files are uploaded, preserve the old files
+            $model->multipleDocs = $model->getOriginal('multipleDocs');
+        }
+
+        $model->save();
     }
     public static function form(Form $form): Form
     {
@@ -422,7 +435,8 @@ class CustomerNumerahaResource extends Resource
                         ->previewable()
                         ->maxFiles(5)
                         ->acceptedFileTypes(['application/pdf', 'image/*'])
-                        ->label('د ځمکی اسناد'),
+                        ->label('د ځمکی اسناد')
+                        ->default(fn($record) => $record ? $record->multipleDocs : null), // <-- Load existing files here
                 ])->columnSpan(4),
                 Card::make()->schema([
                     Forms\Components\Grid::make()->schema([
@@ -588,34 +602,9 @@ class CustomerNumerahaResource extends Resource
                     ->toggleable()
                     ->label('د نمری (ځمکی) آی ډی')
                     ->sortable(),
-                TextColumn::make('multipleDocs')
-                    ->searchable()
-                    ->formatStateUsing(function ($state) {
-                        // Decode the JSON file array
-                        $files = json_decode($state, true);
-
-                        // Create an array of anchor links for each file
-                        return implode(', ', array_map(function ($file) {
-                            // Create the URL for the file using the storage disk
-                            $fileUrl = Storage::disk('public')->url($file);
-
-                            // Check the file extension
-                            $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
-
-                            // If the file is an image, allow for previewing
-                            if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif'])) {
-                                // Render image tag with width and height for preview
-                                return '<a href="' . $fileUrl . '" target="_blank"><img src="' . $fileUrl . '" alt="Image" style="width: 100px; height: auto;">عکس انسناد</a>';
-                            }
-
-                            // Otherwise, make it a downloadable link (e.g., for PDF files)
-                            return '<a href="' . $fileUrl . '" target="_blank" download>' . basename($file) . '</a>';
-                        }, $files));
-                    })
+                imageColumn::make('multipleDocs')
                     ->label('د نمری (ځمکی) اسناد')
-                    ->toggleable()
-                    ->html()
-                ,
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('remarks')
                     ->toggleable()
                     ->label('اضافه معلومات')
@@ -649,7 +638,8 @@ class CustomerNumerahaResource extends Resource
                     ->url(fn(CustomerNumeraha $record) => route('download.invoice', $record)) // Use route to generate URL
                     ->icon('heroicon-o-printer')
                     ->color('primary')
-                    ->requiresConfirmation(),
+                    ->requiresConfirmation()
+                ,
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

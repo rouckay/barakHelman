@@ -26,16 +26,20 @@ class CustomerNumeraha extends Model
     ];
 
     // Custom code For converting MultipleDocs to Json when Saving
-    protected static function boot()
-    {
-        parent::boot();
+    protected $casts = [
+        'multipleDocs' => 'array',
+    ];
+    // protected static function boot()
+    // {
+    //     parent::boot();
 
-        static::saving(function ($model) {
-            if (is_array($model->multipleDocs)) {
-                $model->multipleDocs = json_encode($model->multipleDocs);
-            }
-        });
-    }
+    //     static::saving(function ($model) {
+
+    //         if (is_array($model->multipleDocs)) {
+    //             $model->multipleDocs = json_encode($model->multipleDocs);
+    //         }
+    //     });
+    // }
 
     public function customer(): BelongsTo
     {
