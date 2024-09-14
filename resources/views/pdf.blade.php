@@ -1,10 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="invoice.css">
+    <link rel="stylesheet" href="/css/invoice.css">
 
+    <style>
+        body {
+            @font-face {
+                font-family: 'Vazir';
+                src: url('{{ public_path('fonts/Vazir-Regular.ttf') }}') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            body {
+                font-family: 'Vazir', 'DejaVu Sans', sans-serif;
+                direction: rtl;
+                text-align: right;
+            }
+
+            body {
+                font-family: "DejaVu Sans", sans-serif;
+                direction: rtl;
+                text-align: center;
+                background-color: #fdf7e6;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                width: 80%;
+                margin: 0 auto;
+                background-color: #fff5e1;
+                border: 2px solid #f9c69d;
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .header {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .header h2 {
+                margin: 0;
+                color: #4a4a4a;
+            }
+
+            .logo {
+                font-size: 20px;
+                background-color: #d4b5f8;
+                padding: 10px 20px;
+                border-radius: 50%;
+            }
+
+            .title {
+                margin-bottom: 20px;
+                color: #4a4a4a;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+
+            thead th {
+                background-color: #f9c69d;
+                padding: 10px;
+                color: #4a4a4a;
+                border: 1px solid #f9c69d;
+            }
+
+            tbody td {
+                padding: 10px;
+                border: 1px solid #f9c69d;
+            }
+
+            .footer {
+                font-weight: bold;
+                color: #4a4a4a;
+            }
+
+        }
+    </style>
 </head>
 
 <body dir="rtl">
@@ -34,8 +117,8 @@
                     <td>احمد</td>
                     <td>محمود</td>
                     <td>1403-0155-01555</td>
-                    <td>BC-02030</td>
-                    <td>2000.00</td>
+                    <td>{{ $numeraha_id }}</td>
+                    <td>{{ $customer_id }}</td>
                     <td>دوہ زہ</td>
                     <td>1122334455665</td>
                 </tr>

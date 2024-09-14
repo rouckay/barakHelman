@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "alpinejs": "^3.14.1",
-        "tailwindcss-rtl": "^0.9.0"
+        "tailwindcss-rtl": "^0.9.0",
+        "vazirmatn": "^33.0.3"
     }
 }

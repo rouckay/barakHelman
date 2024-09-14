@@ -40,10 +40,10 @@ return [
     'pages' => [
         'backups' => [
             'actions' => [
-                'create_backup' => 'نوی بک اپ',
+                'create_backup' => 'نوی بیک اپ',
             ],
 
-            'heading' => 'د بک اپ لیست',
+            'heading' => 'د بیک اپ لیست',
 
             'messages' => [
                 'backup_success' => 'ستاسی بک اپ روان دی په سیستم کی',
@@ -61,8 +61,7 @@ return [
             ],
 
             'navigation' => [
-                'group' => 'Settings',
-                'label' => 'بک آب',
+                'label' => 'بیک اپ',
             ],
         ],
     ],

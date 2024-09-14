@@ -79,8 +79,9 @@ class NumerahaIncomeResource extends Resource
     protected static ?string $model = CustomerNumeraha::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
-    protected static ?string $navigationLabel = 'عواید';
-    protected static ?string $navigationGroup = "ادارې مدیریت برخه";
+    protected static ?string $navigationLabel = 'د عوایدو مدیریت';
+    protected static ?string $navigationGroup = "مالی مدیریت";
+
 
     protected static ?string $title = 'د نمری ټولټال عواید';
 
@@ -139,17 +140,17 @@ class NumerahaIncomeResource extends Resource
                     ->sortable()
                     ->money('AFN', locale: 'en')
                     ->searchable(),
-                TextColumn::make('price_in_words')
-                    ->label('تحویل شوی پیسی په حروفو')
-                    ->suffix(' - افغانی')
-                    ->getStateUsing(function ($record) {
-                        return numberToWordsInPashto($record->payed_price);
-                    })->badge()
-                    ->color('success'),
+                // TextColumn::make('price_in_words')
+                //     ->label('تحویل شوی پیسی په حروفو')
+                //     ->suffix(' - افغانی')
+                //     ->getStateUsing(function ($record) {
+                //         return numberToWordsInPashto($record->payed_price);
+                //     })->badge()
+                //     ->color('success'),
                 Tables\Columns\TextColumn::make('due_price')
                     ->getStateUsing(fn($record) => $record->total_price - $record->payed_price)
                     ->badge()
-                    ->money('AFN', locale: 'ps')
+                    ->money('AFN', locale: 'en')
                     ->label('باقی پیسی')
                     ->color('danger')
                 ,
@@ -187,7 +188,25 @@ class NumerahaIncomeResource extends Resource
                                 Carbon::now()->endOfMonth()->endOfDay()
                             ])
                     )
-                    ->label('اونیز')
+                    ->label('میاشتنی'),
+                Filter::make('this_year')
+                    ->query(
+                        fn(Builder $query): Builder => $query
+                            ->whereBetween('created_at', [
+                                Carbon::now()->startOfYear()->startOfDay(),
+                                Carbon::now()->endOfYear()->endOfDay()
+                            ])
+                    )
+                    ->label('کلنی'),
+                Filter::make('period')
+                    ->query(
+                        fn(Builder $query): Builder => $query
+                            ->whereBetween('created_at', [
+                                Carbon::now()->startOfYear()->startOfDay(),
+                                Carbon::now()->endOfYear()->endOfDay()
+                            ])
+                    )
+                    ->label('ټولټال عواید')
             ]);
     }
 

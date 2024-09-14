@@ -41,10 +41,10 @@ class CustomerNumerahaResource extends Resource
     protected static ?int $navigationSort = 4;
     protected static ?string $recordTitleAttribute = 'customer_id';
     public static ?string $label = 'نمری (ځمکی) پلورل';
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
+    // public static function getNavigationBadge(): ?string
+    // {
+    //     return static::getModel()::count();
+    // }
     protected function afterUpdate($model, $request)
     {
         if ($request->has('multipleDocs')) {

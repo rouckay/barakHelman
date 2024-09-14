@@ -11,6 +11,41 @@ return array(
     | in dompdf_config.inc.php. You can also override the entire config file.
     |
     */
+    'font_dir' => base_path('public/fonts/'), // Or wherever you stored the font files
+    'font_cache' => storage_path('fonts/'),
+
+    'font_height_ratio' => 1.1,
+    'fonts' => [
+        'vazir' => [
+            'R' => 'Vazir-Regular.ttf',
+            'B' => 'Vazir-Bold.ttf',
+            'I' => 'Vazir-Italic.ttf',
+            'BI' => 'Vazir-BoldItalic.ttf',
+        ],
+        'vazir-bold' => [
+            'R' => 'Vazir-Bold.ttf',
+            'B' => 'Vazir-Bold.ttf',
+            'I' => 'Vazir-BoldItalic.ttf',
+            'BI' => 'Vazir-BoldItalic.ttf',
+        ],
+        'vazir-italic' => [
+            'R' => 'Vazir-Italic.ttf',
+            'B' => 'Vazir-BoldItalic.ttf',
+            'I' => 'Vazir-Italic.ttf',
+            'BI' => 'Vazir-BoldItalic.ttf',
+        ],
+        'vazir-bold-italic' => [
+            'R' => 'Vazir-BoldItalic.ttf',
+            'B' => 'Vazir-BoldItalic.ttf',
+            'I' => 'Vazir-BoldItalic.ttf',
+            'BI' => 'Vazir-BoldItalic.ttf',
+        ],
+        'dejavusans' => [
+            'R' => 'DejaVuSans.ttf',
+            'B' => 'DejaVuSans-Bold.ttf',
+        ],
+    ],
+
     'show_warnings' => false,   // Throw an Exception on warnings from dompdf
 
     'public_path' => null,  // Override the public path if needed
@@ -96,15 +131,15 @@ return array(
             "https://" => ["rules" => []]
         ],
 
-         /**
-          * @var string
-          */
+        /**
+         * @var string
+         */
         'log_output_file' => null,
 
         /**
          * Whether to enable font subsetting or not.
          */
-        "enable_font_subsetting" => false,
+        "enable_font_subsetting" => true,
 
         /**
          * The PDF rendering backend to use
@@ -171,13 +206,13 @@ return array(
          */
         "default_paper_size" => "a4",
 
-         /**
-          * The default paper orientation.
-          *
-          * The orientation of the page (portrait or landscape).
-          *
-          * @var string
-          */
+        /**
+         * The default paper orientation.
+         *
+         * The orientation of the page (portrait or landscape).
+         *
+         * @var string
+         */
         'default_paper_orientation' => "portrait",
 
         /**
