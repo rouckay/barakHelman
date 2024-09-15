@@ -19,12 +19,15 @@ class SharwaliTarifa extends Controller
 {
     public function downloadInvoice($id)
     {
-        $filament = CustomerNumeraha::find($id);
+        $filament = CustomerNumeraha::with(['customer', 'numeraha'])->find($id);
 
         // Handle potential null values in the item details
         $numeraha_id = $filament->numeraha_id ?? 'Unnamed Item';
         $customer_id = $filament->customer_id ?? 0; // Fallback price
-        $numera_price = $filament->numera_price ?? 0; // Default quantity to 1
+        $customer = $filament->customer->name ?? 'Unknown'; // Default quantity to 1
+        $father_name = $filament->customer->father_name ?? 'Unknown'; // Default quantity to 1
+        $tazkira = $filament->customer->tazkira ?? 'Unknown'; // Default quantity to 1
+        $sharwali_tarifa_price = $filament->numeraha->sharwali_tarifa_price ?? '0 AFG'; // Default quantity to 1
 
         $pdf = new TCPDF();
 
@@ -39,7 +42,7 @@ class SharwaliTarifa extends Controller
         $pdf::AddPage();
 
         // Render Blade template into HTML with data
-        $html = view('pdf', compact('numeraha_id', 'customer_id', 'numera_price'))->render();
+        $html = view('pdf', compact('numeraha_id', 'customer_id', 'customer', 'father_name', 'tazkira', 'sharwali_tarifa_price'))->render();
 
         // Pass the rendered HTML to TCPDF
         $pdf::writeHTML($html, true, false, true, false, '');

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'components' => [
         'backup_destination_list' => [
             'table' => [

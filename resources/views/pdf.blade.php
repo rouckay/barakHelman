@@ -106,21 +106,19 @@
                     <th>نوم</th>
                     <th>د پلار نوم</th>
                     <th>د تذکري شمېره</th>
-                    <th>د نمری آی ډی </th>
-                    <th>د پیسو او وکرې ور مقدار په عدادو (افغانی)</th>
+                    <th>د تعرفی قیمت</th>
                     <th>تاریخ</th>
                     <th>د بانک حساب نمبر (د افغانستان بانک)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>احمد</td>
-                    <td>محمود</td>
-                    <td>1403-0155-01555</td>
+                    <td>{{ $customer }}</td>
+                    <td>{{ $father_name }}</td>
+                    <td>{{$tazkira}}</td>
+                    <td>{{$sharwali_tarifa_price}}</td>
                     <td>{{ $numeraha_id }}</td>
                     <td>{{ $customer_id }}</td>
-                    <td>دوہ زہ</td>
-                    <td>1122334455665</td>
                 </tr>
             </tbody>
         </table>
