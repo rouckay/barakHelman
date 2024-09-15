@@ -117,6 +117,7 @@
                     <td>{{ $father_name }}</td>
                     <td>{{$tazkira}}</td>
                     <td>{{$sharwali_tarifa_price}}</td>
+                    <td>{{ $date }}</td>
                     <td>{{ $numeraha_id }}</td>
                     <td>{{ $customer_id }}</td>
                 </tr>

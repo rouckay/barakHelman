@@ -12,8 +12,8 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Elibyy\TCPDF\Facades\TCPDF;
 use FontLib\Table\Type\name;
-
 // use PDF;
+use Carbon\Carbon;
 
 class SharwaliTarifa extends Controller
 {
@@ -24,10 +24,11 @@ class SharwaliTarifa extends Controller
         // Handle potential null values in the item details
         $numeraha_id = $filament->numeraha_id ?? 'Unnamed Item';
         $customer_id = $filament->customer_id ?? 0; // Fallback price
-        $customer = $filament->customer->name ?? 'Unknown'; // Default quantity to 1
-        $father_name = $filament->customer->father_name ?? 'Unknown'; // Default quantity to 1
-        $tazkira = $filament->customer->tazkira ?? 'Unknown'; // Default quantity to 1
-        $sharwali_tarifa_price = $filament->numeraha->sharwali_tarifa_price ?? '0 AFG'; // Default quantity to 1
+        $customer = $filament->customer->name ?? 'Unknown';
+        $father_name = $filament->customer->father_name ?? 'Unknown';
+        $tazkira = $filament->customer->tazkira ?? 'Unknown';
+        $sharwali_tarifa_price = $filament->numeraha->sharwali_tarifa_price ?? '0 AFG';
+        $date = Carbon::now();
 
         $pdf = new TCPDF();
 
@@ -42,7 +43,7 @@ class SharwaliTarifa extends Controller
         $pdf::AddPage();
 
         // Render Blade template into HTML with data
-        $html = view('pdf', compact('numeraha_id', 'customer_id', 'customer', 'father_name', 'tazkira', 'sharwali_tarifa_price'))->render();
+        $html = view('pdf', compact('numeraha_id', 'customer_id', 'customer', 'father_name', 'tazkira', 'sharwali_tarifa_price', 'date'))->render();
 
         // Pass the rendered HTML to TCPDF
         $pdf::writeHTML($html, true, false, true, false, '');
@@ -67,7 +68,7 @@ class SharwaliTarifa extends Controller
         // // Handle potential null values in the item details
         // $numera_number = $filament->numera_number ?? 'Unnamed Item';
         // $save_number = $filament->save_number ?? 0; // Fallback price
-        // $numera_price = $filament->numera_price ?? 1; // Default quantity to 1
+        // $numera_price = $filament->numera_price ?? 1;
 
         // // Create InvoiceItem instances for each row data
         // $item = InvoiceItem::make($numera_number)
