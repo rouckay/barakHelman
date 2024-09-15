@@ -29,11 +29,11 @@ class ListNumerahas extends ListRecords
                 ->label('پاتی نمری (ځمکی)')
                 ->url('numerahas?tableFilters[پلورل%20شوی%20نمری%20(ځمکی)][value]=0')
                 ->color('warning'),
-            Actions\CreateAction::make()
-                ->label('د نوی نمری پلورل')
-                ->extraAttributes([
-                    'x-ref' => 'create_button', // Reference for the button
-                ]),
+            // Actions\CreateAction::make()
+            //     ->label('د نوی نمری پلورل')
+            //     ->extraAttributes([
+            //         'x-ref' => 'create_button', // Reference for the button
+            //     ]),
             // \EightyNine\ExcelImport\ExcelImportAction::make()
             //     // ->color("primary")
             //     ->icon("heroicon-o-arrow-up-tray")

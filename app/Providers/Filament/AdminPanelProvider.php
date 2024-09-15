@@ -50,7 +50,8 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-m-user')
                     ->label('زما پروفایل')
                     ->url(env('APP_URL') . 'admin/my-profile')
-                    ->sort(10),
+                    ->sort(10)
+                    ->group('ډیټابیس مدیریان'),
                 NavigationItem::make('Selled_numeraha')
                     ->icon('heroicon-m-map')
                     ->label('د پلورل شویو نمرو لیست')

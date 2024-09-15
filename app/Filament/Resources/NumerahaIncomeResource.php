@@ -202,8 +202,8 @@ class NumerahaIncomeResource extends Resource
                     ->query(
                         fn(Builder $query): Builder => $query
                             ->whereBetween('created_at', [
-                                Carbon::now()->startOfYear()->startOfDay(),
-                                Carbon::now()->endOfYear()->endOfDay()
+                                $query->min('created_at') ?? Carbon::minValue(), // Start from the earliest record or default min date
+                                Carbon::now()->endOfDay()
                             ])
                     )
                     ->label('ټولټال عواید')

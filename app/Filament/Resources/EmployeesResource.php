@@ -21,10 +21,10 @@ class EmployeesResource extends Resource
     protected static ?string $navigationLabel = "کارمندان";
 
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';
-    // protected static ?string $navigationGroup = "ادارې مدیریت برخه";
+    protected static ?string $navigationGroup = 'ډیټابیس مدیریان';
 
     protected static ?string $recordTitleAttribute = 'name';
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 10;
 
     public static ?string $label = 'کارمندان';
 

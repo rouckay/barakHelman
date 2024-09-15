@@ -73,12 +73,12 @@
                 background-color: #f9c69d;
                 padding: 10px;
                 color: #4a4a4a;
-                border: 1px solid #f9c69d;
+                border: 3px solid #f9c69d;
             }
 
             tbody td {
                 padding: 10px;
-                border: 1px solid #f9c69d;
+                border: 3px solid #f9c69d;
             }
 
             .footer {
@@ -108,7 +108,9 @@
                     <th>د تذکري شمېره</th>
                     <th>د تعرفی قیمت</th>
                     <th>تاریخ</th>
-                    <th>د بانک حساب نمبر (د افغانستان بانک)</th>
+                    <th>د ځمکی آی ډی</th>
+                    <th>د مشتری آی ډی</th>
+                    <th>د بانک حساب </th>
                 </tr>
             </thead>
             <tbody>
@@ -120,6 +122,7 @@
                     <td>{{ $date }}</td>
                     <td>{{ $numeraha_id }}</td>
                     <td>{{ $customer_id }}</td>
+                    <td>########</td>
                 </tr>
             </tbody>
         </table>
