@@ -452,7 +452,7 @@ class CustomerNumerahaResource extends Resource
                         Forms\Components\TextInput::make('first_phase')
                             ->label('لمړی قسط')
                             ->numeric()
-                            ->prefix(now()->toDateString())
+                            // ->prefix(now()->toDateString())
                             ->live(onBlur: true)
                             ->prefixIcon('heroicon-o-banknotes')
                             ->placeholder('لمړی قسط')
