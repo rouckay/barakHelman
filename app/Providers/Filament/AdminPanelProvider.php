@@ -49,7 +49,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationItem::make('my-profile')
                     ->icon('heroicon-m-user')
                     ->label('زما پروفایل')
-                    ->url(env('APP_URL') . 'admin/my-profile')
+                    ->url(env('APP_URL') . '/admin/my-profile')
                     ->sort(10)
                     ->group('ډیټابیس مدیریان'),
                 NavigationItem::make('Selled_numeraha')
