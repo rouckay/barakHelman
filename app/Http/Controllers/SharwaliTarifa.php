@@ -50,40 +50,39 @@ class SharwaliTarifa extends Controller
 
         // Output PDF as download
         return $pdf::Output('تعرفه.pdf', 'D');
+    }
+    public function downloadsoldDocs($id)
+    {
+        $filament = CustomerNumeraha::with(['customer', 'numeraha'])->find($id);
 
-        // $filament = Numeraha::find($id);
+        // Handle potential null values in the item details
+        $numeraha_id = $filament->numeraha_id ?? 'Unnamed Item';
+        $customer_id = $filament->customer_id ?? 0; // Fallback price
+        $customer = $filament->customer->name ?? 'Unknown';
+        $father_name = $filament->customer->father_name ?? 'Unknown';
+        $tazkira = $filament->customer->tazkira ?? 'Unknown';
+        $sharwali_tarifa_price = $filament->numeraha->sharwali_tarifa_price ?? '0 AFG';
+        $date = Carbon::now();
 
-        // if (!$filament) {
-        //     return redirect()->back()->with('error', 'Filament not found.');
-        // }
+        $pdf = new TCPDF();
 
-        // // Create a Buyer instance with customer data
-        // $customer = new Buyer([
-        //     'name' => $filament->numera_number ?? 'Unknown', // Fallback to 'Unknown'
-        //     'custom_fields' => [
-        //         'email' => $filament->save_number ?? 'no-email@example.com', // Fallback email
-        //     ],
-        // ]);
+        // Set document information
+        $pdf::SetAuthor('Your Name');
+        $pdf::SetTitle('Persian PDF');
 
-        // // Handle potential null values in the item details
-        // $numera_number = $filament->numera_number ?? 'Unnamed Item';
-        // $save_number = $filament->save_number ?? 0; // Fallback price
-        // $numera_price = $filament->numera_price ?? 1;
+        // Set RTL language support if needed
+        $pdf::setRTL(true);
 
-        // // Create InvoiceItem instances for each row data
-        // $item = InvoiceItem::make($numera_number)
-        //     ->pricePerUnit($save_number)
-        //     ->quantity($numera_price);
+        // Add a page
+        $pdf::AddPage();
 
-        // // Create the invoice
-        // $invoice = Invoice::make()
-        //     ->buyer($customer)
-        //     ->discountByPercent(10) // Adjust discount as necessary
-        //     ->taxRate(15) // Adjust tax rate as necessary
-        //     ->shipping(1.99) // Adjust shipping as necessary
-        //     ->addItem($item);
+        // Render Blade template into HTML with data
+        $html = view('numerahDocs', compact('numeraha_id', 'customer_id', 'customer', 'father_name', 'tazkira', 'sharwali_tarifa_price', 'date'))->render();
 
-        // // Stream the invoice as a downloadable PDF
-        // return $invoice->stream();
+        // Pass the rendered HTML to TCPDF
+        $pdf::writeHTML($html, true, false, true, false, '');
+
+        // Output PDF as download
+        return $pdf::Output('د نمری سند.pdf', 'D');
     }
 }

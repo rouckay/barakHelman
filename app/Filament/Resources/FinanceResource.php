@@ -57,10 +57,12 @@ class FinanceResource extends Resource
                             // ->helperText('07 په اتومات ډول خپله سیستم لیکی تاسی خپل باقی نمبر ټایپ کړی')
                             ->mask(RawJs::make(<<<'JS'
                                     $input.startsWith('07') ? '079-999-9999' : '079-999-9999'? :''
-                            JS))
+                                    JS))
                             ->maxLength(12)
                             ->prefixIcon('heroicon-o-phone')
-                            ->label('د پلورونکی تلفن نمبر'),
+                            ->label('د پلورونکی تلفن نمبر')
+                            ->required()
+                        ,
                         Forms\Components\Select::make('user_id')
                             ->relationship('user', 'name')
                             ->label('مصرف کوونکی')
