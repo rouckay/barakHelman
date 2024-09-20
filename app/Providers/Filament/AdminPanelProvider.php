@@ -56,7 +56,7 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-m-map')
                     ->label('د پلورل شویو نمرو لیست')
                     ->isActiveWhen(fn() => request()->routeIs('filament.admin.resources.numerahas.index'))
-                    ->url(env('APP_URL') . 'admin/numerahas?tableFilters[%D9%BE%D9%84%D9%88%D8%B1%D9%84%20%D8%B4%D9%88%DB%8C%20%D9%86%D9%85%D8%B1%DB%8C%20(%DA%81%D9%85%DA%A9%DB%8C)][value]=1')
+                    ->url(env('APP_URL') . '/admin/numerahas?tableFilters[%D9%BE%D9%84%D9%88%D8%B1%D9%84%20%D8%B4%D9%88%DB%8C%20%D9%86%D9%85%D8%B1%DB%8C%20(%DA%81%D9%85%DA%A9%DB%8C)][value]=1')
                     ->sort(2)
                     ->badge(function () {
                         // Replace the following with the actual logic to get the badge count
@@ -67,7 +67,7 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-map')
                     ->label('د پاتی نمرو لیست')
                     ->isActiveWhen(fn() => request()->routeIs('filament.admin.resources.numerahas.index'))
-                    ->url(env('APP_URL') . 'admin/numerahas?tableFilters[%D9%BE%D9%84%D9%88%D8%B1%D9%84%20%D8%B4%D9%88%DB%8C%20%D9%86%D9%85%D8%B1%DB%8C%20(%DA%81%D9%85%DA%A9%DB%8C)][value]=0')
+                    ->url(env('APP_URL') . '/admin/numerahas?tableFilters[%D9%BE%D9%84%D9%88%D8%B1%D9%84%20%D8%B4%D9%88%DB%8C%20%D9%86%D9%85%D8%B1%DB%8C%20(%DA%81%D9%85%DA%A9%DB%8C)][value]=0')
                     ->sort(3)
                     ->badge(function () {
                         return Numeraha::query()->whereDoesntHave('customers')->count();
