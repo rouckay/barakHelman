@@ -11,40 +11,40 @@ return array(
     | in dompdf_config.inc.php. You can also override the entire config file.
     |
     */
-    'font_dir' => base_path('public/fonts/'), // Or wherever you stored the font files
+    'font_dir' => base_path('fonts/'), // Or wherever you stored the font files
     'font_cache' => storage_path('fonts/'),
-
+    'default_font' => 'dejavusans',
+    'pdf_backend' => 'CPDF',
+    'unicode' => true,
+    'enable_font_subsetting' => true,
     'font_height_ratio' => 1.1,
     'fonts' => [
-        'vazir' => [
-            'R' => 'Vazir-Regular.ttf',
-            'B' => 'Vazir-Bold.ttf',
-            'I' => 'Vazir-Italic.ttf',
-            'BI' => 'Vazir-BoldItalic.ttf',
-        ],
-        'vazir-bold' => [
-            'R' => 'Vazir-Bold.ttf',
-            'B' => 'Vazir-Bold.ttf',
-            'I' => 'Vazir-BoldItalic.ttf',
-            'BI' => 'Vazir-BoldItalic.ttf',
-        ],
-        'vazir-italic' => [
-            'R' => 'Vazir-Italic.ttf',
-            'B' => 'Vazir-BoldItalic.ttf',
-            'I' => 'Vazir-Italic.ttf',
-            'BI' => 'Vazir-BoldItalic.ttf',
-        ],
-        'vazir-bold-italic' => [
-            'R' => 'Vazir-BoldItalic.ttf',
-            'B' => 'Vazir-BoldItalic.ttf',
-            'I' => 'Vazir-BoldItalic.ttf',
-            'BI' => 'Vazir-BoldItalic.ttf',
-        ],
         'dejavusans' => [
             'R' => 'DejaVuSans.ttf',
             'B' => 'DejaVuSans-Bold.ttf',
+            'I' => 'DejaVuSans-Oblique.ttf', // Optional, if you need italic
+            'BI' => 'DejaVuSans-BoldOblique.ttf', // Optional, if you need bold italic
+        ],
+        'dejavusans-bold' => [
+            'R' => 'DejaVuSans-Bold.ttf',
+            'B' => 'DejaVuSans-Bold.ttf',
+            'I' => 'DejaVuSans-BoldOblique.ttf',
+            'BI' => 'DejaVuSans-BoldOblique.ttf',
+        ],
+        'dejavusans-italic' => [
+            'R' => 'DejaVuSans-Oblique.ttf',
+            'B' => 'DejaVuSans-BoldOblique.ttf',
+            'I' => 'DejaVuSans-Oblique.ttf',
+            'BI' => 'DejaVuSans-BoldOblique.ttf',
+        ],
+        'dejavusans-bold-italic' => [
+            'R' => 'DejaVuSans-BoldOblique.ttf',
+            'B' => 'DejaVuSans-BoldOblique.ttf',
+            'I' => 'DejaVuSans-BoldOblique.ttf',
+            'BI' => 'DejaVuSans-BoldOblique.ttf',
         ],
     ],
+
 
     'show_warnings' => false,   // Throw an Exception on warnings from dompdf
 

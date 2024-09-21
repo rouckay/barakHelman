@@ -7,14 +7,14 @@
         body {
 
             @font-face {
-                font-family: 'Vazir';
-                src: url('{{ public_path('fonts/Vazir-Regular.ttf') }}') format('truetype');
+                font-family: 'DejaVu Sans';
+                src: url('{{ public_path('fonts/DejaVuSans.ttf') }}') format('truetype');
                 font-weight: normal;
                 font-style: normal;
             }
 
             body {
-                font-family: 'Vazir', 'DejaVu Sans', sans-serif;
+                font-family: 'DejaVu Sans';
                 direction: rtl;
                 text-align: right;
             }
@@ -109,25 +109,31 @@
                 <th colspan="6" class="header">د نمرو د پیرودلو سند</th>
             </tr>
             <tr>
-                <th colspan="6" class="sub-header">د هلال بارک هلمند د ځمکی (نمری، مارکیټ) د پیرودلو سند</th>
+                <th colspan="6" class="sub-header">د نوی غازی محمد ایوب خان مینه</th>
             </tr>
             <tr>
-                <th colspan="5" class="date-label">نیټه</th>
+                <th colspan="5" class="date-label" style="text-align:left">تاریخ</th>
                 <th>{{ $date }}</th>
             </tr>
             <tr>
-                <th></th>
+                <th>
+                    <img src="{{ asset('storage/logo/imarat.png') }}" height="40px" width="auto" />
+                </th>
                 <th colspan="4">د هلال بارک هلمند ساختمانی شرکت </th>
-                <th><img src="{{ asset('storage/logo/logo.png') }}" height="100px" width="auto" /></th>
+                <th>
+                    <img src="{{ asset('storage/logo/logo.png') }}" height="100px" width="auto" />
+                </th>
             </tr>
             <hr />
         </thead>
+
         <tbody>
             <tr>
-                <td rowspan="10">
-                    <img src="{{ asset('storage/' . $Customer_image) }}" height="100px" width="100px" />
+                <td rowspan="10" style="text-align:center; vertical-align:middle;">
+                    <img src="{{ asset('storage/' . $Customer_image) }}" height="180px" width="180px"
+                        style="display: block; margin-left: auto; margin-right: auto;" />
                 </td>
-                <td colspan="5" class="">د پیرودونکی معلومات</td>
+                <td colspan="5">د پیرودونکی معلومات</td>
             </tr>
             <tr>
                 <td>نوم</td>
@@ -166,8 +172,9 @@
                 <td colspan="4">{{$mobile_number }}</td>
             </tr>
             <tr>
-                <td rowspan="10">
-                    <img src="{{ asset('storage/' . $responsable_image) }}" height="100px" width="100px" />
+                <td rowspan="10" style="text-align:center; vertical-align:middle;">
+                    <img style="display: block; margin-left: auto; margin-right: auto;"
+                        src="{{ asset('storage/' . $responsable_image) }}" height="180px" width="180px" />
                 </td>
                 <td colspan="5">د پیرودونکی د وکیل معلومات</td>
             </tr>
@@ -209,12 +216,12 @@
             </tr>
             <tr>
                 <td rowspan="8">
-                    د ځمکی اړوند معلومات
+                    د نمری معلومات
                 </td>
-                <td colspan="5" class="">د ځمکی اړوند معلومات</td>
+                <!-- <td colspan="5" class=""></td> -->
             </tr>
             <tr>
-                <td>د نمری آی ډی ID</td>
+                <td>د نمری ID</td>
                 <td colspan="4">{{$numera_id }}</td>
             </tr>
             <tr>
@@ -243,9 +250,8 @@
             </tr>
             <tr>
                 <td rowspan="3">
-                    د قیمت اړوند معلومات
+                    د نمری قیمت
                 </td>
-                <td colspan="6" class="section-header">د قیمت او وړاندی کولو معلومات</td>
             </tr>
             <tr>
                 <td>اصلي قیمت (افغانی)</td>
@@ -265,8 +271,8 @@
             <tr>
                 <td>د شرکت د مدیر لاسلیک</td>
                 <td colspan="2">د شرکت د ریئس لاسلیک او مهر</td>
-                <td colspan="2">د پیرودونکی لاسلیک او د ګوتی نښان</td>
-                <td colspan="2">د پیرودونکی د وکیل لاسلیک او د ګوتی نښان</td>
+                <td colspan="2">د پیرودونکی لاسلیک او د شست</td>
+                <td colspan="2">د پیرودونکی د وکیل لاسلیک او د شست</td>
             </tr>
             <tr>
                 <td></td>

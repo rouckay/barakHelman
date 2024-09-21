@@ -6,28 +6,24 @@
     <link rel="stylesheet" href="/css/invoice.css">
 
     <style>
+        @font-face {
+            font-family: 'DejaVuSans';
+            src: url('{{ public_path('fonts/DejaVuSans.ttf') }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+
         body {
-            @font-face {
-                font-family: 'Vazir';
-                src: url('{{ public_path('fonts/Vazir-Regular.ttf') }}') format('truetype');
-                font-weight: normal;
-                font-style: normal;
-            }
 
-            body {
-                font-family: 'Vazir', 'DejaVu Sans', sans-serif;
-                direction: rtl;
-                text-align: right;
-            }
+            font-family: 'DejaVuSans', sans-serif;
+            text-align: right;
 
-            body {
-                font-family: "DejaVu Sans", sans-serif;
-                direction: rtl;
-                text-align: center;
-                background-color: #fdf7e6;
-                margin: 0;
-                padding: 0;
-            }
+            direction: rtl;
+            text-align: center;
+            background-color: #fdf7e6;
+            margin: 0;
+            padding: 0;
         }
 
         .container {
@@ -121,22 +117,42 @@
     <div class="container" style="margin-top: 15%;">
         <div class="header">
 
-            <div class="logo">لوگو شاروالی</div>
         </div>
         <table>
             <thead>
                 <tr>
-                    <th rowspan="3"><img src="{{ asset('storage/logo/logo.png') }}" height="100px" width="auto" /></th>
-                    <th colspan="4">
-                        <h2>د افغانستان اسلامي امارت</h2>
-                        <h2>د هلمند ولایت شاروالی</h2>
-                        <h2>د ښارګوټو د عوایدو تعرفه</h2>
+                    <th rowspan="3"><img src="{{ asset('storage/logo/imarat.png') }}" height="100px" width="auto" />
                     </th>
-                    <th rowspan="3"></th>
+                    <th colspan="4">
+                        <h4>د افغانستان اسلامي امارت</h4>
+                        <h4>د هلمند ولایت شاروالی</h4>
+                        <h4>د شهرکونو د عوایدو تعرفه</h4>
+                        ځمکی
+                    </th>
+                    <th rowspan="3">
+                        <img src="{{ asset('storage/logo/logo.png') }}" height="100px" width="auto" />
+                    </th>
+
+
+                </tr>
+                <tr>
+                    <th>
+                        شرکت نوم
+                    </th>
+                    <th colspan="3">
+                        هلال بارک هلمند ساختمانی شرکت
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        د شهرک نوم
+                    </th>
+                    <th colspan="3">
+                        د نوی غازی محمد ایوب خان مینه
+                    </th>
                 </tr>
             </thead>
         </table>
-        <h3 class="title">تعرفه عواید</h3>
         <table>
             <thead>
                 <tr>
@@ -145,8 +161,8 @@
                     <th>د تذکري شمیره</th>
                     <th>د تعرفی قیمت</th>
                     <th>تاریخ</th>
-                    <th>د ځمکی آی ډی</th>
-                    <th>د مشتری آی ډی</th>
+                    <th>د نمری ID</th>
+                    <th>د مشتری ID</th>
                     <th>د بانک حساب </th>
                 </tr>
             </thead>
@@ -163,7 +179,33 @@
                 </tr>
             </tbody>
         </table>
-        <div class="footer">د هلال پارک هلمند ساختماني شرکت</div>
+        <h3 class="title">د نمری مشخصات</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>د نمری ID</th>
+                    <th>د نمری مساحت</th>
+                    <th>شرق</th>
+                    <th>غرب</th>
+                    <th>شمال</th>
+                    <th>جنوب</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ $numera_id }}</td>
+                    <td>{{ $Land_Area }} متر مربع</td>
+                    <td>{{$east}}</td>
+                    <td>{{$west}}</td>
+                    <td>{{ $north }}</td>
+                    <td>{{ $south }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <div class="footer">د تعرفی قیمت {{ $sharwali_tarifa_price }} افغانی</div>
+        <div class="footer">د هلال بارک هلمند ساختماني شرکت</div>
     </div>
 </body>
 
